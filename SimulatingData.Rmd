@@ -1,0 +1,44 @@
+---
+title: "Example Notebook:  Creating Simulated Data"
+output:
+  html_document:
+    css: custom.css
+    highlight: zenburn
+    theme: lumen
+---
+
+## Data Simulation
+
+### Environment Prep
+
+```{r}
+source('SimData.R')
+source('ValidateFunction.R')
+```
+
+### Load Compendium
+
+```{r}
+compendium <- read.csv("SampleCompendium/sampleClinical.csv", header=T, stringsAsFactors = F)
+```
+
+### Simulate Data
+
+```{r}
+n <- 1000 #simulate this many observations
+SimulatedData <- simData(compendium, n)
+#write.csv(SimulatedData, "mySimData.csv")
+```
+
+### Verification & Validation methods
+
+```{r}
+threshold <- .01 #reject variables that fail test below this
+variables <- compendium$VARIABLE
+
+par(mfrow = c(2, 3))
+for (i in variables) {
+    validateVar(i, compendium, SimulatedData, threshold)
+}
+```
+
