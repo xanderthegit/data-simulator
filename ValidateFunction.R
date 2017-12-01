@@ -1,8 +1,6 @@
-source('SimData.R')
 library(pryr)
 
-
-validateVar <- function(var, compendium, simdata, threshold) {
+validateVar <- function(var, compendium, simdata, threshold=.05, include.plot=F) {
     # review simulation of variable, test simulated vs theoretical values
     # plot simulated vs theoretical w/ p value for given test
     #
@@ -16,6 +14,7 @@ validateVar <- function(var, compendium, simdata, threshold) {
     #   p:  plot 
     type <- compendium[['TYPE']][compendium[['VARIABLE']] == var]
     vector <- simdata[[var]]
+    vector <- na.omit(vector)
     
     titleHelper <- function() {
         # prep string for plot title
@@ -78,7 +77,7 @@ validateVar <- function(var, compendium, simdata, threshold) {
                 pp <- hist(vector, freq=F, main=title, xlab="", ylab="")
                 curve(dnorm(x, dist.vals[[1]], dist.vals[[2]]), add=TRUE, col='red')
             }
-
+            
         } else if (dist == "uniform") {
             # validation test using Kolmogorov-Smirnov test
             k.test <- ks.test(vector, "punif", dist.vals[[1]], dist.vals[[2]])
@@ -90,7 +89,7 @@ validateVar <- function(var, compendium, simdata, threshold) {
                 pp <- hist(vector, freq=F, main=title, xlab="", ylab="")
                 curve(dunif(x, dist.vals[[1]], dist.vals[[2]]), add=TRUE, col='red')
             }
-
+            
         } else if (dist == "exponential") {
             # validation test using Kolmogorov-Smirnov test
             k.test <- ks.test(vector, "pexp", dist.vals[[1]])
@@ -103,7 +102,7 @@ validateVar <- function(var, compendium, simdata, threshold) {
                 curve(dexp(x, dist.vals[[1]]), add=TRUE, col='red')
             }
         }
-
+        
     } else if (type == "integer") {
         
         dist <- compendium[['DISTRIB']][compendium[['VARIABLE']] == var]
@@ -164,7 +163,10 @@ validateVar <- function(var, compendium, simdata, threshold) {
             }
         } 
     }
-    
-    return(pt)
+    if (include.plot) {
+        return(pt)
+    } else {
+        return(p)
+    }
     
 }

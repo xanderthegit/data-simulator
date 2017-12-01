@@ -1,4 +1,5 @@
 library(stringr)
+source('ValidateFunction.R')
 
 ## Helper for handling numeric / integer distributions in compendium
 distPrep <- function(row, n=0, full.output=FALSE) {
@@ -47,49 +48,69 @@ convertToList <- function(l) {
 }
 
 ## Helper to choose correct simulation method for a var
-simVar <- function(row, n) {
+simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
     # reviews row, selects and implements a method for simulating variable
     #
     # Args: 
     #   row:  row in compendium representing a variable
     #   n:   number of times to sim var
+    #   include.na:   simulate NA values based on compendium probabilities
+    #   reject:  run validation and immediately resim if threshold not met
+    #   threshold:  desired threshold for validation
     # 
     # Returns:
     #   val:  list of simulated inputs based on distribution type
-    if (row[['TYPE']] == "enum") {
-        val <- unlist(sample(convertToList(row[['CHOICES']]), 
-                             n, T, as.numeric(convertToList(row[['PROBS']]))))
-    } else if (row[['TYPE']] == "boolean"){
-        val <- unlist(sample(c(TRUE, FALSE), 
-                             n, T, as.numeric(convertToList(row[['PROBS']]))))
-    } else if (row[['TYPE']] == "number"){
-        val <- distPrep(row, n)
-    } else if (row[['TYPE']] == "integer"){
-        val <- round(distPrep(row, n), 0)
-    } else {
-        val <- rep("Something Went Wrong", n)
-    }
+    if (!reject) {threshold <- 0}
+    repeat {
+        if (row[['TYPE']] == "enum") {
+            val <- unlist(sample(convertToList(row[['CHOICES']]), 
+                                 n, T, as.numeric(convertToList(row[['PROBS']]))))
+        } else if (row[['TYPE']] == "boolean"){
+            val <- unlist(sample(c(TRUE, FALSE), 
+                                 n, T, as.numeric(convertToList(row[['PROBS']]))))
+        } else if (row[['TYPE']] == "number"){
+            val <- distPrep(row, n)
+        } else if (row[['TYPE']] == "integer"){
+            val <- round(distPrep(row, n), 0)
+        } else {
+            val <- rep("Something Went Wrong", n)
+        }
+        # add NAS
+        if (include.na) {
+            na.prob <- row[['NAS']]
+            ind <- sample(c(TRUE, FALSE), n, replace=TRUE, prob=c(1-na.prob, na.prob))
+            val[!ind] <- NA
+        }
+
     names <- c("id", row[["VARIABLE"]])
     id <- c(1:n)
     df <- data.frame(id, val)
     names(df) <- names
-    df
+    
+    check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
+    if (check > threshold) break
+    
+    }
+    return(df)
 }
 
-simData <- function(compendium, n) {
+simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05) {
     # helper that runs simulation for each row in variable compendium
     #
     # Args: 
     #   row:  dictionary representing variables to simulate and methods to use
     #   n:   number of observations to simulate
+    #   include.na:   simulate NA values based on compendium probabilities
+    #   reject:  run validation and immediately resim if threshold not met
+    #   threshold:  desired threshold for validation
     # 
     # Returns:
     #   df:   a simulated dataset
     for (i in 1:nrow(compendium)) {
         if (i==1) {
-            df <- simVar(compendium[i,], n)
+            df <- simVar(compendium[i,], n, include.na, reject, threshold)
         } else {
-            var <- simVar(compendium[i,], n)
+            var <- simVar(compendium[i,], n, include.na, reject, threshold)
             df <- merge(df, var, by="id")
         }
     }

@@ -14,6 +14,7 @@ output:
 ```{r}
 source('SimData.R')
 source('ValidateFunction.R')
+n <- 1000 #simulate this many observations
 ```
 
 ### Load Compendium
@@ -22,23 +23,48 @@ source('ValidateFunction.R')
 compendium <- read.csv("SampleCompendium/sampleClinical.csv", header=T, stringsAsFactors = F)
 ```
 
-### Simulate Data
+### V1: Simulate Data w/o Rejecting
+
+In the attempt below, we'll include the creation of NAs, but not reject any of the variables simmed.   We'll accept the first simulation run of each variable.
 
 ```{r}
-n <- 1000 #simulate this many observations
-SimulatedData <- simData(compendium, n)
+SimulatedData <- simData(compendium, n, include.na = TRUE, reject=FALSE)
 #write.csv(SimulatedData, "mySimData.csv")
 ```
 
-### Verification & Validation methods
+### Plot Simmed Data
 
 ```{r}
-threshold <- .01 #reject variables that fail test below this
+threshold <- .05 #reject variables that fail test below this
 variables <- compendium$VARIABLE
 
 par(mfrow = c(2, 3))
 for (i in variables) {
-    validateVar(i, compendium, SimulatedData, threshold)
+    validateVar(i, compendium, SimulatedData, threshold, include.plot=T)
 }
 ```
 
+## Rejecting Simmed Variables
+
+We may want more QC to make sure our simulated variables match our projected distributions.    We can reject a simulation and resimulate it until it meets a declared threshold (p > x for the appropriate test).    
+
+Below, we set a very high p-value and let it run until all simulated variables meet our threshold. 
+
+### V2: Simulate Data Rejecting
+
+```{r}
+SimulatedData2 <- simData(compendium, n, include.na = TRUE, 
+                         reject=TRUE, threshold=.6) # set a very high threshold
+#write.csv(SimulatedData2, "mySimData.csv")
+```
+
+### Plot Simmed Data 
+
+Here we'll see values > than the threshold set in the simulation call above. 
+
+```{r}
+par(mfrow = c(2, 3))
+for (i in variables) {
+    validateVar(i, compendium, SimulatedData2, include.plot=T)
+}
+```
