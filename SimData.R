@@ -60,7 +60,7 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
     # 
     # Returns:
     #   val:  list of simulated inputs based on distribution type
-    if (!reject) {threshold <- 0}
+    if (!reject) {threshold <- 0; check <- 1}
     repeat {
         if (row[['TYPE']] == "enum") {
             val <- unlist(sample(convertToList(row[['CHOICES']]), 
@@ -86,8 +86,9 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
     id <- c(1:n)
     df <- data.frame(id, val)
     names(df) <- names
-    
-    check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
+    if (reject) {
+        check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
+    }
     if (check > threshold) break
     
     }

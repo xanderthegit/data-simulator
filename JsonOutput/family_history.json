@@ -1,0 +1,47 @@
+[
+  {
+    "relative_with_bipolar_history": true,
+    "relative_with_schizophrenia_history": true,
+    "relative_with_panic_history": true
+  },
+  {
+    "relative_with_bipolar_history": true,
+    "relative_with_schizophrenia_history": true,
+    "relative_with_panic_history": false
+  },
+  {
+    "relative_with_bipolar_history": true,
+    "relative_with_schizophrenia_history": true,
+    "relative_with_panic_history": true
+  },
+  {
+    "relative_with_panic_history": true
+  },
+  {
+    "relative_with_bipolar_history": true,
+    "relative_with_schizophrenia_history": false,
+    "relative_with_panic_history": true
+  },
+  {
+    "relative_with_bipolar_history": false,
+    "relative_with_schizophrenia_history": false,
+    "relative_with_panic_history": true
+  },
+  {
+    "relative_with_bipolar_history": false,
+    "relative_with_schizophrenia_history": true,
+    "relative_with_panic_history": true
+  },
+  {
+    "relative_with_bipolar_history": true,
+    "relative_with_schizophrenia_history": true
+  },
+  {
+    "relative_with_bipolar_history": false,
+    "relative_with_schizophrenia_history": false
+  },
+  {
+    "relative_with_bipolar_history": true,
+    "relative_with_schizophrenia_history": true
+  }
+]

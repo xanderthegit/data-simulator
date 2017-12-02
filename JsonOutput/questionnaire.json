@@ -1,0 +1,46 @@
+[
+  {
+    "auditscore": 20,
+    "bss_score": 3,
+    "cdrlsc_score": 7
+  },
+  {
+    "auditscore": 14
+  },
+  {
+    "auditscore": 20,
+    "bss_score": 4,
+    "cdrlsc_score": 13
+  },
+  {
+    "auditscore": 16,
+    "bss_score": 1,
+    "cdrlsc_score": 14
+  },
+  {
+    "bss_score": 4,
+    "cdrlsc_score": 10
+  },
+  {
+    "auditscore": 13,
+    "bss_score": 1,
+    "cdrlsc_score": 11
+  },
+  {
+    "bss_score": 2,
+    "cdrlsc_score": 11
+  },
+  {
+    "bss_score": 4,
+    "cdrlsc_score": 8
+  },
+  {
+    "auditscore": 20,
+    "bss_score": 7,
+    "cdrlsc_score": 11
+  },
+  {
+    "bss_score": 0,
+    "cdrlsc_score": 10
+  }
+]

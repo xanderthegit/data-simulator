@@ -1,57 +1,31 @@
 DESCRIPTION,NODE,VARIABLE,REQUIRED,TYPE,CHOICES,PROBS,DISTRIB,DISTRIB.INPUTS,NAS
-score obtained from test to identify alcohol use disorder,questionnaire,auditscore,No,integer,,,uniform,"min = 10, max = 20",0.2
-score obtained from the Beck Scale test to determine suicidial ideation,questionnaire,bss_score,No,integer,,,poisson,lambda = 3,0.2
-score obtained from the Connor David test to determine resilience,questionnaire,cdrlsc_score,No,integer,,,normal,"mean = 10, sd = 3",0.125
-score obtained to determine the scale of combat exposure,questionnaire,ces_score,No,integer,,,uniform,"min = 5, max = 20",0.142857143
-score obtained from screening test about drug abuse,questionnaire,dast_score,No,integer,,,poisson,lambda = 4,0.125
-score obtained from the Medical Questionnaire to determine the physical status,questionnaire,nvvrs_physdiag,No,integer,,,uniform,"min = 10, max = 20",0.1
-"Signify if the individual had nightmares or thoughts in the past month about any experience that was frightening, horrible or upsetting ",ptsd_screen_questionnaire,pcptsd_1,No,boolean,,.4 | .6,,,0.1
-"Signify if the individual was constantly on guard, watchful or easily startled in the past month ( PTSD Screen Questionnaire)",ptsd_screen_questionnaire,pcptsd_2,No,boolean,,.75 | .25,,,0.125
-"Signify if the individual felt numb or detached from others, activities or surroundings in the past month ( PTSD Screen Questionnaire)",ptsd_screen_questionnaire,pcptsd_3,No,boolean,,.6| .4,,,0.25
-Averaged score to scale anxiety from  sympton checklist questionnaire,sympton_checklist,scl_anxiety,No,number,,,normal,"mean = 20, sd = 2",0.2
-Averaged score to scale depression from  sympton checklist questionnaire,sympton_checklist,scl_depression,No,number,,,exponential,rate = 3,0.25
-Averaged score to scale hostility from  sympton checklist questionnaire,sympton_checklist,scl_hostility,No,number,,,normal,"mean = 20, sd = 2",0.25
-Averaged score to scale interpersonal relationships from  sympton checklist questionnaire,sympton_checklist,scl_interpersonal,No,number,,,exponential,rate = 3,0.125
-Averaged score to scale obsession from  sympton checklist questionnaire,sympton_checklist,scl_obsessive,No,number,,,normal,"mean = 20, sd = 2",0.2
-Averaged score to scale paranoia from  sympton checklist questionnaire,sympton_checklist,scl_paranoid,No,number,,,normal,"mean = 15, sd = 2",0.125
-Averaged score to scale phobias from  sympton checklist questionnaire,sympton_checklist,scl_phobic,No,number,,,normal,"mean = 20, sd = 2",0.2
-Averaged score to scale psychoticism from  sympton checklist questionnaire,sympton_checklist,scl_psychoticism,No,number,,,uniform,"min = 10, max = 20",0.125
-Averaged score to scale somatization from  sympton checklist questionnaire,sympton_checklist,scl_somatization,No,number,,,uniform,"min = 10, max = 20",0.142857143
-Percentage of answered questions at  sympton checklist questionnaire,sympton_checklist,scl_gsi,No,number,,,uniform,"min = 10, max = 20",0.125
-Number of non-zero responses at  sympton checklist questionnaire,sympton_checklist,scl_pst,No,number,,,uniform,"min = 5, max = 10",0.142857143
-Rate of response at sympton checklist questionnaire,sympton_checklist,scl_psdi,No,number,,,normal,"mean = 20, sd = 3",0.2
-Derived score for conceptual questions at living scale questionnaire ,living_scale_questionnaire,sils_conceptual_quot,No,number,,,exponential,rate = 4,0.166666667
-Derived score for abstraction questions at living scale questionnaire ,living_scale_questionnaire,sils_abstraction_quot,No,number,,,normal,"mean = 20, sd = 2",0.111111111
-Derived score at living scale questionnaire ,living_scale_questionnaire,sils_full_scale,No,number,,,exponential,rate = 2,0.25
-Count of all events that happened one or more times resulting in helplessness or horror at the TLEQ,traumatic_events_questionnaire,tleq_critA,No,integer,,,poisson,lambda = 4,0.25
-Count of all events that happened one or more times before military resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_before,No,integer,,,uniform,"min = 10, max = 20",0.1
-Count of all events that happened one or more times during military resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_during,No,integer,,,poisson,lambda = 4,0.142857143
-Count of all events that happened one or more times after military resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_after,No,integer,,,normal,"mean = 10, sd = 3",0.2
-Count of all events related to any accident that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_accident,No,integer,,,uniform,"min = 10, max = 20",0.166666667
+score obtained from test to identify alcohol use disorder,questionnaire,auditscore,No,integer,,,uniform,"min = 10, max = 20",0.166666667
+score obtained from the Beck Scale test to determine suicidial ideation,questionnaire,bss_score,No,integer,,,poisson,lambda = 3,0.111111111
+score obtained from the Connor David test to determine resilience,questionnaire,cdrlsc_score,No,integer,,,normal,"mean = 10, sd = 3",0.2
+"Signify if the individual had nightmares or thoughts in the past month about any experience that was frightening, horrible or upsetting ",ptsd_screen_questionnaire,pcptsd_1,No,boolean,,.4 | .6,,,0.166666667
+"Signify if the individual was constantly on guard, watchful or easily startled in the past month ( PTSD Screen Questionnaire)",ptsd_screen_questionnaire,pcptsd_2,No,boolean,,.75 | .25,,,0.2
+Averaged score to scale anxiety from  sympton checklist questionnaire,sympton_checklist,scl_anxiety,No,number,,,normal,"mean = 20, sd = 2",0.166666667
+Averaged score to scale depression from  sympton checklist questionnaire,sympton_checklist,scl_depression,No,number,,,exponential,rate = 3,0.166666667
+Number of non-zero responses at  sympton checklist questionnaire,sympton_checklist,scl_pst,No,number,,,uniform,"min = 5, max = 10",0.125
+Rate of response at sympton checklist questionnaire,sympton_checklist,scl_psdi,No,number,,,normal,"mean = 20, sd = 3",0.142857143
+Derived score for conceptual questions at living scale questionnaire ,living_scale_questionnaire,sils_conceptual_quot,No,number,,,exponential,rate = 4,0.25
+Derived score for abstraction questions at living scale questionnaire ,living_scale_questionnaire,sils_abstraction_quot,No,number,,,normal,"mean = 20, sd = 2",0.2
+Count of all events that happened one or more times resulting in helplessness or horror at the TLEQ,traumatic_events_questionnaire,tleq_critA,No,integer,,,poisson,lambda = 4,0.111111111
 Count of all events related to any illness that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_illness,No,integer,,,uniform,"min = 10, max = 20",0.125
-Count of all events related to attacks that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_attack,No,integer,,,poisson,lambda = 1,0.2
-Count of all events related to childness violence that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_childvio,No,integer,,,poisson,lambda = 2,0.125
+Count of all events related to childness violence that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_childvio,No,integer,,,poisson,lambda = 2,0.25
 Count of all events related to child sex abuses that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_childsex,No,integer,,,normal,"mean = 10, sd = 3",0.125
-Count of all events related to adult sex abuses that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_adultsex,No,integer,,,poisson,lambda = 4,0.25
-Indicator to signify whether or not an individual's biological relative has/had alcohol problems,family_history,relative_with_alcohol_history,No,boolean,,.4 | .6,,,0.111111111
-Indicator to signify whether or not an individual's biological relative has/had grug problems,family_history,relative_with_drug_history,No,boolean,,.6 | .4,,,0.2
-Indicator to signify whether or not an individual's biological relative has been hospitalized for Psychiatric illness,family_history,relative_with_psychiatric_history,No,boolean,,.75 | .25,,,0.142857143
-Indicator to signify whether or not an individual's biological relative has attempted suicide,family_history,relative_with_attempted_suicide,No,boolean,,.4 | .6,,,0.25
-Indicator to signify whether or not an individual's biological relative has committed suicide,family_history,relative_with_committed_suicide,No,boolean,,.6 | .4,,,0.1
-Indicator to signify whether or not an individual's biological relative has served time in prison,family_history,relative_with_prison_history,No,boolean,,.75 | .25,,,0.111111111
-Indicator to signify whether or not an individual's biological relative has been diagnosed with depression,family_history,relative_with_depression_history,No,boolean,,.4 | .6,,,0.111111111
-Indicator to signify whether or not an individual's biological relative has been diagnosed with bipolar disorder (manic-depression),family_history,relative_with_bipolar_history,No,boolean,,.6 | .4,,,0.111111111
-Indicator to signify whether or not an individual's biological relative has been diagnosed with schizophrenia or schizoaffective disorder,family_history,relative_with_schizophrenia_history,No,boolean,,.75 | .25,,,0.1
-Indicator to signify whether or not an individual's biological relative has been diagnosed with PTSD,family_history,relative_with_ptsd_history,No,boolean,,.4 | .6,,,0.2
-Indicator to signify whether or not an individual's biological relative has been diagnosed with panic attacks/disorders,family_history,relative_with_panic_history,No,boolean,,.6 | .4,,,0.1
-Indicator to signify whether or not an individual's biological relative has been diagnosed with anxiety,family_history,relative_with_anxiety_history,No,boolean,,.75 | .25,,,0.1
-Text designations to identify the current marital status.,demographic,marital_status,No,enum,Married/Domestic Partner|Remarried|Widowed|Separated|Divorced|Never Married, .2 | .1 | .2 | .1 | .1 | .3,,,0.25
-Number of times the individual has been married.,demographic,times_married,No,integer,,,uniform,"min = 0, max = 4",0.25
-Number of times the individual got divorced.,demographic,times_divorced,No,integer,,,uniform,"min = 0, max = 4",0.166666667
-The highest level of education obtained by the individual.,demographic,highest_education,No,enum,Elementary | G.E.D | High School | Technical/Trade School | Associate Degree | Bachelor Degree | Master Degree | Doctorate Degree | Other ,.1 | .1 | .2 | .1 | .1 | .1 | .1 | .1 | .1,,,0.166666667
-The total number of years that the individual studied.,demographic,years_education,No,integer,,,normal,"mean = 14, sd = 4",0.2
-The current employment status for the individual.,demographic,working_status,No,enum,No|Part-time|Full-time|Unemployed|Full-time student|Medical disability|Retired|Other,.1 | .1 | .1 | .1 | .1 | .1 | .1 | .3,,,0.111111111
-The waist size of the patient measured in centimeters.,followup,waist,No,number,,,normal,"mean = 20, sd = 2",0.142857143
-The hip size of the patient measured in centimeters.,followup,hip,No,number,,,exponential,rate = 5,0.125
-Quantity of medication the patient is taken,treatment,dosage,No,number,,,exponential,rate = 3,0.2
-Number of doses of the medication per day,treatment,doses_per_day,No,integer,,,normal,"mean = 2, sd = 1",0.142857143
+Count of all events related to adult sex abuses that happened one or more times resulting in helplessness or horror  at the TLEQ,traumatic_events_questionnaire,tleq_critA_adultsex,No,integer,,,poisson,lambda = 4,0.111111111
+Indicator to signify whether or not an individual's biological relative has been diagnosed with bipolar disorder (manic-depression),family_history,relative_with_bipolar_history,No,boolean,,.6 | .4,,,0.2
+Indicator to signify whether or not an individual's biological relative has been diagnosed with schizophrenia or schizoaffective disorder,family_history,relative_with_schizophrenia_history,No,boolean,,.75 | .25,,,0.142857143
+Indicator to signify whether or not an individual's biological relative has been diagnosed with panic attacks/disorders,family_history,relative_with_panic_history,No,boolean,,.6 | .4,,,0.125
+Text designations to identify the current marital status.,demographic,marital_status,No,enum,Married/Domestic Partner|Remarried|Widowed|Separated|Divorced|Never Married, .2 | .1 | .2 | .1 | .1 | .3,,,0.142857143
+Number of times the individual has been married.,demographic,times_married,No,integer,,,uniform,"min = 0, max = 4",0.125
+Number of times the individual got divorced.,demographic,times_divorced,No,integer,,,uniform,"min = 0, max = 4",0.25
+The highest level of education obtained by the individual.,demographic,highest_education,No,enum,Elementary | G.E.D | High School | Technical/Trade School | Associate Degree | Bachelor Degree | Master Degree | Doctorate Degree | Other ,.1 | .1 | .2 | .1 | .1 | .1 | .1 | .1 | .1,,,0.1
+The total number of years that the individual studied.,demographic,years_education,No,integer,,,normal,"mean = 14, sd = 4",0.166666667
+The current employment status for the individual.,demographic,working_status,No,enum,No|Part-time|Full-time|Unemployed|Full-time student|Medical disability|Retired|Other,.1 | .1 | .1 | .1 | .1 | .1 | .1 | .3,,,0.142857143
+The waist size of the patient measured in centimeters.,followup,waist,No,number,,,normal,"mean = 20, sd = 2",0.125
+The hip size of the patient measured in centimeters.,followup,hip,No,number,,,exponential,rate = 5,0.166666667
+Opt In,treatment,opt_in,No,boolean,,.75 | .25,,,0.1
+Quantity of medication the patient is taken,treatment,dosage,No,number,,,exponential,rate = 3,0.1
+Number of doses of the medication per day,treatment,doses_per_day,No,integer,,,normal,"mean = 2, sd = 1",0.2

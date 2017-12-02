@@ -1,0 +1,46 @@
+[
+  {
+    "opt_in": true,
+    "dosage": 0.0017
+  },
+  {
+    "opt_in": false,
+    "dosage": 0.0931
+  },
+  {
+    "dosage": 0.2509
+  },
+  {
+    "opt_in": true,
+    "doses_per_day": 4
+  },
+  {
+    "opt_in": false,
+    "dosage": 0.4892,
+    "doses_per_day": 5
+  },
+  {
+    "opt_in": true,
+    "dosage": 0.2594,
+    "doses_per_day": 1
+  },
+  {
+    "opt_in": true,
+    "dosage": 0.0937,
+    "doses_per_day": 2
+  },
+  {
+    "opt_in": true,
+    "dosage": 0.641,
+    "doses_per_day": 1
+  },
+  {
+    "opt_in": true,
+    "dosage": 0.895,
+    "doses_per_day": 1
+  },
+  {
+    "opt_in": true,
+    "dosage": 0.5129
+  }
+]

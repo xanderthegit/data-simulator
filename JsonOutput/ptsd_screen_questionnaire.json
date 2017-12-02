@@ -1,0 +1,37 @@
+[
+  {
+    "pcptsd_1": true,
+    "pcptsd_2": false
+  },
+  {
+    "pcptsd_1": true,
+    "pcptsd_2": true
+  },
+  {},
+  {
+    "pcptsd_1": true,
+    "pcptsd_2": false
+  },
+  {
+    "pcptsd_2": false
+  },
+  {
+    "pcptsd_1": false,
+    "pcptsd_2": true
+  },
+  {
+    "pcptsd_1": true,
+    "pcptsd_2": true
+  },
+  {
+    "pcptsd_2": true
+  },
+  {
+    "pcptsd_1": false,
+    "pcptsd_2": true
+  },
+  {
+    "pcptsd_1": true,
+    "pcptsd_2": true
+  }
+]

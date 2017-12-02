@@ -1,0 +1,63 @@
+[
+  {
+    "tleq_critA": 3,
+    "tleq_critA_illness": 16,
+    "tleq_critA_childsex": 13,
+    "tleq_critA_adultsex": 0
+  },
+  {
+    "tleq_critA": 2,
+    "tleq_critA_illness": 19,
+    "tleq_critA_childvio": 1,
+    "tleq_critA_childsex": 8,
+    "tleq_critA_adultsex": 8
+  },
+  {
+    "tleq_critA_illness": 15,
+    "tleq_critA_childvio": 0,
+    "tleq_critA_childsex": 9,
+    "tleq_critA_adultsex": 6
+  },
+  {
+    "tleq_critA": 3,
+    "tleq_critA_illness": 10,
+    "tleq_critA_childsex": 5
+  },
+  {
+    "tleq_critA": 5,
+    "tleq_critA_illness": 14,
+    "tleq_critA_childvio": 2,
+    "tleq_critA_adultsex": 3
+  },
+  {
+    "tleq_critA": 2,
+    "tleq_critA_illness": 17,
+    "tleq_critA_childvio": 3,
+    "tleq_critA_childsex": 3,
+    "tleq_critA_adultsex": 3
+  },
+  {
+    "tleq_critA_illness": 19,
+    "tleq_critA_childvio": 4,
+    "tleq_critA_childsex": 15,
+    "tleq_critA_adultsex": 4
+  },
+  {
+    "tleq_critA": 2,
+    "tleq_critA_childvio": 1,
+    "tleq_critA_childsex": 12,
+    "tleq_critA_adultsex": 8
+  },
+  {
+    "tleq_critA": 6,
+    "tleq_critA_illness": 16,
+    "tleq_critA_childsex": 18,
+    "tleq_critA_adultsex": 8
+  },
+  {
+    "tleq_critA": 5,
+    "tleq_critA_illness": 11,
+    "tleq_critA_childsex": 8,
+    "tleq_critA_adultsex": 5
+  }
+]
