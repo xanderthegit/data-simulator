@@ -1,5 +1,5 @@
 library(stringr)
-source('ValidateFunction.R')
+source('https://raw.githubusercontent.com/occ-data/data-simulator/master/ValidateFunction.R')
 
 ## Helper for handling numeric / integer distributions in compendium
 distPrep <- function(row, n=0, full.output=FALSE) {

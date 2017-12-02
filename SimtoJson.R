@@ -1,4 +1,4 @@
-source('SimData.R')
+source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
 library(jsonlite)
 
 SimtoJson <- function(simdata, compendium, path) {
