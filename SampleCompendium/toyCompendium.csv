@@ -1,0 +1,5 @@
+DESCRIPTION,NODE,VARIABLE,REQUIRED,TYPE,CHOICES,PROBS,DISTRIB,DISTRIB.INPUTS,NAS
+Number of times issue occurred,case,num_incidents,No,integer,,,normal,"mean = 10, sd = 3",0.2
+Was the incident detected,study,incident_detected,No,boolean,,.4 | .6,,,0.166666667
+Description of incident size,options,incident_size,No,enum,Small | Medium | Large,.3 | .6 | .1,,,0.142857143
+Time till next occurrence (yrs),treatment,recurrence_age,No,number,,,exponential,rate = 4,0.166666667
