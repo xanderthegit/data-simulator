@@ -123,9 +123,3 @@ simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05)
     }
     df
 }
-
-compendium <- read.csv('SampleCompendium/BHC_comprendium_061217.csv', header=T, stringsAsFactors = F)
-
-SimulatedData <- simData(compendium, 10, include.na = FALSE, reject=FALSE)
-#row <- compendium[compendium$VARIABLE=="ChildTraumaType",]
-#v <- simVar(row, 10, include.na=F)
