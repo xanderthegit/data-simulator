@@ -32,7 +32,7 @@ distPrep <- function(row, n=0, full.output=FALSE) {
             val <- sample(min:max, n, replace=T)
         }
     } else if (row[['DISTRIB']] == "exponential") {
-        rate <- as.numeric(str_extract(str_extract(str, "(rate = )[0-9]*"), "([0-9]+)"))
+        rate <- as.numeric(sub('rate = ', '', str))
         full <- list(rate=rate)
         val <- rexp(n, rate)
     }
@@ -44,7 +44,7 @@ distPrep <- function(row, n=0, full.output=FALSE) {
 
 convertToList <- function(l) {
     # quick helper to handle lists for categorical vars
-    as.list(strsplit(l, '\\|')[[1]])
+    as.list(str_trim(strsplit(l, '\\|')[[1]]))
 }
 
 ## Helper to choose correct simulation method for a var
@@ -108,12 +108,24 @@ simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05)
     # Returns:
     #   df:   a simulated dataset
     for (i in 1:nrow(compendium)) {
+        v <- compendium[i,][['VARIABLE']]
         if (i==1) {
             df <- simVar(compendium[i,], n, include.na, reject, threshold)
         } else {
-            var <- simVar(compendium[i,], n, include.na, reject, threshold)
-            df <- merge(df, var, by="id")
+            tried <- try(simVar(compendium[i,], n, include.na, reject, threshold), silent=T)
+            if(inherits(tried, "try-error")) {
+                print(paste0("Variable: ", v, " | Error: ", tried))
+            } else {
+                var <- simVar(compendium[i,], n, include.na, reject, threshold)
+                df <- merge(df, var, by="id")
+            }
         }
     }
     df
 }
+
+compendium <- read.csv('SampleCompendium/BHC_comprendium_061217.csv', header=T, stringsAsFactors = F)
+
+SimulatedData <- simData(compendium, 10, include.na = FALSE, reject=FALSE)
+#row <- compendium[compendium$VARIABLE=="ChildTraumaType",]
+#v <- simVar(row, 10, include.na=F)
