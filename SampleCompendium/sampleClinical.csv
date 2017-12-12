@@ -1,5 +1,5 @@
 DESCRIPTION,NODE,VARIABLE,REQUIRED,TYPE,CHOICES,PROBS,DISTRIB,DISTRIB.INPUTS,NAS
-patient visit link,core_visit,index_date,No ,enum,1,1,,,
+patient visit link,core_visit,index_date,No ,integer,,,uniform,"min=1, max=1",
 score obtained from test to identify alcohol use disorder,questionnaire,auditscore,No,integer,,,uniform,"min = 10, max = 20",0.166666667
 score obtained from the Beck Scale test to determine suicidial ideation,questionnaire,bss_score,No,integer,,,poisson,lambda = 3,0.111111111
 score obtained from the Connor David test to determine resilience,questionnaire,cdrlsc_score,No,integer,,,normal,"mean = 10, sd = 3",0.2
