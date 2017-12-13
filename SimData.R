@@ -1,4 +1,5 @@
 library(stringr)
+library(stringi)
 source('https://raw.githubusercontent.com/occ-data/data-simulator/master/ValidateFunction.R')
 
 ## Helper for handling numeric / integer distributions in compendium
@@ -72,6 +73,8 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
             val <- distPrep(row, n)
         } else if (row[['TYPE']] == "integer"){
             val <- round(distPrep(row, n), 0)
+        } else if (row[['TYPE']] == "string"){
+            val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
         } else {
             val <- rep("Something Went Wrong", n)
         }

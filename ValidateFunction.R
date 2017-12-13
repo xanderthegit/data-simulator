@@ -103,6 +103,9 @@ validateVar <- function(var, compendium, simdata, threshold=.05, include.plot=F)
             }
         }
         
+    } else if (type == "string") {
+        pt <- NA
+        p <- NA
     } else if (type == "integer") {
         
         dist <- compendium[['DISTRIB']][compendium[['VARIABLE']] == var]
@@ -162,6 +165,7 @@ validateVar <- function(var, compendium, simdata, threshold=.05, include.plot=F)
                 curve(dunif(x, dist.vals[[1]], dist.vals[[2]]), add=TRUE, col='red')
             }
         } 
+        
     }
     if (include.plot) {
         return(pt)
