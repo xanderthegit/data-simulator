@@ -104,8 +104,8 @@ validateVar <- function(var, compendium, simdata, threshold=.05, include.plot=F)
         }
         
     } else if (type == "string") {
-        pt <- NA
-        p <- NA
+        #pt <- 1
+        p <- 1
     } else if (type == "integer") {
         
         dist <- compendium[['DISTRIB']][compendium[['VARIABLE']] == var]
