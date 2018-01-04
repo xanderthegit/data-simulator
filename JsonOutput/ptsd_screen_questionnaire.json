@@ -1,37 +1,37 @@
 [
   {
-    "pcptsd_1": true,
-    "pcptsd_2": false
+    "pcptsd_1": false,
+    "pcptsd_2": true,
+    "type": "ptsd_screen_questionnaire",
+    "submitter_id": "ptsd_screen_questionnaire_001",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
     "pcptsd_1": true,
-    "pcptsd_2": true
-  },
-  {},
-  {
-    "pcptsd_1": true,
-    "pcptsd_2": false
-  },
-  {
-    "pcptsd_2": false
+    "pcptsd_2": true,
+    "type": "ptsd_screen_questionnaire",
+    "submitter_id": "ptsd_screen_questionnaire_002",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
     "pcptsd_1": false,
-    "pcptsd_2": true
-  },
-  {
-    "pcptsd_1": true,
-    "pcptsd_2": true
-  },
-  {
-    "pcptsd_2": true
+    "pcptsd_2": true,
+    "type": "ptsd_screen_questionnaire",
+    "submitter_id": "ptsd_screen_questionnaire_003",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
     "pcptsd_1": false,
-    "pcptsd_2": true
+    "pcptsd_2": false,
+    "type": "ptsd_screen_questionnaire",
+    "submitter_id": "ptsd_screen_questionnaire_004",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "pcptsd_1": true,
-    "pcptsd_2": true
+    "pcptsd_1": false,
+    "pcptsd_2": true,
+    "type": "ptsd_screen_questionnaire",
+    "submitter_id": "ptsd_screen_questionnaire_005",
+    "core_visits": "submitter_id : core_visit_00N"
   }
 ]

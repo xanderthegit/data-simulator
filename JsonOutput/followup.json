@@ -1,38 +1,37 @@
 [
   {
-    "hip": 0.0552
+    "waist": 20.7104,
+    "hip": 0.6214,
+    "type": "followup",
+    "submitter_id": "followup_001",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "waist": 21.4375,
-    "hip": 0.1252
+    "waist": 18.1052,
+    "hip": 0.0515,
+    "type": "followup",
+    "submitter_id": "followup_002",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "waist": 19.9568
+    "waist": 17.528,
+    "hip": 0.4272,
+    "type": "followup",
+    "submitter_id": "followup_003",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "waist": 22.0082,
-    "hip": 0.0589
+    "waist": 16.8286,
+    "hip": 0.0161,
+    "type": "followup",
+    "submitter_id": "followup_004",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "waist": 17.9887,
-    "hip": 0.254
-  },
-  {
-    "waist": 19.8835,
-    "hip": 0.0825
-  },
-  {
-    "waist": 17.4095
-  },
-  {
-    "waist": 19.3466,
-    "hip": 0.3062
-  },
-  {
-    "waist": 18.3609,
-    "hip": 0.0049
-  },
-  {
-    "hip": 0.3335
+    "waist": 23.7082,
+    "hip": 0.3493,
+    "type": "followup",
+    "submitter_id": "followup_005",
+    "core_visits": "submitter_id : core_visit_00N"
   }
 ]

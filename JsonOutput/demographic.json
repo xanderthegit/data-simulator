@@ -1,69 +1,57 @@
 [
   {
-    "marital_status": "Separated",
-    "times_married": 4,
-    "highest_education": " Technical/Trade School ",
-    "years_education": 18,
-    "working_status": "Other"
-  },
-  {
-    "marital_status": "Widowed",
-    "times_married": 0,
-    "highest_education": " Associate Degree ",
-    "years_education": 23,
-    "working_status": "Other"
-  },
-  {
-    "times_married": 0,
-    "highest_education": " G.E.D ",
-    "years_education": 21,
-    "working_status": "Unemployed"
-  },
-  {
-    "marital_status": "Remarried",
-    "times_married": 4,
-    "times_divorced": 2,
-    "highest_education": " Bachelor Degree ",
-    "years_education": 12,
-    "working_status": "Other"
-  },
-  {
-    "times_married": 0,
-    "highest_education": " Doctorate Degree ",
+    "marital_status": "Never Married",
+    "times_married": 2,
+    "times_divorced": 3,
+    "highest_education": "G.E.D",
     "years_education": 17,
-    "working_status": "Other"
-  },
-  {
-    "marital_status": "Divorced",
-    "times_married": 4,
-    "times_divorced": 1,
-    "highest_education": " Other ",
-    "years_education": 15,
-    "working_status": "Other"
+    "working_status": "Full-time student",
+    "type": "demographic",
+    "submitter_id": "demographic_001",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
     "marital_status": "Never Married",
     "times_married": 1,
-    "times_divorced": 1,
-    "highest_education": " Associate Degree ",
-    "years_education": 17,
-    "working_status": "Other"
-  },
-  {
-    "times_divorced": 0,
-    "highest_education": " High School ",
-    "years_education": 5,
-    "working_status": "Unemployed"
-  },
-  {
-    "times_divorced": 3,
-    "years_education": 16,
-    "working_status": "Other"
+    "times_divorced": 2,
+    "highest_education": "Elementary",
+    "years_education": 18,
+    "working_status": "Medical disability",
+    "type": "demographic",
+    "submitter_id": "demographic_002",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
     "marital_status": "Never Married",
-    "highest_education": " High School ",
-    "years_education": 7,
-    "working_status": "Full-time"
+    "times_married": 3,
+    "times_divorced": 3,
+    "highest_education": "Associate Degree",
+    "years_education": 12,
+    "working_status": "Full-time",
+    "type": "demographic",
+    "submitter_id": "demographic_003",
+    "core_visits": "submitter_id : core_visit_00N"
+  },
+  {
+    "marital_status": "Married/Domestic Partner",
+    "times_married": 0,
+    "times_divorced": 1,
+    "highest_education": "Associate Degree",
+    "years_education": 11,
+    "working_status": "Full-time student",
+    "type": "demographic",
+    "submitter_id": "demographic_004",
+    "core_visits": "submitter_id : core_visit_00N"
+  },
+  {
+    "marital_status": "Widowed",
+    "times_married": 1,
+    "times_divorced": 2,
+    "highest_education": "Associate Degree",
+    "years_education": 13,
+    "working_status": "Other",
+    "type": "demographic",
+    "submitter_id": "demographic_005",
+    "core_visits": "submitter_id : core_visit_00N"
   }
 ]

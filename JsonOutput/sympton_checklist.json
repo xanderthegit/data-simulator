@@ -1,58 +1,47 @@
 [
   {
-    "scl_depression": 0.067,
-    "scl_pst": 6.8981,
-    "scl_psdi": 19.8673
+    "scl_anxiety": 17.4059,
+    "scl_depression": 0.0398,
+    "scl_pst": 6.8089,
+    "scl_psdi": 19.366,
+    "type": "sympton_checklist",
+    "submitter_id": "sympton_checklist_001",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "scl_anxiety": 21.0737,
-    "scl_depression": 0.1991,
-    "scl_pst": 9.3159,
-    "scl_psdi": 20.868
+    "scl_anxiety": 18.7418,
+    "scl_depression": 0.2659,
+    "scl_pst": 6.0053,
+    "scl_psdi": 19.122,
+    "type": "sympton_checklist",
+    "submitter_id": "sympton_checklist_002",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "scl_anxiety": 15.1692,
-    "scl_pst": 6.3597,
-    "scl_psdi": 17.3545
+    "scl_anxiety": 21.9354,
+    "scl_depression": 0.2851,
+    "scl_pst": 5.706,
+    "scl_psdi": 19.9542,
+    "type": "sympton_checklist",
+    "submitter_id": "sympton_checklist_003",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "scl_anxiety": 22.6664,
-    "scl_depression": 0.0001,
-    "scl_pst": 5.4662,
-    "scl_psdi": 20.2708
+    "scl_anxiety": 19.2365,
+    "scl_depression": 0.0482,
+    "scl_pst": 6.5294,
+    "scl_psdi": 19.798,
+    "type": "sympton_checklist",
+    "submitter_id": "sympton_checklist_004",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "scl_anxiety": 20.2121,
-    "scl_depression": 0.2039,
-    "scl_pst": 9.5753,
-    "scl_psdi": 18.6174
-  },
-  {
-    "scl_depression": 0.5505,
-    "scl_pst": 5.4512,
-    "scl_psdi": 22.8148
-  },
-  {
-    "scl_anxiety": 18.1572,
-    "scl_depression": 0.0093,
-    "scl_pst": 5.1122,
-    "scl_psdi": 22.3825
-  },
-  {
-    "scl_anxiety": 18.0345,
-    "scl_depression": 0.0573,
-    "scl_pst": 5.0469,
-    "scl_psdi": 19.5147
-  },
-  {
-    "scl_anxiety": 22.1927,
-    "scl_depression": 0.1691,
-    "scl_pst": 5.9885,
-    "scl_psdi": 19.4289
-  },
-  {
-    "scl_anxiety": 20.2459,
-    "scl_depression": 0.2894,
-    "scl_psdi": 19.4896
+    "scl_anxiety": 24.2909,
+    "scl_depression": 1.0471,
+    "scl_pst": 6.3978,
+    "scl_psdi": 20.8012,
+    "type": "sympton_checklist",
+    "submitter_id": "sympton_checklist_005",
+    "core_visits": "submitter_id : core_visit_00N"
   }
 ]

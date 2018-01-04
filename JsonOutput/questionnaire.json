@@ -1,46 +1,42 @@
 [
   {
-    "auditscore": 20,
+    "auditscore": 11,
     "bss_score": 3,
-    "cdrlsc_score": 7
+    "cdrlsc_score": 10,
+    "type": "questionnaire",
+    "submitter_id": "questionnaire_001",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "auditscore": 14
-  },
-  {
-    "auditscore": 20,
-    "bss_score": 4,
-    "cdrlsc_score": 13
-  },
-  {
-    "auditscore": 16,
-    "bss_score": 1,
-    "cdrlsc_score": 14
-  },
-  {
-    "bss_score": 4,
-    "cdrlsc_score": 10
-  },
-  {
-    "auditscore": 13,
-    "bss_score": 1,
-    "cdrlsc_score": 11
-  },
-  {
+    "auditscore": 12,
     "bss_score": 2,
-    "cdrlsc_score": 11
+    "cdrlsc_score": 11,
+    "type": "questionnaire",
+    "submitter_id": "questionnaire_002",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "bss_score": 4,
-    "cdrlsc_score": 8
+    "auditscore": 19,
+    "bss_score": 3,
+    "cdrlsc_score": 7,
+    "type": "questionnaire",
+    "submitter_id": "questionnaire_003",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "auditscore": 20,
-    "bss_score": 7,
-    "cdrlsc_score": 11
+    "auditscore": 11,
+    "bss_score": 3,
+    "cdrlsc_score": 1,
+    "type": "questionnaire",
+    "submitter_id": "questionnaire_004",
+    "core_visits": "submitter_id : core_visit_00N"
   },
   {
-    "bss_score": 0,
-    "cdrlsc_score": 10
+    "auditscore": 12,
+    "bss_score": 5,
+    "cdrlsc_score": 8,
+    "type": "questionnaire",
+    "submitter_id": "questionnaire_005",
+    "core_visits": "submitter_id : core_visit_00N"
   }
 ]
