@@ -114,7 +114,6 @@ validateVar <- function(var, compendium, simdata, threshold=.05, include.plot=F)
         
         if (dist == "normal") {
             p <- 1    
-            }
             
         } else if (dist == "poisson") {
             # validation test using chisquare test
