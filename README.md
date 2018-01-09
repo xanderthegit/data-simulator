@@ -52,7 +52,7 @@ compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulato
 
 n <- 10 #create 10 rows
 SimulatedData <- simData(compendium, n, 
-                         include.na = TRUE, 
+                         include.na = FALSE, 
                          reject= FALSE)
 ```
 
