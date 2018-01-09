@@ -70,9 +70,17 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
             val <- unlist(sample(c(TRUE, FALSE), 
                                  n, T, as.numeric(convertToList(row[['PROBS']]))))
         } else if (row[['TYPE']] == "number"){
-            val <- distPrep(row, n)
+            if (row[['DISTRIB']] == "poisson") {
+                val <- rep("Not a valid number distribution", n)
+            } else { 
+                val <- distPrep(row, n)
+            }
         } else if (row[['TYPE']] == "integer"){
-            val <- round(distPrep(row, n), 0)
+            if (row[['DISTRIB']] == "exponential") {
+                val <- rep("Not a valid integer distribution", n)
+            } else { 
+                val <- round(distPrep(row, n), 0)
+            }
         } else if (row[['TYPE']] == "string"){
             val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
         } else {
