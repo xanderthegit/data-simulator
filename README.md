@@ -29,6 +29,8 @@ Compendium fields are as follows:
 * __CHOICES__  If enum, this represents the enum options
 * __PROBS__  If enum or boolean this represents the probabilites for each option.   If boolean, the first probability represents `TRUE`
 * __DISTRIB__ If number or integer, this field represents the distribution that best represents the data. 
+    * If Number - options = normal, uniform, exponential
+    * If Integer - options = normal, uniform, poisson
 * __DISTRIB.INPUTS__  If number or integer, this field represents the distribution inputs (eg, mean, sd, lambda, etc)
 * __NAS__ proportion of the variable that should be NA.
 
