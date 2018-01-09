@@ -80,7 +80,9 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
                 val <- rep("Not a valid integer distribution", n)
             } else { 
                 val <- round(distPrep(row, n), 0)
-                if (row[['POSITIVEONLY']]) {
+                if (is.na(row[['POSITIVEONLY']])) {
+                    val
+                } else { 
                     val[val < 0] <- 0
                 }
             }

@@ -24,7 +24,7 @@ Text designations to identify the current marital status.,demographic,marital_st
 Number of times the individual has been married.,demographic,times_married,No,integer,,,uniform,"min = 0, max = 4",0.125,
 Number of times the individual got divorced.,demographic,times_divorced,No,integer,,,uniform,"min = 0, max = 4",0.25,
 The highest level of education obtained by the individual.,demographic,highest_education,No,enum,Elementary | G.E.D | High School | Technical/Trade School | Associate Degree | Bachelor Degree | Master Degree | Doctorate Degree | Other ,.1 | .1 | .2 | .1 | .1 | .1 | .1 | .1 | .1,,,0.1,
-The total number of years that the individual studied.,demographic,years_education,No,integer,,,normal,"mean = 5, sd = 5",0.166666667,TRUE
+The total number of years that the individual studied.,demographic,years_education,No,integer,,,normal,"mean = 10, sd = 4",0.166666667,TRUE
 The current employment status for the individual.,demographic,working_status,No,enum,No|Part-time|Full-time|Unemployed|Full-time student|Medical disability|Retired|Other,.1 | .1 | .1 | .1 | .1 | .1 | .1 | .3,,,0.142857143,
 The waist size of the patient measured in centimeters.,followup,waist,No,number,,,normal,"mean = 20, sd = 2",0.125,
 The hip size of the patient measured in centimeters.,followup,hip,No,number,,,exponential,rate = 5,0.166666667,
