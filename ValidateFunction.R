@@ -113,21 +113,7 @@ validateVar <- function(var, compendium, simdata, threshold=.05, include.plot=F)
         dist.vals <- distPrep(row, full.output = TRUE)
         
         if (dist == "normal") {
-            # validation test using chisquare test
-            tab.Norm <- table(vector)
-            nam <- names(tab.Norm)
-            l <- unlist(c(as.list(tab.Norm), 0))
-            probs <- dnorm(as.numeric(unlist(nam)), dist.vals[[1]], dist.vals[[2]])
-            comp <- 1 - sum(probs)
-            chi.test <- chisq.test(l, p=c(probs, comp))#, simulate.p.value = T)
-            p <- chi.test$p.value
-            
-            # plot
-            title <- titleHelper()
-            pt %<a-% {
-                pp <- plot(table(vector)/length(vector), 
-                           main=title, xlab="", ylab="")
-                curve(dnorm(x, dist.vals[[1]], dist.vals[[2]]), add=TRUE, col='red')
+            p <- 1    
             }
             
         } else if (dist == "poisson") {
