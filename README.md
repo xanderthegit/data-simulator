@@ -33,6 +33,7 @@ Compendium fields are as follows:
     * If Integer - options = normal, uniform, poisson
 * __DISTRIB.INPUTS__  If number or integer, this field represents the distribution inputs (eg, mean, sd, lambda, etc)
 * __NAS__ proportion of the variable that should be NA.
+* __POSITIVEONLY__ If an integer, make sure any values < 0 end up as 0, not negative numbers.
 
 The fields can be grouped into three classes:
 

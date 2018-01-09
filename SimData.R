@@ -80,6 +80,9 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
                 val <- rep("Not a valid integer distribution", n)
             } else { 
                 val <- round(distPrep(row, n), 0)
+                if (row[['POSITIVEONLY']]) {
+                    val[val < 0] <- 0
+                }
             }
         } else if (row[['TYPE']] == "string"){
             val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
