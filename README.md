@@ -63,7 +63,7 @@ SimulatedData <- simData(compendium, n,
 
 When running a simulation there is an option to resimulate a variable if it does not match the desired distribution closely enough.  This is generally done by comparing the simulated distribution to the theoretical distribution using:  
 
-* Chi Square tests (`TYPE` == integer or enum)
+* Chi Square tests (`TYPE` == enum)
 * Binomial tests (`TYPE` == boolean)
 * Kolmogorov-Smirnov tests (`TYPE` == number)
 
@@ -81,10 +81,15 @@ NOTE:   It is not recommended to use the `reject` flag with a small n value.
 ### Example of Validation with Plotting
 
 ```
+source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
+compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical.csv', header=T, stringsAsFactors = F)
+
 SimulatedData <- simData(compendium, n, 
-                         include.na = TRUE, 
+                         include.na = FALSE, 
                          reject = TRUE, 
                          threshold = .6) # set a very high p-value threshold
+
+variables <- compendium$VARIABLE
 
 par(mfrow = c(2, 3))
 for (i in variables) {
@@ -100,6 +105,7 @@ To easily add simulated entries into a data commons, use the function in SimtoJs
 
 ```
 source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimtoJson.R')
+source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
 compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical.csv', header=T, stringsAsFactors = F)
 nodelinks <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical_Nodes.csv', header = T, stringsAsFactors = F)
 
