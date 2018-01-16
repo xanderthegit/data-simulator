@@ -1,42 +1,32 @@
 [
   {
-    "opt_in": true,
-    "dosage": 0.1353,
-    "doses_per_day": -0,
-    "type": "treatment",
-    "submitter_id": "treatment_001",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
     "opt_in": false,
-    "dosage": 0.6308,
+    "dosage": 0.4385,
     "doses_per_day": 3,
     "type": "treatment",
-    "submitter_id": "treatment_002",
-    "core_visits": "submitter_id : core_visit_00N"
+    "submitter_id": "treatment_001",
+    "core_visits": {
+      "submitter_id": "core_visit_001"
+    }
   },
   {
     "opt_in": true,
-    "dosage": 0.2218,
+    "dosage": 0.3638,
+    "doses_per_day": 1,
+    "type": "treatment",
+    "submitter_id": "treatment_002",
+    "core_visits": {
+      "submitter_id": "core_visit_002"
+    }
+  },
+  {
+    "opt_in": true,
+    "dosage": 0.2382,
     "doses_per_day": 1,
     "type": "treatment",
     "submitter_id": "treatment_003",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "opt_in": false,
-    "dosage": 0.7061,
-    "doses_per_day": 2,
-    "type": "treatment",
-    "submitter_id": "treatment_004",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "opt_in": true,
-    "dosage": 0.0663,
-    "doses_per_day": 1,
-    "type": "treatment",
-    "submitter_id": "treatment_005",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_003"
+    }
   }
 ]

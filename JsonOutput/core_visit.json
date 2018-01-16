@@ -1,37 +1,29 @@
 [
   {
     "index_date": 1,
-    "visit_reason": "jQcknoe1GJsz",
+    "visit_reason": "JuxgEPPw9Fjr",
     "type": "core_visit",
     "submitter_id": "core_visit_001",
-    "cases": "submitter_id : case_00N"
+    "cases": {
+      "submitter_id": "case_001"
+    }
   },
   {
     "index_date": 1,
-    "visit_reason": "gBFhRiJrt92z",
+    "visit_reason": "jPqKkR5IKYmS",
     "type": "core_visit",
     "submitter_id": "core_visit_002",
-    "cases": "submitter_id : case_00N"
+    "cases": {
+      "submitter_id": "case_002"
+    }
   },
   {
     "index_date": 1,
-    "visit_reason": "0jRMiqe4r8B5",
+    "visit_reason": "2mrNnBzT2YWD",
     "type": "core_visit",
     "submitter_id": "core_visit_003",
-    "cases": "submitter_id : case_00N"
-  },
-  {
-    "index_date": 1,
-    "visit_reason": "eLKahv2Bndnc",
-    "type": "core_visit",
-    "submitter_id": "core_visit_004",
-    "cases": "submitter_id : case_00N"
-  },
-  {
-    "index_date": 1,
-    "visit_reason": "0kl0cZX9hzPg",
-    "type": "core_visit",
-    "submitter_id": "core_visit_005",
-    "cases": "submitter_id : case_00N"
+    "cases": {
+      "submitter_id": "case_003"
+    }
   }
 ]

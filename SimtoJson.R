@@ -32,37 +32,41 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
         
-        if (multiplicity == "many_to_one") {
-            lt <- paste0("submitter_id : ", target, "_00N")
-            sub[[link_name]] <- I(list(lt))
-        } else {
-            sub[[link_name]] <- paste0('submitter_id : ' , target, "_00N")
+        #if (multiplicity == "many_to_one") {
+        #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
+        #} else {
+        #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
+        #}
+        
+        l <- c()
+        for (v in 1:nrow(simdata)) {
+            num <- paste0(target, "_00", v)
+            l <- append(l, num)
         }
-                     
         
-        #l <- apply(sub, 1, as.vector)
+        finlist <- c()
+        for (m in 1:nrow(sub)) {
+            x <- as.list(sub[m,])
+            x[[link_name]] <- list(submitter_id=l[m])
+            finlist <- append(finlist, list(x))
+        }
         
-        #l <- split(sub, seq(nrow(sub)))
-        #l <- unname(l)
-        #for (i in seq_along(l))     # add element from ch to list
-        #    l[[i]] <- c(l[[i]], link_name=list("submitter_id", paste0(target, "_00N")))
-    
-        #json <- toJSON(l, pretty=T, auto_unbox = T)
-        
-        json <- toJSON(sub, pretty=T, auto_unbox=T)
+        json <- toJSON(finlist, pretty=T, auto_unbox=T)
        
         filepath <- paste0(path, i, ".json")
         write(json, filepath)
     }
 }
 
-n <- 5
-compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical.csv',
-                       header=T, stringsAsFactors = F)
-nodelinks <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical_Nodes.csv',
-                      header = T, stringsAsFactors = F)
-simdata <- simData(compendium, n, 
-                         include.na = FALSE, 
-                         reject= FALSE)
+## Example to run
+#source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
+#n <- 3
+#compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical.csv',
+#                       header=T, stringsAsFactors = F)
+#nodelinks <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical_Nodes.csv',
+#                      header = T, stringsAsFactors = F)
+#simdata <- simData(compendium, n, 
+#                         include.na = FALSE, 
+#                         reject= FALSE)
 
-SimtoJson(simdata, compendium, nodelinks, 'JsonOutput/')
+#SimtoJson(simdata, compendium, nodelinks, 'JsonOutput/')

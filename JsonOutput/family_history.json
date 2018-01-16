@@ -1,42 +1,32 @@
 [
   {
-    "relative_with_bipolar_history": true,
+    "relative_with_bipolar_history": false,
     "relative_with_schizophrenia_history": true,
-    "relative_with_panic_history": true,
+    "relative_with_panic_history": false,
     "type": "family_history",
     "submitter_id": "family_history_001",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_001"
+    }
   },
   {
-    "relative_with_bipolar_history": true,
+    "relative_with_bipolar_history": false,
     "relative_with_schizophrenia_history": true,
-    "relative_with_panic_history": true,
+    "relative_with_panic_history": false,
     "type": "family_history",
     "submitter_id": "family_history_002",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_002"
+    }
   },
   {
-    "relative_with_bipolar_history": true,
-    "relative_with_schizophrenia_history": false,
-    "relative_with_panic_history": true,
+    "relative_with_bipolar_history": false,
+    "relative_with_schizophrenia_history": true,
+    "relative_with_panic_history": false,
     "type": "family_history",
     "submitter_id": "family_history_003",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "relative_with_bipolar_history": true,
-    "relative_with_schizophrenia_history": true,
-    "relative_with_panic_history": true,
-    "type": "family_history",
-    "submitter_id": "family_history_004",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "relative_with_bipolar_history": true,
-    "relative_with_schizophrenia_history": true,
-    "relative_with_panic_history": true,
-    "type": "family_history",
-    "submitter_id": "family_history_005",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_003"
+    }
   }
 ]

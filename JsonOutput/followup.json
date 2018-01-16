@@ -1,37 +1,29 @@
 [
   {
-    "waist": 20.7104,
-    "hip": 0.6214,
+    "waist": 21.2396,
+    "hip": 0.0681,
     "type": "followup",
     "submitter_id": "followup_001",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_001"
+    }
   },
   {
-    "waist": 18.1052,
-    "hip": 0.0515,
+    "waist": 21.3088,
+    "hip": 0.0656,
     "type": "followup",
     "submitter_id": "followup_002",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_002"
+    }
   },
   {
-    "waist": 17.528,
-    "hip": 0.4272,
+    "waist": 18.6545,
+    "hip": 0.3666,
     "type": "followup",
     "submitter_id": "followup_003",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "waist": 16.8286,
-    "hip": 0.0161,
-    "type": "followup",
-    "submitter_id": "followup_004",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "waist": 23.7082,
-    "hip": 0.3493,
-    "type": "followup",
-    "submitter_id": "followup_005",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_003"
+    }
   }
 ]

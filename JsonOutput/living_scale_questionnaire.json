@@ -1,37 +1,29 @@
 [
   {
-    "sils_conceptual_quot": 0.1898,
-    "sils_abstraction_quot": 19.7972,
+    "sils_conceptual_quot": 0.0029,
+    "sils_abstraction_quot": 21.7598,
     "type": "living_scale_questionnaire",
     "submitter_id": "living_scale_questionnaire_001",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_001"
+    }
   },
   {
-    "sils_conceptual_quot": 0.0192,
-    "sils_abstraction_quot": 21.377,
+    "sils_conceptual_quot": 0.2735,
+    "sils_abstraction_quot": 22.5977,
     "type": "living_scale_questionnaire",
     "submitter_id": "living_scale_questionnaire_002",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_002"
+    }
   },
   {
-    "sils_conceptual_quot": 0.0146,
-    "sils_abstraction_quot": 17.1486,
+    "sils_conceptual_quot": 0.1072,
+    "sils_abstraction_quot": 20.9758,
     "type": "living_scale_questionnaire",
     "submitter_id": "living_scale_questionnaire_003",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "sils_conceptual_quot": 0.0925,
-    "sils_abstraction_quot": 20.0858,
-    "type": "living_scale_questionnaire",
-    "submitter_id": "living_scale_questionnaire_004",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "sils_conceptual_quot": 0.2871,
-    "sils_abstraction_quot": 18.9255,
-    "type": "living_scale_questionnaire",
-    "submitter_id": "living_scale_questionnaire_005",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_003"
+    }
   }
 ]

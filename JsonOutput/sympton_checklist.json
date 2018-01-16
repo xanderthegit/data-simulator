@@ -1,47 +1,35 @@
 [
   {
-    "scl_anxiety": 17.4059,
-    "scl_depression": 0.0398,
-    "scl_pst": 6.8089,
-    "scl_psdi": 19.366,
+    "scl_anxiety": 22.4902,
+    "scl_depression": 0.3409,
+    "scl_pst": 9.2474,
+    "scl_psdi": 23.586,
     "type": "sympton_checklist",
     "submitter_id": "sympton_checklist_001",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_001"
+    }
   },
   {
-    "scl_anxiety": 18.7418,
-    "scl_depression": 0.2659,
-    "scl_pst": 6.0053,
-    "scl_psdi": 19.122,
+    "scl_anxiety": 18.9021,
+    "scl_depression": 0.0928,
+    "scl_pst": 7.319,
+    "scl_psdi": 19.2276,
     "type": "sympton_checklist",
     "submitter_id": "sympton_checklist_002",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_002"
+    }
   },
   {
-    "scl_anxiety": 21.9354,
-    "scl_depression": 0.2851,
-    "scl_pst": 5.706,
-    "scl_psdi": 19.9542,
+    "scl_anxiety": 21.0599,
+    "scl_depression": 0.6586,
+    "scl_pst": 9.5257,
+    "scl_psdi": 13.0276,
     "type": "sympton_checklist",
     "submitter_id": "sympton_checklist_003",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "scl_anxiety": 19.2365,
-    "scl_depression": 0.0482,
-    "scl_pst": 6.5294,
-    "scl_psdi": 19.798,
-    "type": "sympton_checklist",
-    "submitter_id": "sympton_checklist_004",
-    "core_visits": "submitter_id : core_visit_00N"
-  },
-  {
-    "scl_anxiety": 24.2909,
-    "scl_depression": 1.0471,
-    "scl_pst": 6.3978,
-    "scl_psdi": 20.8012,
-    "type": "sympton_checklist",
-    "submitter_id": "sympton_checklist_005",
-    "core_visits": "submitter_id : core_visit_00N"
+    "core_visits": {
+      "submitter_id": "core_visit_003"
+    }
   }
 ]
