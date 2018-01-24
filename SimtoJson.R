@@ -69,4 +69,4 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
 #                         include.na = FALSE, 
 #                         reject= FALSE)
 
-#SimtoJson(simdata, compendium, nodelinks, 'JsonOutput/')
+#SimtoJson(simdata, compendium, nodelinks, 'SampleJsonOutput/')
