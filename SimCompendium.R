@@ -75,7 +75,8 @@ readDictionary <- function(repo, branch) {
 
 
 ## Run Example: 
-repo <- 'https://github.com/occ-data/bpadictionary'
+#repo <- 'https://github.com/occ-data/bpadictionary'
+repo <- 'https://github.com/NCI-GDC/gdcdictionary'
 branch <- 'develop'
 dictionary <- readDictionary(repo, branch)
 
@@ -120,28 +121,38 @@ buildCompendiums <- function(dictionary) {
                              TEMPCHOICES = numeric())
     
     # get objects from dictionary
-    node_list <- dictionary$node_list
+    #node_list <- dictionary$node_list
+    
+    # testing
+    node_list <- c('https://raw.githubusercontent.com/occ-data/bpadictionary/develop/gdcdictionary/schemas/read_group_qc.yaml', 
+                   'https://raw.githubusercontent.com/occ-data/bpadictionary/develop/gdcdictionary/schemas/demographic.yaml', 
+                   'https://raw.githubusercontent.com/NCI-GDC/gdcdictionary/develop/gdcdictionary/schemas/aligned_reads.yaml')
     
     # loop through nodes
     for (n in node_list) {
         # get single node
         node <- yaml.load_file(n)
         
+        
+        # new exception:
+        # https://github.com/NCI-GDC/gdcdictionary/blob/develop/gdcdictionary/schemas/aligned_reads.yaml
+        links <- unlist(node$links)
         # get compendium_nodes field definitions
-        if (is.null(node$links[[1]]$exclusive)) {
-            link_name <- node$links[[1]]$name
-            backref <- node$links[[1]]$backref
-            label <- node$links[[1]]$label
-            target <- node$links[[1]]$target_type
-            multiplicity <- node$links[[1]]$multiplicity
-            link_required <- node$links[[1]]$required
+        if ('name' %in% names(links)) {
+            # if there is no link multiplicity
+            link_name <- links[['name']]
+            backref <- links[['backref']]
+            label <- links[['label']]
+            target <- links[['target_type']]
+            multiplicity <- links[['multiplicity']]
+            link_required <- links[['required']]
         } else {
-            link_name <- node$links[[1]]$subgroup[[1]]$name
-            backref <- node$links[[1]]$subgroup[[1]]$backref
-            label <- node$links[[1]]$subgroup[[1]]$label
-            target <- node$links[[1]]$subgroup[[1]]$target_type
-            multiplicity <- node$links[[1]]$subgroup[[1]]$multiplicity
-            link_required <- node$links[[1]]$subgroup[[1]]$required
+            link_name <- links[['subgroup.name']]
+            backref <- links[['subgroup.backref']]
+            label <- links[['subgroup.label']]
+            target <- links[['subgroup.target_type']]
+            multiplicity <- links[['subgroup.multiplicity']]
+            link_required <- links[['subgroup.required']]
         }
         
         links_list <- data.frame(NODE = node$id,
@@ -160,6 +171,9 @@ buildCompendiums <- function(dictionary) {
         ## get compendium field definitions
     }
     
+    compendium_objects <- list(compendium = compendium,
+                               compendium_nodes = compendium_nodes)
+    return(compendium_objects)
 }
 
 
