@@ -72,19 +72,6 @@ readDictionary <- function(repo, branch) {
 
 }
 
-
-
-## Run Example: 
-#repo <- 'https://github.com/occ-data/bpadictionary'
-repo <- 'https://github.com/NCI-GDC/gdcdictionary'
-branch <- 'develop'
-dictionary <- readDictionary(repo, branch)
-
-node_loc <- dictionary$node_list[3]
-
-# sample single node for below
-node <- yaml.load_file(node_loc)
-
 ## Create Node_Compendium and Compendium from Dictionary
 
 buildCompendiums <- function(dictionary) {
@@ -121,21 +108,32 @@ buildCompendiums <- function(dictionary) {
                              TEMPCHOICES = numeric())
     
     # get objects from dictionary
-    #node_list <- dictionary$node_list
-    
-    # testing
-    node_list <- c('https://raw.githubusercontent.com/occ-data/bpadictionary/develop/gdcdictionary/schemas/read_group_qc.yaml', 
-                   'https://raw.githubusercontent.com/occ-data/bpadictionary/develop/gdcdictionary/schemas/demographic.yaml', 
-                   'https://raw.githubusercontent.com/NCI-GDC/gdcdictionary/develop/gdcdictionary/schemas/aligned_reads.yaml')
+    node_list <- dictionary$node_list
     
     # loop through nodes
     for (n in node_list) {
+        
+        #error handling for if issues with source .yaml
+        node <- tryCatch(
+            {
+                node <- yaml.load_file(n)
+            },
+            error=function(cond) {
+                message(paste("Error loading:", n))
+                message(cond)
+                message('')
+            },
+            warning=function(cond) {
+                message(paste("Warning created:", n))
+                message(cond)
+                message('')
+            }
+        )  
+        
+        if(inherits(node, "error")) next
         # get single node
-        node <- yaml.load_file(n)
+        #node <- yaml.load_file(n)
         
-        
-        # new exception:
-        # https://github.com/NCI-GDC/gdcdictionary/blob/develop/gdcdictionary/schemas/aligned_reads.yaml
         links <- unlist(node$links)
         # get compendium_nodes field definitions
         if ('name' %in% names(links)) {
@@ -155,17 +153,32 @@ buildCompendiums <- function(dictionary) {
             link_required <- links[['subgroup.required']]
         }
         
-        links_list <- data.frame(NODE = node$id,
-                           TITLE = node$title,
-                           CATEGORY = node$category,
-                           DESCRIPTION = node$description,
-                           LINK_NAME = link_name,
-                           BACKREF = backref,
-                           LABEL = label,
-                           TARGET = target,
-                           MULTIPLICITY = multiplicity, 
-                           LINK_REQUIRED = link_required)
+        links_list <- tryCatch(
+            {
+                links_list <- data.frame(NODE = node$id,
+                                         TITLE = node$title,
+                                         CATEGORY = node$category,
+                                         DESCRIPTION = node$description,
+                                         LINK_NAME = link_name,
+                                         BACKREF = backref,
+                                         LABEL = label,
+                                         TARGET = target,
+                                         MULTIPLICITY = multiplicity, 
+                                         LINK_REQUIRED = link_required)
+            },
+            error=function(cond) {
+                message(paste("Error creating df: ", node$id))
+                message(cond)
+                message('')
+            },
+            warning=function(cond) {
+                message(paste("Warning created: ", node$id))
+                message(cond)
+            }
+        )  
         
+        if(inherits(links_list, "error")) next
+
         compendium_nodes <- rbind(compendium_nodes, links_list)
         
         ## get compendium field definitions
@@ -176,55 +189,16 @@ buildCompendiums <- function(dictionary) {
     return(compendium_objects)
 }
 
+## Run Example: 
+#repo <- 'https://github.com/occ-data/bpadictionary'
+#repo <- 'https://github.com/NCI-GDC/gdcdictionary'
+#branch <- 'develop'
 
-## compendium df
-#model after : https://github.com/occ-data/data-simulator/blob/master/SampleCompendium/sampleClinical.csv
-NODE <- node$id
+#get urls for nodes
+#dictionary <- readDictionary(repo, branch)
 
-# need to extract description, variable, required, type, and choices from below info
-fields <- node$properties
-linkback <- node$links[[1]]$name
-fieldnames <- names(fields)[-1] #don't include $ref
-fieldnames <- fieldnames[!fieldnames %in% linkback]
-ref <- fields$`$ref`
-required <- node$required
+#testObject <- buildCompendiums(dictionary)
 
-for (f in fieldnames) {
-    
-    if ('description' %in% names(fields[[f]])) {
-        DESCRIPTION = fields[[f]]$description
-    } else {
-        DESCRIPTION = paste0("See : ", fields[[f]]$term$`$ref`)
-    }
-    
-    if ('enum' %in% names(fields[[f]])) {
-        TYPE <- 'enum'
-        elements <- fields[[f]]$enum
-        CHOICES <- paste(elements, collapse='|')
-        TEMPCHOICES <- length(elements)
-    } else {
-        TYPE <- fields[[f]]$type[1]
-        CHOICES <- ''
-        TEMPCHOICES <- 0
-    }
-    
-    if (f %in% required) {
-        REQUIRED <- TRUE
-    } else {
-        REQUIRED <- FALSE
-    }
-    
-    var_list <- data.frame(
-        DESCRIPTION = DESCRIPTION,
-        NODE = NODE,
-        VARIABLE = f,
-        REQUIRED = REQUIRED,
-        TYPE = TYPE,
-        CHOICES = CHOICES,
-        TEMPCHOICES = TEMPCHOICES
-    )
-    compendium <- rbind(compendium, var_list)
-}
 
 
 
