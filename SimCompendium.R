@@ -131,8 +131,6 @@ buildCompendiums <- function(dictionary) {
         )  
         
         if(inherits(node, "error")) next
-        # get single node
-        #node <- yaml.load_file(n)
         
         links <- unlist(node$links)
         # get compendium_nodes field definitions
@@ -144,13 +142,20 @@ buildCompendiums <- function(dictionary) {
             target <- links[['target_type']]
             multiplicity <- links[['multiplicity']]
             link_required <- links[['required']]
-        } else {
+        } else if ('subgroup.name' %in% names(links)) {
             link_name <- links[['subgroup.name']]
             backref <- links[['subgroup.backref']]
             label <- links[['subgroup.label']]
             target <- links[['subgroup.target_type']]
             multiplicity <- links[['subgroup.multiplicity']]
             link_required <- links[['subgroup.required']]
+        } else {
+            link_name <- NA
+            backref <- NA
+            label <- NA
+            target <- NA
+            multiplicity <- NA
+            link_required <- NA
         }
         
         links_list <- tryCatch(
@@ -167,13 +172,11 @@ buildCompendiums <- function(dictionary) {
                                          LINK_REQUIRED = link_required)
             },
             error=function(cond) {
-                message(paste("Error creating df: ", node$id))
-                message(cond)
+                message(paste("Error creating table row ", node$title))
                 message('')
             },
             warning=function(cond) {
-                message(paste("Warning created: ", node$id))
-                message(cond)
+                message(paste("Warning created: ", node$title))
             }
         )  
         
