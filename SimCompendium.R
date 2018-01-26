@@ -184,7 +184,66 @@ buildCompendiums <- function(dictionary) {
 
         compendium_nodes <- rbind(compendium_nodes, links_list)
         
-        ## get compendium field definitions
+        NODE <- node$id
+        # need to extract description, variable, required, type, and choices from below info
+        fields <- node$properties
+        linktoremove <- unlist(node$links)[grepl("name", names(unlist(node$links)))]
+        fieldnames <- names(fields) #don't include $ref
+        fieldnames <- fieldnames[!fieldnames %in% linktoremove]
+        fieldnames <- fieldnames[!fieldnames %in% "$ref"]
+        ref <- fields$`$ref`
+        required <- node$required
+        
+        for (f in fieldnames) {
+            
+            if ("$ref" %in% names(fields[[f]])) next
+            
+            if ('description' %in% names(fields[[f]])) {
+                DESCRIPTION = fields[[f]]$description
+            } else {
+                DESCRIPTION = paste0("See : ", fields[[f]]$term$`$ref`)
+            }
+            
+            if ('enum' %in% names(fields[[f]])) {
+                TYPE <- 'enum'
+                elements <- fields[[f]]$enum
+                CHOICES <- paste(elements, collapse='|')
+                TEMPCHOICES <- length(elements)
+            } else {
+                TYPE <- fields[[f]]$type[1]
+                CHOICES <- ''
+                TEMPCHOICES <- 0
+            }
+            
+            if (f %in% required) {
+                REQUIRED <- TRUE
+            } else {
+                REQUIRED <- FALSE
+            }
+            
+            var_list <- tryCatch(
+                {
+                    var_list <- data.frame(
+                        DESCRIPTION = DESCRIPTION,
+                        NODE = NODE,
+                        VARIABLE = f,
+                        REQUIRED = REQUIRED,
+                        TYPE = TYPE,
+                        CHOICES = CHOICES,
+                        TEMPCHOICES = TEMPCHOICES)
+                },
+                error=function(cond) {
+                    message(paste("Error creating variable ", f, " on node ", node$id))
+                    message(cond)
+                    message('')
+                },
+                warning=function(cond) {
+                    message(paste("Warning created: ", f))
+                }
+            ) 
+            
+            compendium <- rbind(compendium, var_list)
+        }
     }
     
     compendium_objects <- list(compendium = compendium,
@@ -199,7 +258,6 @@ buildCompendiums <- function(dictionary) {
 
 #get urls for nodes
 #dictionary <- readDictionary(repo, branch)
-
 #testObject <- buildCompendiums(dictionary)
 
 
