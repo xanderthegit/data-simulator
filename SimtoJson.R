@@ -17,6 +17,11 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
     for (i in nodes) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
         sub <- simdata[, varlist, drop=FALSE]
+        
+        new_names <- names(sub)
+        new_names <- gsub("\\..*", "", new_names)
+        names(sub) <- new_names
+        
         sub <- cbind(sub, 
                      type=rep(i, nrow(simdata)))
         
@@ -61,8 +66,8 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
 ## Example to run
 #source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
 #n <- 3
-#compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical.csv',
-#                       header=T, stringsAsFactors = F)
+compendium <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical.csv',
+                       header=T, stringsAsFactors = F)
 #nodelinks <- read.csv('https://raw.githubusercontent.com/occ-data/data-simulator/master/SampleCompendium/sampleClinical_Nodes.csv',
 #                      header = T, stringsAsFactors = F)
 #simdata <- simData(compendium, n, 
