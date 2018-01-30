@@ -1,0 +1,18 @@
+[
+  {
+    "aliquot_container": "Vial",
+    "aliquot_quantity": 12.7295,
+    "aliquot_volume": {
+      "submitter_id": "sample_001"
+    },
+    "clinical_or_contrived": "Contrived",
+    "contrivance_method": "zalZSxSe8rAU",
+    "hours_to_freezer_lower": 10.7531,
+    "hours_to_freezer_upper": 15.4223,
+    "methanol_added": false,
+    "preservation_method": "OCT",
+    "storage_temperature": 8.9241,
+    "type": "aliquot",
+    "submitter_id": "aliquot_001"
+  }
+]

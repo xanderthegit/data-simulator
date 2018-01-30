@@ -1,0 +1,22 @@
+[
+  {
+    "adverse_event": "Toxic epidermal necrolysis",
+    "bmi": 7.9897,
+    "cause_of_response": "MOjOY4MJzwrq",
+    "comorbidity": "Liver toxicity (non-infectious)",
+    "days_to_adverse_event": {
+      "submitter_id": "case_001"
+    },
+    "days_to_comorbidity": 10,
+    "days_to_followup": 3,
+    "days_to_progression": 6,
+    "days_to_recurrence": 3,
+    "disease_response": "VGPR-Very Good Partial Response",
+    "ecog_performance_status": "4",
+    "height": 10.0836,
+    "progression_or_recurrence": "Unknown",
+    "weight": 16.5196,
+    "type": "followup",
+    "submitter_id": "followup_001"
+  }
+]

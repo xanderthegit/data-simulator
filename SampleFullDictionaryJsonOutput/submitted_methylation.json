@@ -1,0 +1,15 @@
+[
+  {
+    "type": "submitted_methylation",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "data_format": "IDAT",
+    "assay_method": "Methylation Array",
+    "assay_instrument": "Illumina",
+    "assay_instrument_model": {
+      "submitter_id": "analyte_001"
+    },
+    "type.1": "submitted_methylation",
+    "submitter_id": "submitted_methylation_001"
+  }
+]

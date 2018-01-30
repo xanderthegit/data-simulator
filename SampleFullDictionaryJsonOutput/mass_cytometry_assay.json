@@ -1,0 +1,16 @@
+[
+  {
+    "data_category": "Mass Cytometry",
+    "data_type": "Raw IMC Data",
+    "data_format": "TXT",
+    "assay_method": "Imaging Mass Cytometry",
+    "assay_instrument": "bDEVABeLdBUv",
+    "assay_instrument_model": "aFlk6cvWLnSv",
+    "panel_used": {
+      "submitter_id": "analyte_001"
+    },
+    "protocol_used": "aKmFj7o6ILjn",
+    "type": "mass_cytometry_assay",
+    "submitter_id": "mass_cytometry_assay_001"
+  }
+]

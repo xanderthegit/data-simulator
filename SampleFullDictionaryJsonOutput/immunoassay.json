@@ -1,0 +1,18 @@
+[
+  {
+    "assay_instrument": "HD-SCA Platform",
+    "assay_instrument_model": "BoyUSg47LYXg",
+    "assay_kit_name": "5t8T4a2O9jYv",
+    "assay_kit_vendor": "uBru4EEJziXH",
+    "assay_kit_version": "kdUWrZxYa5p5",
+    "assay_method": "MALDI-TOF Mass Spectrometry",
+    "assay_target": {
+      "submitter_id": "analyte_001"
+    },
+    "target_localization": "BL3ScvgoUKbW",
+    "target_measurement": 6.733,
+    "target_measurement_units": "L4cpjAXulRxU",
+    "type": "immunoassay",
+    "submitter_id": "immunoassay_001"
+  }
+]

@@ -117,5 +117,22 @@ simdata <- simData(compendium, n,
 SimtoJson(simdata, compendium, nodelinks, 'JsonOutput/')
 ```
 
-Sample simulated data resulting from this function call can be found at: https://github.com/occ-data/data-simulator/tree/master/JsonOutput
+Sample simulated data resulting from this function call can be found at: https://github.com/occ-data/data-simulator/tree/master/SampleJsonOutput
+
+## Sim from Dictionary
+
+A use case for the simulation is to run a simulation to stress validate a dictionary or stress test the data commons software stack with records.   In this instance, we have a function to ingest a repo of .yaml files and create a dummy simulation to import into a data commons. 
+
+To run an example, point the function at a dictionary repo and a branch. 
+
+```
+source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimCompendium.R')
+repo <- 'https://github.com/occ-data/bpadictionary'
+branch <- 'develop'
+n <- 1
+dir <- 'SampleFullDictionaryJsonOutput/'
+finalSim <- simFromDictionary(repo, branch, required_only=F, n, output_to_json=T, dir)
+```
+
+Sample simulated data resulting from this function call can be found at: https://github.com/occ-data/data-simulator/tree/master/SampleFullDictionaryJsonOutput
 

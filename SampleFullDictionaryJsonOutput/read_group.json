@@ -1,0 +1,32 @@
+[
+  {
+    "adapter_sequence": "8XaIto5w8YFG",
+    "barcoding_applied": false,
+    "flow_cell_barcode": "ecpjlaWT04cw",
+    "instrument_model": "Complete Genomics",
+    "is_paired_end": false,
+    "library_name": "tWitPWLViRvo",
+    "library_preparation_kit_name": {
+      "submitter_id": "analyte_001"
+    },
+    "library_preparation_kit_vendor": "5QzMZfZ4hnMk",
+    "library_preparation_kit_catalog_number": "UmtJf2WDYGQ2",
+    "library_preparation_kit_version": "4BNSEMKXpsBY",
+    "library_selection": "RNA Depletion",
+    "library_strand": "First Stranded",
+    "library_strategy": "Other",
+    "platform": "LS454",
+    "read_group_name": "ewiKvXxmokZh",
+    "read_length_lower": 5,
+    "read_length_upper": 6,
+    "RIN": 6.4747,
+    "sequencing_center": "z4lG5hRcRg8N",
+    "target_capture_kit_name": "HCEAtQo3U51g",
+    "target_capture_kit_vendor": "USrutZsgSTSI",
+    "target_capture_kit_catalog_number": "AolQReqWo3IP",
+    "target_capture_kit_version": "aO2FsssKeQOJ",
+    "target_capture_kit_target_region": "geR1d58bQDAv",
+    "type": "read_group",
+    "submitter_id": "read_group_001"
+  }
+]

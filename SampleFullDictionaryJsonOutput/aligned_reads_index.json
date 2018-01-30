@@ -1,0 +1,11 @@
+[
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": {
+      "submitter_id": "submitted_aligned_reads_001"
+    },
+    "data_format": "BAI",
+    "type": "aligned_reads_index",
+    "submitter_id": "aligned_reads_index_001"
+  }
+]

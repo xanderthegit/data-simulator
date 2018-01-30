@@ -1,0 +1,16 @@
+[
+  {
+    "blood_fractionation_method": "hnSXb3IOfefG",
+    "composition": "Peripheral Whole Blood",
+    "hours_to_fractionation_lower": 6.2952,
+    "hours_to_fractionation_upper": 11.3853,
+    "sample_quantity": 7.58,
+    "sample_volume": 11.5259,
+    "type": "sample",
+    "submitter_id": "sample_001",
+    "9": {},
+    "10": {
+      "submitter_id": "biospecimen_001"
+    }
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Unaligned Reads",
+    "data_format": "BAM",
+    "experimental_strategy": "Low Pass WGS",
+    "type": "submitted_unaligned_reads",
+    "submitter_id": "submitted_unaligned_reads_001",
+    "7": {},
+    "8": {},
+    "9": {
+      "submitter_id": "read_group_001"
+    }
+  }
+]

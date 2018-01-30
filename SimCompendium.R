@@ -2,19 +2,6 @@
 if(!require(yaml)) install.packages(yaml)
 if(!require(httr)) install.packages(httr)
 
-## PROJECT OUTLINE
-# 1:  go through repo, get raw urls associated with each node
-# 2:  go through each node and extract the details matching with 
-##      compendium and link dfs required for submission
-# 3:  for compendium, create functions that create random stats 
-##      properties for each variable type
-# 4:  given compendium and links, sim.
-# optional:  flag for required, flag to create multiple 
-##    entries on lower level nodes
-
-#https://stackoverflow.com/questions/25485216/how-to-get-list-files-from-a-github-repository-folder-using-r
-
-# Helper  
 readDictionary <- function(repo, branch) {
     # given github repo, get list of links for each dictionary yaml
     #
@@ -110,10 +97,12 @@ buildCompendiums <- function(dictionary) {
     # get objects from dictionary
     node_list <- dictionary$node_list
     
-    # loop through nodes
+    # loop through nodes to generate rows in compendium
+    # and compendium nodes
     for (n in node_list) {
         
-        #error handling for if issues with source .yaml
+        # load node yaml
+        # error handling if issues with source .yaml
         node <- tryCatch(
             {
                 node <- yaml.load_file(n)
@@ -132,6 +121,9 @@ buildCompendiums <- function(dictionary) {
         
         if(inherits(node, "error")) next
         
+        ## Get variables for node relationships df
+        
+        # get node relationships/links
         links <- unlist(node$links)
         # get compendium_nodes field definitions
         if ('name' %in% names(links)) {
@@ -172,7 +164,7 @@ buildCompendiums <- function(dictionary) {
                                          LINK_REQUIRED = link_required)
             },
             error=function(cond) {
-                message(paste("Error creating table row ", node$title))
+                message(paste("Skipping creation of table row ", node$title))
                 message('')
             },
             warning=function(cond) {
@@ -184,8 +176,10 @@ buildCompendiums <- function(dictionary) {
 
         compendium_nodes <- rbind(compendium_nodes, links_list)
         
+        ## Get variables and append to compendium df
+    
         NODE <- node$id
-        # need to extract description, variable, required, type, and choices from below info
+        # get list of variables
         fields <- node$properties
         linktoremove <- unlist(node$links)[grepl("name", names(unlist(node$links)))]
         fieldnames <- names(fields) #don't include $ref
@@ -194,6 +188,7 @@ buildCompendiums <- function(dictionary) {
         ref <- fields$`$ref`
         required <- node$required
         
+        # loop through fields in node to get variables
         for (f in fieldnames) {
             
             if ("$ref" %in% names(fields[[f]])) next
@@ -226,7 +221,7 @@ buildCompendiums <- function(dictionary) {
                     var_list <- data.frame(
                         DESCRIPTION = DESCRIPTION,
                         NODE = NODE,
-                        VARIABLE = f,
+                        VARIABLE = paste0(f, ".", NODE),
                         REQUIRED = REQUIRED,
                         TYPE = TYPE,
                         CHOICES = CHOICES,
@@ -246,20 +241,98 @@ buildCompendiums <- function(dictionary) {
         }
     }
     
+    ## Add sim values to compendium
+    getEnumProbs <- function(df){
+        probs <- c()
+        for(i in 1:nrow(df)) {
+            row <- df[i,]
+            num <- row[['TEMPCHOICES']]
+            if (num == '') {probs_new = ''} else {
+                probs_new <- paste(rep(1/num, num), collapse='|')
+                probs <- c(probs, probs_new)
+            }
+        }
+        return(probs)
+    }
+    compendium$DESCRIPTION <- as.character(compendium$DESCRIPTION)
+    compendium$NODE <- as.character(compendium$NODE)
+    compendium$VARIABLE <- as.character(compendium$VARIABLE)
+    compendium$CHOICES <- as.character(compendium$CHOICES)
+    compendium$TYPE <- as.character(compendium$TYPE)
+    
+    compendium$PROBS <- getEnumProbs(compendium)
+    compendium$PROBS[compendium$TYPE=='boolean'] <- c('.4|.6')
+    compendium$TEMPCHOICES <- NULL
+    
+    compendium$DISTRIB <- ''
+    compendium$DISTRIB[compendium$TYPE=='integer'] <- 'poisson'
+    compendium$DISTRIB[compendium$TYPE=='number'] <- 'normal'
+    
+    compendium$DISTRIB.INPUTS <- ''
+    compendium$DISTRIB.INPUTS[compendium$TYPE=='integer'] <- 'lambda = 4'
+    compendium$DISTRIB.INPUTS[compendium$TYPE=='number'] <- 'mean = 10, sd = 3'
+    
+    compendium$NAS <- runif(nrow(compendium), 0, .2)
+    compendium$POSITIVEONLY <- ''
+    
+    # create final object with compendium and compendium node relationships
     compendium_objects <- list(compendium = compendium,
                                compendium_nodes = compendium_nodes)
     return(compendium_objects)
+}
+
+
+simFromDictionary <- function(repo, branch, required_only=F, n, output_to_json=F, dir=NULL) {
+    # given the raw dictionary, build a base compendium table
+    # and a node relationship table and run simulation
+    #
+    # Args:
+    #   repo: top level URL for repo, eg: 'https://github.com/occ-data/bpadictionary'
+    #   branch: branch name to use for desired dictionary
+    #   required_only: to subset compendium so that only required fields are simmed
+    #   n: number of sims for each variable
+    #   output_to_json:  create output json files
+    #   dir: output for json files
+    #
+    # Returns:
+    #   simdata and json files in output directory
+    
+    print("Loading Simulation Tools...")
+    source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimtoJson.R')
+    source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
+    
+    print("Getting URLs for Each Node...") 
+    dictionary <- readDictionary(repo, branch)
+    
+    print("Creating Compendium and Node Relationship Table...")
+    compendiumObjects <- buildCompendiums(dictionary)
+    compendium <- compendiumObjects$compendium
+    
+    if (required_only) {
+        compendium <- compendium[compendium$REQUIRED==TRUE,]
+    } 
+    
+    print("Simulating Data...")
+    simdata <- simData(compendium, 
+                       n, 
+                       include.na = FALSE, 
+                       reject= FALSE)
+    if (output_to_json) {
+        print("Generating Json...")
+        SimtoJson(simdata, 
+                  compendium, 
+                  compendiumObjects$compendium_nodes, 
+                  dir)
+    }
+    
+    return(simdata)
+
 }
 
 ## Run Example: 
 #repo <- 'https://github.com/occ-data/bpadictionary'
 #repo <- 'https://github.com/NCI-GDC/gdcdictionary'
 #branch <- 'develop'
-
-#get urls for nodes
-#dictionary <- readDictionary(repo, branch)
-#testObject <- buildCompendiums(dictionary)
-
-
-
-
+#n <- 1
+#dir <- 'SampleFullDictionaryJsonOutput/'
+#finalSim <- simFromDictionary(repo, branch, required_only=F, n, output_to_json=T, dir)

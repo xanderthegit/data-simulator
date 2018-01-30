@@ -1,0 +1,15 @@
+[
+  {
+    "type": "family_history",
+    "submitter_id": "JmtzZfqG4Zdn",
+    "relative_with_cancer_history": "no",
+    "relationship_type": "3iFCqAPSNVTG",
+    "relationship_gender": {
+      "submitter_id": "case_001"
+    },
+    "relationship_age_at_diagnosis": 5.2443,
+    "relationship_primary_diagnosis": "Qys14lwdOFph",
+    "type.1": "family_history",
+    "submitter_id.1": "family_history_001"
+  }
+]

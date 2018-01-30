@@ -1,0 +1,22 @@
+[
+  {
+    "assay_instrument": "Qiagen Rotor-Gene Q",
+    "assay_instrument_model": "Bio-Rad QX100",
+    "assay_kit_name": "TZhid5MF7Usr",
+    "assay_kit_vendor": "ydf9iVhyzcJe",
+    "assay_kit_version": "qAEt7FGsvKJW",
+    "assay_method": "TaqMan",
+    "mutant_fraction_percent": {
+      "submitter_id": "analyte_001"
+    },
+    "mutation_result": "Unspecified",
+    "mutant_copies": 6,
+    "assay_target": "XB8V1Cha0y8J",
+    "target_chromosome": "TRUE",
+    "target_position": 1,
+    "target_ref": "Qp8Ej70nvxaP",
+    "target_alt": "aJdC2ET56bo9",
+    "type": "pcr_assay",
+    "submitter_id": "pcr_assay_001"
+  }
+]

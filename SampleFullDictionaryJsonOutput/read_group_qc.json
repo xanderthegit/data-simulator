@@ -1,0 +1,15 @@
+[
+  {
+    "encoding": "r2Y9klknhzqw",
+    "percent_aligned": 9,
+    "percent_gc_content": 4,
+    "total_aligned_reads": 3,
+    "total_sequences": 2,
+    "type": "read_group_qc",
+    "submitter_id": "read_group_qc_001",
+    "8": {},
+    "9": {
+      "submitter_id": "read_group_001"
+    }
+  }
+]

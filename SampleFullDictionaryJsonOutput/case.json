@@ -1,0 +1,12 @@
+[
+  {
+    "collaboration_id": "5Y4mn8CnnDa5",
+    "index_date": "Study Enrollment",
+    "lost_to_followup": "Yes",
+    "days_to_lost_to_followup": 4,
+    "type": "case",
+    "submitter_id": {
+      "submitter_id": "study_001"
+    }
+  }
+]

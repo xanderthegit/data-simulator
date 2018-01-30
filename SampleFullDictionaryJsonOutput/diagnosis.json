@@ -1,0 +1,31 @@
+[
+  {
+    "ajcc_clinical_m": "M1",
+    "ajcc_clinical_n": "N0 (mol-)",
+    "ajcc_clinical_stage": "Stage IB",
+    "ajcc_clinical_t": "T2b",
+    "ajcc_pathologic_m": {
+      "submitter_id": "case_001"
+    },
+    "ajcc_pathologic_n": "N1bII",
+    "ajcc_pathologic_stage": "Stage IVB",
+    "ajcc_pathologic_t": "Tis",
+    "best_overall_response": "sCR-Stringent Complete Response",
+    "classification_of_tumor": "Primary",
+    "days_to_best_overall_response": 2,
+    "days_to_diagnosis": 3,
+    "method_of_diagnosis": "Excisional Biopsy",
+    "morphology": "8410/0",
+    "overall_survival": 2,
+    "primary_diagnosis": "Intraglandular papillary neoplasm with low grade intraepithelial neoplasia",
+    "prior_malignancy": "Yes",
+    "prior_treatment": "Not Reported",
+    "progression_free_survival": 3,
+    "progression_free_survival_event": "Unknown",
+    "residual_disease": "R1",
+    "tissue_or_organ_of_origin": "iAaie9E135HW",
+    "tumor_grade": "G2 Moderately differentiated (intermediate grade)",
+    "type": "diagnosis",
+    "submitter_id": "diagnosis_001"
+  }
+]

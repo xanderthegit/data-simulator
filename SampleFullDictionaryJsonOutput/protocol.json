@@ -1,0 +1,12 @@
+[
+  {
+    "data_category": "Biospecimen Metadata",
+    "data_type": "Collection and Shipping SOP",
+    "data_format": "PDF",
+    "type": "protocol",
+    "submitter_id": "protocol_001",
+    "6": {
+      "submitter_id": "study_001"
+    }
+  }
+]

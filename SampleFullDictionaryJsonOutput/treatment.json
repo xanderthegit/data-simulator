@@ -1,0 +1,17 @@
+[
+  {
+    "days_to_treatment_end": 11.255,
+    "days_to_treatment_start": 13.5245,
+    "regimen_or_line_of_therapy": "BdLVoOUGWpZm",
+    "therapeutic_agents": "jv07ASryjc0d",
+    "treatment_anatomic_site": "Prostate",
+    "treatment_intent_type": "3gfkprnAmMGv",
+    "treatment_outcome": "Unknown",
+    "treatment_type": "Other",
+    "type": "treatment",
+    "submitter_id": "treatment_001",
+    "11": {
+      "submitter_id": "diagnosis_001"
+    }
+  }
+]

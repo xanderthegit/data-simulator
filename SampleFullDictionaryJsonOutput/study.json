@@ -1,0 +1,14 @@
+[
+  {
+    "associated_study": {
+      "submitter_id": "project_001"
+    },
+    "data_description": "LuMcFb9RBnOH",
+    "study_description": "cq2pWTmOyrxg",
+    "study_design": "Clinical Utility",
+    "study_objective": "Limit of Detection",
+    "study_setup": "Detection/Enumeration/Isolation",
+    "type": "study",
+    "submitter_id": "study_001"
+  }
+]

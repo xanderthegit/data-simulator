@@ -1,0 +1,31 @@
+[
+  {
+    "biospecimen_anatomic_site": "Jaw",
+    "biospecimen_type": "Fluid",
+    "biospecimen_volume": 7.5647,
+    "biospecimen_weight": 11.2828,
+    "blood_draw_method": {
+      "submitter_id": "case_001"
+    },
+    "blood_tube_type": "Acid Citrate Dextrose (ACD)",
+    "clinical_site": "wX3xeg9DRIb4",
+    "collaboration_id": "8a1VQ2cBJeos",
+    "days_to_collection": 4,
+    "days_to_procurement": 3,
+    "disease_type": "Ovarian Cancer",
+    "metastatic_bone": false,
+    "metastatic_lymph_node": true,
+    "metastatic_visceral": false,
+    "method_of_procurement": "Blood Draw",
+    "primary_site": "Male Genital Organs",
+    "procured_or_purchased": "Purchased",
+    "procurement_temperature": 8.1029,
+    "shipping_temperature": 7.3781,
+    "tissue_type": "Peritumoral",
+    "tumor_code": "Granular Cell Tumors and Alveolar Soft Part Sarcomas",
+    "tumor_descriptor": "Primary",
+    "tumor_morphology": "Vsjte8N2G3c6",
+    "type": "biospecimen",
+    "submitter_id": "biospecimen_001"
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "data_format": "BAM",
+    "experimental_strategy": "WXS",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_001",
+    "7": {},
+    "8": {},
+    "9": {
+      "submitter_id": "read_group_001"
+    }
+  }
+]

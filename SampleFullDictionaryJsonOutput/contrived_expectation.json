@@ -1,0 +1,16 @@
+[
+  {
+    "expected_allelic_fraction": 10.7055,
+    "expected_copy_number": 9.5877,
+    "expected_mutation_alt": "7o14SxyQhs7A",
+    "expected_mutation_chromosome": {
+      "submitter_id": "aliquot_001"
+    },
+    "expected_mutation_gene": "5TWlEusSbHuD",
+    "expected_mutation_position": "PmR5v5w98aWN",
+    "expected_mutation_reference": "Owr4URujcz18",
+    "expected_mutation_type": "vo3CmJncEXPT",
+    "type": "contrived_expectation",
+    "submitter_id": "contrived_expectation_001"
+  }
+]

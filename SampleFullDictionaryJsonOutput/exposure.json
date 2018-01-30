@@ -1,0 +1,13 @@
+[
+  {
+    "alcohol_history": "4H2Y0utTZotD",
+    "alcohol_intensity": "FTULrAS8ePB0",
+    "cigarettes_per_day": 9.5309,
+    "tobacco_smoking_status": "2",
+    "years_smoked": {
+      "submitter_id": "case_001"
+    },
+    "type": "exposure",
+    "submitter_id": "exposure_001"
+  }
+]

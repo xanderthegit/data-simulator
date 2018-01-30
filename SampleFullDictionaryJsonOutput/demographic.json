@@ -1,0 +1,15 @@
+[
+  {
+    "cause_of_death": "Not Cancer Related",
+    "days_to_birth": 0,
+    "days_to_death": 3,
+    "ethnicity": "Unknown",
+    "gender": {
+      "submitter_id": "case_001"
+    },
+    "race": "Native Hawaiian or Other Pacific Islander",
+    "vital_status": "Alive",
+    "type": "demographic",
+    "submitter_id": "demographic_001"
+  }
+]
