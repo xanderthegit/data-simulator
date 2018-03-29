@@ -52,7 +52,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         finlist <- c()
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
-            x[[link_name]] <- list(submitter_id=l[m])
+            x[[as.character(link_name)]] <- list(submitter_id=l[m])
             finlist <- append(finlist, list(x))
         }
         
