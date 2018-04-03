@@ -38,6 +38,9 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         if(!("type" %in% colnames(sub))){
           sub <- cbind(sub, type=rep(i, nrow(simdata)))
         }
+        else{
+          sub$type <- rep(i, nrow(simdata))
+        }
         
         submitter_id <- c()
         for (v in 1:nrow(simdata)){ 
