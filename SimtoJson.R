@@ -26,6 +26,11 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
         sub <- simdata[, varlist, drop=FALSE]
         
+        # Remove project_id
+        if(length(grep("project_id", colnames(sub))) > 0){
+            sub <- sub[-grep("project_id", colnames(sub))]
+        }
+        
         new_names <- names(sub)
         new_names <- gsub("\\..*", "", new_names)
         names(sub) <- new_names
@@ -47,7 +52,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
             sub <- cbind(sub, submitter_id=submitter_id)
         }
                 
-        link_name <- nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i]
+        link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i])
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
         
@@ -66,7 +71,12 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         finlist <- c()
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
-            x[[as.character(link_name)]] <- list(submitter_id=l[m])
+            if(link_name == "projects"){
+               x[[link_name]] <- list(code=l[m])
+            }
+            else{
+               x[[link_name]] <- list(submitter_id=l[m])
+            }
             finlist <- append(finlist, list(x))
         }
         
