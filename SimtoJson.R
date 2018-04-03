@@ -14,7 +14,15 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
     
     nodes <- unique(compendium[['NODE']])
     
+    # Sort nodes
+    sorted_nodes <- c("project")
     for (i in nodes) {
+        target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==i])
+        sorted_nodes <- getOrder(target, i, nodes, sorted_nodes, nodelinks)
+    }   
+    sorted_nodes <- sorted_nodes[-1]
+    
+    for (i in sorted_nodes) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
         sub <- simdata[, varlist, drop=FALSE]
         
@@ -22,17 +30,23 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         new_names <- gsub("\\..*", "", new_names)
         names(sub) <- new_names
         
-        sub <- cbind(sub, 
-                     type=rep(i, nrow(simdata)))
+        if(!("type" %in% colnames(sub))){
+          sub <- cbind(sub, type=rep(i, nrow(simdata)))
+        }
         
         submitter_id <- c()
         for (v in 1:nrow(simdata)){ 
             num <- paste0(i, "_00", v)
             submitter_id <- c(submitter_id, num)
         }
-        sub <- cbind(sub,
-                     submitter_id=submitter_id)
         
+        if("submitter_id" %in% colnames(sub)){
+            sub$submitter_id <- submitter_id
+        }
+        else{
+            sub <- cbind(sub, submitter_id=submitter_id)
+        }
+                
         link_name <- nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i]
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
@@ -57,10 +71,26 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         }
         
         json <- toJSON(finlist, pretty=T, auto_unbox=T)
-       
+              
         filepath <- paste0(path, i, ".json")
         write(json, filepath)
     }
+    
+    # Write importing order
+    fileOrder <- paste(sorted_nodes, ".json", sep="")
+    write(fileOrder, paste0(path, 'DataImportOrder.txt'))
+}
+
+getOrder <- function(link, node, nodes, sorted_nodes, nodelinks) {
+
+    if (!(link %in% sorted_nodes)){
+      target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
+      sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
+    }
+    if (!(node %in% sorted_nodes)){
+       sorted_nodes <- c(sorted_nodes, node)
+    }
+    return(sorted_nodes)
 }
 
 ## Example to run
