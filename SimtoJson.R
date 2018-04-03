@@ -72,7 +72,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
             if(link_name == "projects"){
-               x[[link_name]] <- list(code=l[m])
+               x[[link_name]] <- list(code="test-project")
             }
             else{
                x[[link_name]] <- list(submitter_id=l[m])
