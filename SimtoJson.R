@@ -1,7 +1,7 @@
 source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
 library(jsonlite)
 
-SimtoJson <- function(simdata, compendium, nodelinks, path) {
+SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     # takes simulated data and creates json
     # Args:
     #   simdata:   Simulated values
@@ -75,7 +75,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, path) {
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
             if(link_name == "projects"){
-               x[[link_name]] <- list(code="test-project")
+               x[[link_name]] <- list(code=project_name)
             }
             else{
                x[[link_name]] <- list(submitter_id=l[m])
