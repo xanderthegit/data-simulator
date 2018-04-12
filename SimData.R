@@ -15,7 +15,7 @@ distPrep <- function(row, n=0, full.output=FALSE) {
     str <- row[['DISTRIB.INPUTS']]
     if (row[['DISTRIB']] == "normal") {
         str <- row[['DISTRIB.INPUTS']]
-        mean <- as.numeric(str_extract(str_extract(str, "(mean = )[0-9]*"), "([0-9]+)"))
+        mean <- as.numeric(str_extract(str_extract(str, "(mean = )[-]{0,1}[0-9]*"), "([-]{0,1}[0-9]+)"))
         sd <- as.numeric(str_extract(str_extract(str, "(sd = )[0-9]*"), "([0-9]+)"))
         full <- list(mean=mean, sd=sd)
         val <- rnorm(n, mean, sd)
@@ -87,15 +87,31 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
                 }
             }
         } else if (row[['TYPE']] == "string"){
-            val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
+            if(row[['CHOICES']] != ''){
+                 pat <- str_extract(row[['CHOICES']], "\\[(.+?)\\]")
+                 size <- as.integer(str_match(row[['CHOICES']], "\\{(.+?)\\}")[,2])
+                 val <- stri_rand_strings(n, size, pattern = pat)
+            }
+            else{
+                 val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
+            }
         } else {
             val <- rep("Something Went Wrong", n)
         }
+      
         # add NAS
         if (include.na) {
             na.prob <- row[['NAS']]
             ind <- sample(c(TRUE, FALSE), n, replace=TRUE, prob=c(1-na.prob, na.prob))
             val[!ind] <- NA
+        }
+        
+        # check MAX and MIN columns
+        if ('MAX' %in% names(row) & 'MIN' %in% names(row)){
+            if (!is.na(row[['MAX']]) & !is.na(row[['MIN']])){
+                 val[val>row[['MAX']]] <- row[['MAX']]
+                 val[val<row[['MIN']]] <- row[['MIN']]
+            }
         }
 
     names <- c("id", row[["VARIABLE"]])
