@@ -92,7 +92,9 @@ buildCompendiums <- function(dictionary) {
                              REQUIRED = logical(), 
                              TYPE = character(),
                              CHOICES = character(), 
-                             TEMPCHOICES = numeric())
+                             TEMPCHOICES = numeric(),
+                             MAX = numeric(),
+                             MIN = numeric())
     
     # get objects from dictionary
     node_list <- dictionary$node_list
@@ -182,16 +184,80 @@ buildCompendiums <- function(dictionary) {
         # get list of variables
         fields <- node$properties
         linktoremove <- unlist(node$links)[grepl("name", names(unlist(node$links)))]
-        fieldnames <- names(fields) #don't include $ref
-        fieldnames <- fieldnames[!fieldnames %in% linktoremove]
-        fieldnames <- fieldnames[!fieldnames %in% "$ref"]
+        fieldnames <- names(fields) 
         ref <- fields$`$ref`
+        
+        # check nested props in ref
+        if(!is.null(ref)){
+            reference <- strsplit(ref,"#/")[[1]]
+            reffile <- as.character(dictionary$helper_yaml[grep(reference[1], dictionary$helper_yaml)])
+            nested <- tryCatch(
+              {
+                nested <- yaml.load_file(reffile)
+              },
+              error=function(cond) {
+                message(paste("Error loading:", n))
+                message(cond)
+                message('')
+              },
+              warning=function(cond) {
+                message(paste("Warning created:", n))
+                message(cond)
+                message('')
+              }
+            )
+            nested_fields <- names(nested[[reference[2]]])
+            for (f in nested_fields){
+                field <- nested[[reference[2]]][[f]]
+                if('$ref' %in% names(field)){
+                   fields[[f]] <- nested[[f]]
+                }
+                else{
+                   fields[[f]] <- field
+                }
+            }
+            fieldnames <- c(fieldnames, nested_fields)
+        }        
+        
+        #don't include $ref and other internal variables #PROVISIONALLY HARD CODED
+        excluded_fields <- c("$ref", "type", "error_type", "state", "id",
+                             "file_state", "created_datetime", "updated_datetime",
+                             "state", "state_comment", "project_id", "submitter_id",
+                             "workflow_start_datetime", "workflow_end_datetime", 
+                             "sequencing_date", "run_datetime")
+        fieldnames <- fieldnames[!fieldnames %in% linktoremove]
+        fieldnames <- fieldnames[!(fieldnames %in% excluded_fields)]
         required <- node$required
         
         # loop through fields in node to get variables
         for (f in fieldnames) {
             
-            if ("$ref" %in% names(fields[[f]])) next
+            if ("$ref" %in% names(fields[[f]])){ 
+              if ('type' %in% names(fields[[f]]) | 'enum' %in% names(fields[[f]])) next
+              else {
+                
+                # Check nested property
+                ref <- fields[[f]]$`$ref`
+                reference <- strsplit(ref,"#/")[[1]]
+                reffile <- as.character(dictionary$helper_yaml[grep(reference[1], dictionary$helper_yaml)])
+                definitions <- tryCatch(
+                  {
+                    definitions <- yaml.load_file(reffile)
+                  },
+                  error=function(cond) {
+                    message(paste("Error loading:", n))
+                    message(cond)
+                    message('')
+                  },
+                  warning=function(cond) {
+                    message(paste("Warning created:", n))
+                    message(cond)
+                    message('')
+                  }
+                )
+                fields[[f]] <- definitions[[reference[2]]]                               
+              }
+            }
             
             if ('description' %in% names(fields[[f]])) {
                 DESCRIPTION = fields[[f]]$description
@@ -204,12 +270,25 @@ buildCompendiums <- function(dictionary) {
                 elements <- fields[[f]]$enum
                 CHOICES <- paste(elements, collapse='|')
                 TEMPCHOICES <- length(elements)
+                MAX <- NA
+                MIN <- NA                
             } else {
                 TYPE <- fields[[f]]$type[1]
                 CHOICES <- ''
+                if ('pattern' %in% names(fields[[f]])){
+                  CHOICES <- fields[[f]]$pattern[1]
+                }
                 TEMPCHOICES <- 0
+                MAX <- NA
+                MIN <- NA
+                if ('maximum' %in% names(fields[[f]])){
+                  MAX <- fields[[f]]$maximum
+                }
+                if ('minimum' %in% names(fields[[f]])){
+                  MIN <- fields[[f]]$minimum
+                }                
             }
-            
+                      
             if (f %in% required) {
                 REQUIRED <- TRUE
             } else {
@@ -225,7 +304,9 @@ buildCompendiums <- function(dictionary) {
                         REQUIRED = REQUIRED,
                         TYPE = TYPE,
                         CHOICES = CHOICES,
-                        TEMPCHOICES = TEMPCHOICES)
+                        TEMPCHOICES = TEMPCHOICES,
+                        MAX = MAX,
+                        MIN = MIN)
                 },
                 error=function(cond) {
                     message(paste("Error creating variable ", f, " on node ", node$id))
@@ -271,6 +352,13 @@ buildCompendiums <- function(dictionary) {
     compendium$DISTRIB.INPUTS <- ''
     compendium$DISTRIB.INPUTS[compendium$TYPE=='integer'] <- 'lambda = 4'
     compendium$DISTRIB.INPUTS[compendium$TYPE=='number'] <- 'mean = 10, sd = 3'
+    
+    # update number/integer distribution if a range is provided
+    means <- (compendium$MAX[compendium$TYPE=='integer' &!is.na(compendium$MIN)] + compendium$MIN[compendium$TYPE=='integer' &!is.na(compendium$MIN)]) / 2         
+    compendium$DISTRIB.INPUTS[compendium$TYPE=='integer' & !is.na(compendium$MIN)] <- paste("lambda = ", as.character(means), sep="")
+    means <- (compendium$MAX[compendium$TYPE=='number' &!is.na(compendium$MIN)] + compendium$MIN[compendium$TYPE=='number' &!is.na(compendium$MIN)]) / 2         
+    compendium$DISTRIB.INPUTS[compendium$TYPE=='number' & !is.na(compendium$MIN)] <- paste("mean = ", as.character(means), ", sd = 10", sep="")
+
     
     compendium$NAS <- runif(nrow(compendium), 0, .2)
     compendium$POSITIVEONLY <- ''
