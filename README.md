@@ -130,8 +130,9 @@ source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimComp
 repo <- 'https://github.com/occ-data/bpadictionary'
 branch <- 'develop'
 n <- 1
+project_name <- 'test'
 dir <- 'SampleFullDictionaryJsonOutput/'
-finalSim <- simFromDictionary(repo, branch, required_only=F, n, output_to_json=T, dir)
+finalSim <- simFromDictionary(repo, branch, project_name, required_only=F, n, output_to_json=T, dir)
 ```
 
 Sample simulated data resulting from this function call can be found at: https://github.com/occ-data/data-simulator/tree/master/SampleFullDictionaryJsonOutput

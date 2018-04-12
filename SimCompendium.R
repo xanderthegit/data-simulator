@@ -282,7 +282,7 @@ buildCompendiums <- function(dictionary) {
 }
 
 
-simFromDictionary <- function(repo, branch, required_only=F, n, output_to_json=F, dir=NULL) {
+simFromDictionary <- function(repo, branch, project_name, required_only=F, n, output_to_json=F, dir=NULL) {
     # given the raw dictionary, build a base compendium table
     # and a node relationship table and run simulation
     #
@@ -321,7 +321,8 @@ simFromDictionary <- function(repo, branch, required_only=F, n, output_to_json=F
         print("Generating Json...")
         SimtoJson(simdata, 
                   compendium, 
-                  compendiumObjects$compendium_nodes, 
+                  compendiumObjects$compendium_nodes,
+                  project_name,
                   dir)
     }
     
