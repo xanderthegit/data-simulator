@@ -113,11 +113,6 @@ buildCompendiums <- function(dictionary) {
                 message(paste("Error loading:", n))
                 message(cond)
                 message('')
-            },
-            warning=function(cond) {
-                message(paste("Warning created:", n))
-                message(cond)
-                message('')
             }
         )  
         
@@ -199,11 +194,6 @@ buildCompendiums <- function(dictionary) {
                 message(paste("Error loading:", n))
                 message(cond)
                 message('')
-              },
-              warning=function(cond) {
-                message(paste("Warning created:", n))
-                message(cond)
-                message('')
               }
             )
             nested_fields <- names(nested[[reference[2]]])
@@ -231,7 +221,7 @@ buildCompendiums <- function(dictionary) {
         
         # loop through fields in node to get variables
         for (f in fieldnames) {
-            
+          
             if ("$ref" %in% names(fields[[f]])){ 
               if ('type' %in% names(fields[[f]]) | 'enum' %in% names(fields[[f]])) next
               else {
@@ -240,22 +230,27 @@ buildCompendiums <- function(dictionary) {
                 ref <- fields[[f]]$`$ref`
                 reference <- strsplit(ref,"#/")[[1]]
                 reffile <- as.character(dictionary$helper_yaml[grep(reference[1], dictionary$helper_yaml)])
+                property <- reference[2]
+                if (length(reffile) == 0){
+                   reffile <- as.character(node_list[grep(reference[1], node_list)])
+                   property <- strsplit(property,"/")[[1]]
+                }
                 definitions <- tryCatch(
                   {
                     definitions <- yaml.load_file(reffile)
                   },
                   error=function(cond) {
-                    message(paste("Error loading:", n))
-                    message(cond)
-                    message('')
-                  },
-                  warning=function(cond) {
-                    message(paste("Warning created:", n))
+                    message(paste("Error loading:", reffile))
                     message(cond)
                     message('')
                   }
                 )
-                fields[[f]] <- definitions[[reference[2]]]                               
+                if (length(property) > 1){
+                    fields[[f]] <- definitions[[property[1]]][[property[2]]] 
+                }
+                else{
+                    fields[[f]] <- definitions[[property]]
+                }
               }
             }
             
@@ -264,7 +259,7 @@ buildCompendiums <- function(dictionary) {
             } else {
                 DESCRIPTION = paste0("See : ", fields[[f]]$term$`$ref`)
             }
-            
+          
             if ('enum' %in% names(fields[[f]])) {
                 TYPE <- 'enum'
                 elements <- fields[[f]]$enum
@@ -273,7 +268,12 @@ buildCompendiums <- function(dictionary) {
                 MAX <- NA
                 MIN <- NA                
             } else {
-                TYPE <- fields[[f]]$type[1]
+                if ('type' %in% names(fields[[f]])){    
+                    TYPE <- fields[[f]]$type[1]
+                }              
+                else if ('oneOf' %in% names(fields[[f]])){
+                    TYPE <- fields[[f]]$oneOf[[1]]$type
+                }
                 CHOICES <- ''
                 if ('pattern' %in% names(fields[[f]])){
                   CHOICES <- fields[[f]]$pattern[1]
@@ -288,13 +288,13 @@ buildCompendiums <- function(dictionary) {
                   MIN <- fields[[f]]$minimum
                 }                
             }
-                      
+
             if (f %in% required) {
                 REQUIRED <- TRUE
             } else {
                 REQUIRED <- FALSE
             }
-            
+          
             var_list <- tryCatch(
                 {
                     var_list <- data.frame(
@@ -309,13 +309,13 @@ buildCompendiums <- function(dictionary) {
                         MIN = MIN)
                 },
                 error=function(cond) {
-                    message(paste("Error creating variable ", f, " on node ", node$id))
-                    message(cond)
-                    message('')
+                  message(paste("Error creating variable ", f, " on node ", node$id))
+                  message(cond)
+                  message('')
                 },
                 warning=function(cond) {
-                    message(paste("Warning created: ", f))
-                }
+                  message(paste("Warning created: ", f))
+                }                
             ) 
             
             compendium <- rbind(compendium, var_list)
