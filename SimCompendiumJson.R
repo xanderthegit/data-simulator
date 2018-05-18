@@ -344,7 +344,7 @@ simFromDictionary <- function(dictionary, branch, project_name, required_only=F,
   source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
   
   print("Getting JSON form dictionary...") 
-  dictionary <- readDictionary(repo, branch)
+  dictionary <- readDictionary(dictionary, branch)
   
   print("Creating Compendium and Node Relationship Table...")
   compendiumObjects <- buildCompendiums(dictionary)
