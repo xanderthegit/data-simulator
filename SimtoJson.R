@@ -22,6 +22,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     }   
     sorted_nodes <- sorted_nodes[-1]
     
+    
     for (i in sorted_nodes) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
         sub <- simdata[, varlist, drop=FALSE]
@@ -34,14 +35,16 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         new_names <- names(sub)
         new_names <- gsub("\\..*", "", new_names)
         names(sub) <- new_names
-        
+
+        # Add type
         if(!("type" %in% colnames(sub))){
           sub <- cbind(sub, type=rep(i, nrow(simdata)))
         }
         else{
           sub$type <- rep(i, nrow(simdata))
         }
-        
+
+        # Add submitter_id
         submitter_id <- c()
         for (v in 1:nrow(simdata)){ 
             num <- paste0(i, "_00", v)
@@ -54,17 +57,18 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         else{
             sub <- cbind(sub, submitter_id=submitter_id)
         }
-                
+
         link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i])
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
-        
+ 
         #if (multiplicity == "many_to_one") {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
         #} else {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
         #}
         
+        # Add links
         l <- c()
         for (v in 1:nrow(simdata)) {
             num <- paste0(target, "_00", v)
@@ -74,11 +78,14 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         finlist <- c()
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
-            if(link_name == "projects"){
-               x[[link_name]] <- list(code=project_name)
-            }
-            else{
-               x[[link_name]] <- list(submitter_id=l[m])
+            for(ln in 1:length(link_name)){
+                if(ln == "projects"){
+                   x[[link_name[ln]]] <- list(code=project_name)
+                }
+                else{
+                   pos = (m-1)*length(link_name) + ln
+                   x[[link_name[ln]]] <- list(submitter_id=l[pos])
+                }
             }
             finlist <- append(finlist, list(x))
         }
@@ -94,14 +101,16 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     write(fileOrder, paste0(path, 'DataImportOrder.txt'))
 }
 
-getOrder <- function(link, node, nodes, sorted_nodes, nodelinks) {
+getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
 
-    if (!(link %in% sorted_nodes)){
-      target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
-      sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
-    }
-    if (!(node %in% sorted_nodes)){
-       sorted_nodes <- c(sorted_nodes, node)
+    for (link in links){
+      if (!(link %in% sorted_nodes)){
+        target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
+        sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
+      }
+      if (!(node %in% sorted_nodes)){
+         sorted_nodes <- c(sorted_nodes, node)
+      }
     }
     return(sorted_nodes)
 }
