@@ -13,7 +13,7 @@ readDictionary <- function(dictionary, branch) {
   #      node_list: contain  dictionary nodes
   #      helper_yaml: contain information representing persistent definitions, settings and terms
   
-  dict_json_path <- paste(c("https://s3.amazonaws.com/dictionary-artifacts/", dictionary , "/", branch ,"/schema.json"), collapse ="")
+  dict_json_path <- paste(c(dictionary , "/", branch ,"/schema.json"), collapse ="")
   dictionary_json <- fromJSON(dict_json_path)
   
   altdefs <- grep("^_", names(dictionary_json), value = TRUE)

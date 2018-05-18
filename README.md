@@ -139,7 +139,7 @@ Alternatively, the dictionary simulation can be generated from JSON schemas alre
 
 ```
 source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimCompendiumJson.R')
-dictionary <- 'bpadictionary'
+dictionary <- 'https://s3.amazonaws.com/dictionary-artifacts/bpadictionary'
 branch <- 'develop'
 n <- 1
 project_name <- 'test'

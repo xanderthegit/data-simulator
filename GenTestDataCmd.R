@@ -1,6 +1,6 @@
 #source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimCompendium.R')
 setwd('./')
-source('SimCompendium.R')
+source('SimCompendiumJson.R')
 options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
@@ -13,4 +13,4 @@ rm(args)
 
 finalSim <- simFromDictionary(repo, branch, project, FALSE, n, TRUE, dir)
 
-#Rscript GenTestDataCmd.R https://github.com/occ-data/bpadictionary develop test 4 SampleJsonOutput
+#Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/bpadictionary develop test 4 ~/sampleJsonOutput/
