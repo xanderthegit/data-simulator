@@ -135,5 +135,18 @@ dir <- 'SampleFullDictionaryJsonOutput/'
 finalSim <- simFromDictionary(repo, branch, project_name, required_only=F, n, output_to_json=T, dir)
 ```
 
+Alternatively, the dictionary simulation can be generated from JSON schemas already processed and stored in S3 from YAML.
+
+```
+source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimCompendiumJson.R')
+dictionary <- 'bpadictionary'
+branch <- 'develop'
+n <- 1
+project_name <- 'test'
+dir <- 'SampleFullDictionaryJsonOutput/'
+finalSim <- simFromDictionary(dictionary, branch, project_name, required_only=F, n, output_to_json=T, dir)
+```
+
 Sample simulated data resulting from this function call can be found at: https://github.com/occ-data/data-simulator/tree/master/SampleFullDictionaryJsonOutput
+
 
