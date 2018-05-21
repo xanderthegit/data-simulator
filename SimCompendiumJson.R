@@ -232,6 +232,9 @@ buildCompendiums <- function(dictionary) {
           if ('pattern' %in% names(fields[[f]])){
             CHOICES <- fields[[f]]$pattern[1]
           }
+          else if (f == 'md5sum'){
+            CHOICES <- "^[a-f0-9]{32}$"
+          }
           TEMPCHOICES <- 0
           MAX <- NA
           MIN <- NA
