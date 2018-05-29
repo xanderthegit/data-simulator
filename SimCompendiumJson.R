@@ -85,28 +85,42 @@ buildCompendiums <- function(dictionary) {
       }
     
       # get compendium_nodes field definitions
-      if ('name' %in% names(links) && !is.na(links$name)) {
+      link_name <- NA
+      backref <- NA
+      label <- NA
+      target <- NA
+      multiplicity <- NA
+      link_required <- NA      
+      if ('name' %in% names(links)) {
           # if there is no link multiplicity
-          link_name <- links[['name']][!is.na(links[['name']])]
-          backref <- links[['backref']][!is.na(links[['name']])]
-          label <- links[['label']][!is.na(links[['name']])]
-          target <- links[['target_type']][!is.na(links[['name']])]
-          multiplicity <- links[['multiplicity']][!is.na(links[['name']])]
-          link_required <- links[['required']][!is.na(links[['name']])]
-      } else if ('subgroup' %in% names(links)) {
-          link_name <- links$subgroup[[1]][['name']]
-          backref <- links$subgroup[[1]][['backref']] 
-          label <- links$subgroup[[1]][['label']] 
-          target <- links$subgroup[[1]][['target_type']] 
-          multiplicity <- links$subgroup[[1]][['multiplicity']]
-          link_required <- links$subgroup[[1]][['required']]
-      } else {
-          link_name <- NA
-          backref <- NA
-          label <- NA
-          target <- NA
-          multiplicity <- NA
-          link_required <- NA
+          link_pos <- !is.na(links[['name']])
+          link_name <- links[['name']][link_pos]
+          backref <- links[['backref']][link_pos]
+          label <- links[['label']][link_pos]
+          target <- links[['target_type']][link_pos]
+          multiplicity <- links[['multiplicity']][link_pos]
+          link_required <- links[['required']][link_pos]
+      } 
+      if ('subgroup' %in% names(links) && !is.null(links$subgroup[[1]])) {
+          exclusive <- links$exclusive[!is.na(links$exclusive)]
+          if (exclusive){
+             link_pos <- 1
+          }
+          else{
+             link_pos <- 1:nrow(links$subgroup[[1]])
+          }
+          link_name <- c(link_name, links$subgroup[[1]][['name']][link_pos])
+          link_name <- link_name[!is.na(link_name)]
+          backref <- c(backref, links$subgroup[[1]][['backref']][link_pos])
+          backref <- backref[!is.na(backref)]
+          label <- c(label, links$subgroup[[1]][['label']][link_pos])
+          label <- label[!is.na(label)]
+          target <- c(target, links$subgroup[[1]][['target_type']][link_pos])
+          target <- target[!is.na(target)]
+          multiplicity <- c(multiplicity, links$subgroup[[1]][['multiplicity']][link_pos])
+          multiplicity <- multiplicity[!is.na(multiplicity)]
+          link_required <- c(link_required, links$subgroup[[1]][['required']][link_pos])
+          link_required <- link_required[!is.na(link_required)]
       }
 
       links_list <- tryCatch(
@@ -231,6 +245,9 @@ buildCompendiums <- function(dictionary) {
           CHOICES <- ''
           if ('pattern' %in% names(fields[[f]])){
             CHOICES <- fields[[f]]$pattern[1]
+          }
+          else if (f == 'md5sum'){
+            CHOICES <- "^[a-f0-9]{32}$"
           }
           TEMPCHOICES <- 0
           MAX <- NA
