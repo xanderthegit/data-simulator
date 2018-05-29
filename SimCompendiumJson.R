@@ -1,7 +1,7 @@
 if(!require(yaml)) install.packages(yaml)
 if(!require(httr)) install.packages(httr)
 
-readDictionary <- function(dictionary, branch) {
+readDictionary <- function(dictionary) {
   # given the dictionary repo name, return the whole json file for that dictionary
   #
   # Args:
@@ -13,7 +13,8 @@ readDictionary <- function(dictionary, branch) {
   #      node_list: contain  dictionary nodes
   #      helper_yaml: contain information representing persistent definitions, settings and terms
   
-  dict_json_path <- paste(c(dictionary , "/", branch ,"/schema.json"), collapse ="")
+  #dict_json_path <- paste(c(dictionary , "/", branch ,"/schema.json"), collapse ="")
+  dict_json_path <- paste(dictionary, collapse ="")
   dictionary_json <- fromJSON(dict_json_path)
   
   altdefs <- grep("^_", names(dictionary_json), value = TRUE)
@@ -324,7 +325,7 @@ buildCompendiums <- function(dictionary) {
     
 }
 
-simFromDictionary <- function(dictionary, branch, project_name, required_only=F, n, output_to_json=F, dir=NULL) {
+simFromDictionary <- function(dictionary, project_name, required_only=F, n, output_to_json=F, dir=NULL) {
   # given the raw dictionary, build a base compendium table
   # and a node relationship table and run simulation
   #
@@ -344,7 +345,8 @@ simFromDictionary <- function(dictionary, branch, project_name, required_only=F,
   source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
   
   print("Getting JSON form dictionary...") 
-  dictionary <- readDictionary(dictionary, branch)
+  #dictionary <- readDictionary(dictionary, branch)
+  dictionary <- readDictionary(dictionary)
   
   print("Creating Compendium and Node Relationship Table...")
   compendiumObjects <- buildCompendiums(dictionary)
