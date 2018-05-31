@@ -1,11 +1,15 @@
 [
   {
+    "data_type": "Tissue Slide Image",
     "data_category": "Slide Image",
-    "data_type": "Diagnostic Slide Image",
-    "data_format": "OIlTwNV6DtlN",
-    "type": {
+    "data_format": "bOVhq5cPkdMF",
+    "file_size": 3,
+    "file_name": "vqo9w9P4RBX2",
+    "md5sum": "AFg0HICZeOgQ",
+    "type": "slide_image",
+    "submitter_id": "slide_image_001",
+    "aliquots": {
       "submitter_id": "aliquot_001"
-    },
-    "submitter_id": "slide_image_001"
+    }
   }
 ]

@@ -1,18 +1,19 @@
 [
   {
-    "assay_instrument": "HD-SCA Platform",
-    "assay_instrument_model": "BoyUSg47LYXg",
-    "assay_kit_name": "5t8T4a2O9jYv",
-    "assay_kit_vendor": "uBru4EEJziXH",
-    "assay_kit_version": "kdUWrZxYa5p5",
+    "assay_kit_vendor": "1yNEzdQMpMcS",
+    "target_measurement_units": "m9S6FwFGfGqu",
     "assay_method": "MALDI-TOF Mass Spectrometry",
-    "assay_target": {
-      "submitter_id": "analyte_001"
-    },
-    "target_localization": "BL3ScvgoUKbW",
-    "target_measurement": 6.733,
-    "target_measurement_units": "L4cpjAXulRxU",
+    "target_localization": "Hb9HlMqQBnfT",
+    "assay_instrument_model": "tZOGuOE1Q7tw",
+    "target_measurement": 9.5144,
+    "assay_kit_version": "auZopRNXSxmP",
+    "assay_target": "73sa7X3TeSZq",
+    "assay_instrument": "Bruker Mass Spectrometer",
+    "assay_kit_name": "wpCFHt8G2SeV",
     "type": "immunoassay",
-    "submitter_id": "immunoassay_001"
+    "submitter_id": "immunoassay_001",
+    "analytes": {
+      "submitter_id": "analyte_001"
+    }
   }
 ]

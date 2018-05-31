@@ -1,14 +1,15 @@
 [
   {
-    "data_category": "czvDwf8CnTrO",
-    "data_type": "IxXhMwC2oDqL",
-    "data_format": "keoZKVJwP1iv",
-    "experimental_strategy": "F9NI5QFY8X6D",
+    "data_category": "oNTeAxo7g4rC",
+    "data_type": "tQcUsrELAWF6",
+    "experimental_strategy": "u6w8R3o5kKk1",
+    "data_format": "c15w53VE7ZQK",
+    "file_size": 1,
+    "file_name": "WxOkcog5JQT5",
+    "md5sum": "qwEUJh3XaH8n",
     "type": "submitted_copy_number",
     "submitter_id": "submitted_copy_number_001",
-    "7": {},
-    "8": {},
-    "9": {
+    "read_groups": {
       "submitter_id": "read_group_001"
     }
   }

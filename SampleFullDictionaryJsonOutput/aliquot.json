@@ -1,18 +1,19 @@
 [
   {
-    "aliquot_container": "Vial",
-    "aliquot_quantity": 12.7295,
-    "aliquot_volume": {
-      "submitter_id": "sample_001"
-    },
+    "contrivance_method": "KDcV99BDPGvz",
+    "storage_temperature": 6.942,
+    "hours_to_freezer_upper": 12.0398,
     "clinical_or_contrived": "Contrived",
-    "contrivance_method": "zalZSxSe8rAU",
-    "hours_to_freezer_lower": 10.7531,
-    "hours_to_freezer_upper": 15.4223,
+    "aliquot_volume": 5.5354,
+    "hours_to_freezer_lower": 10.7433,
+    "preservation_method": "FFPE",
+    "aliquot_quantity": 10.1966,
     "methanol_added": false,
-    "preservation_method": "OCT",
-    "storage_temperature": 8.9241,
+    "aliquot_container": "Serum Card",
     "type": "aliquot",
-    "submitter_id": "aliquot_001"
+    "submitter_id": "aliquot_001",
+    "samples": {
+      "submitter_id": "sample_001"
+    }
   }
 ]

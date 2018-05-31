@@ -1,13 +1,14 @@
 [
   {
-    "alcohol_history": "4H2Y0utTZotD",
-    "alcohol_intensity": "FTULrAS8ePB0",
-    "cigarettes_per_day": 9.5309,
-    "tobacco_smoking_status": "2",
-    "years_smoked": {
-      "submitter_id": "case_001"
-    },
+    "cigarettes_per_day": 4.1785,
+    "tobacco_smoking_status": "1",
+    "alcohol_history": "KQ7edE27TGge",
+    "alcohol_intensity": "Y9ugPf7IPZZy",
+    "years_smoked": 19.9211,
     "type": "exposure",
-    "submitter_id": "exposure_001"
+    "submitter_id": "exposure_001",
+    "cases": {
+      "submitter_id": "case_001"
+    }
   }
 ]

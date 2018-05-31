@@ -1,15 +1,29 @@
 [
   {
-    "encoding": "r2Y9klknhzqw",
-    "percent_aligned": 9,
-    "percent_gc_content": 4,
-    "total_aligned_reads": 3,
-    "total_sequences": 2,
+    "adapter_content": "FAIL",
+    "percent_aligned": 59,
+    "encoding": "WTS8T0a2epb6",
+    "per_base_sequence_quality": "PASS",
+    "sequence_duplication_levels": "PASS",
+    "per_base_sequence_content": "FAIL",
+    "kmer_content": "PASS",
+    "percent_gc_content": 43,
+    "total_sequences": 5,
+    "basic_statistics": "WARN",
+    "total_aligned_reads": 7,
+    "sequence_length_distribution": "PASS",
+    "per_sequence_quality_score": "PASS",
+    "per_tile_sequence_quality": "PASS",
+    "per_sequence_gc_content": "PASS",
+    "per_base_n_content": "PASS",
+    "overrepresented_sequences": "PASS",
     "type": "read_group_qc",
     "submitter_id": "read_group_qc_001",
-    "8": {},
-    "9": {
-      "submitter_id": "read_group_001"
+    "submitted_aligned_reads_files": {
+      "submitter_id": "submitted_aligned_reads_001"
+    },
+    "submitted_unaligned_reads_files": {
+      "submitter_id": "submitted_unaligned_reads_001"
     }
   }
 ]

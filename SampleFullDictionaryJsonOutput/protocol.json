@@ -1,11 +1,14 @@
 [
   {
-    "data_category": "Biospecimen Metadata",
-    "data_type": "Collection and Shipping SOP",
-    "data_format": "PDF",
+    "data_category": "Experimental Metadata",
+    "data_format": "EXCEL",
+    "data_type": "Sample Preparation SOP",
+    "file_size": 5,
+    "file_name": "hKfXl8MkWbPT",
+    "md5sum": "qiQP3mNMRHzj",
     "type": "protocol",
     "submitter_id": "protocol_001",
-    "6": {
+    "studies": {
       "submitter_id": "study_001"
     }
   }

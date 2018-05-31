@@ -1,15 +1,16 @@
 [
   {
-    "cause_of_death": "Not Cancer Related",
-    "days_to_birth": 0,
-    "days_to_death": 3,
-    "ethnicity": "Unknown",
-    "gender": {
-      "submitter_id": "case_001"
-    },
-    "race": "Native Hawaiian or Other Pacific Islander",
-    "vital_status": "Alive",
+    "cause_of_death": "Unknown",
+    "gender": "Female",
+    "race": "Unknown",
+    "days_to_birth": 2,
+    "vital_status": "Dead",
+    "days_to_death": 5,
+    "ethnicity": "Not Hispanic or Latino",
     "type": "demographic",
-    "submitter_id": "demographic_001"
+    "submitter_id": "demographic_001",
+    "cases": {
+      "submitter_id": "case_001"
+    }
   }
 ]

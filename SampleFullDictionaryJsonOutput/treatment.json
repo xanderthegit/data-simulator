@@ -1,16 +1,16 @@
 [
   {
-    "days_to_treatment_end": 11.255,
-    "days_to_treatment_start": 13.5245,
-    "regimen_or_line_of_therapy": "BdLVoOUGWpZm",
-    "therapeutic_agents": "jv07ASryjc0d",
-    "treatment_anatomic_site": "Prostate",
-    "treatment_intent_type": "3gfkprnAmMGv",
-    "treatment_outcome": "Unknown",
-    "treatment_type": "Other",
+    "days_to_treatment_start": 4.3945,
+    "treatment_type": "Unknown",
+    "days_to_treatment_end": 12.499,
+    "therapeutic_agents": "SCiUtBexQMsg",
+    "regimen_or_line_of_therapy": "mqu3oaM6Psps",
+    "treatment_anatomic_site": "Iliac-common",
+    "treatment_outcome": "Treatment Stopped Due to Toxicity",
+    "treatment_intent_type": "y2DGzr8ruGFy",
     "type": "treatment",
     "submitter_id": "treatment_001",
-    "11": {
+    "diagnoses": {
       "submitter_id": "diagnosis_001"
     }
   }

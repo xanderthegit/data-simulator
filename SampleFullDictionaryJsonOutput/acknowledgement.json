@@ -1,9 +1,10 @@
 [
   {
-    "acknowledgee": {
-      "submitter_id": "project_001"
-    },
+    "acknowledgee": "9vlnIVNvWDTL",
     "type": "acknowledgement",
-    "submitter_id": "acknowledgement_001"
+    "submitter_id": "acknowledgement_001",
+    "projects": {
+      "submitter_id": "project_001"
+    }
   }
 ]
