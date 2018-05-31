@@ -76,7 +76,6 @@ buildCompendiums <- function(dictionary) {
   # loop through nodes to generate rows in compendium
   # and compendium nodes
   for (node in node_list) {
-      
       # get node relationships/links
       if (nrow(node$links) > 1){
           links <- node$links[node$links$required,]
@@ -157,36 +156,40 @@ buildCompendiums <- function(dictionary) {
       fields <- node$properties
       linktoremove <- unlist(node$links)[grepl("name", names(unlist(node$links)))]
       fieldnames <- names(fields) 
-      ref <- fields$`$ref`
+      refs <- fields[grepl("\\$ref_", names(fields))]
       
       # check nested props in ref
-      if(!is.null(ref)){
-        for(r in ref){
-          reference <- strsplit(r,"#/")[[1]]
-          reffile <- reference[1]
-          if(reffile %in% names(dictionary$helper_yaml)){
-              nested <- dictionary$helper_yaml[[reffile]]
-          }
-          else{
-              nested <- dictionary$node_list[[reffile]]
-          }
-          
-          nested_fields <- names(nested[[reference[2]]])
-          for (f in nested_fields){
-            field <- nested[[reference[2]]][[f]]
-            if('$ref' %in% names(field)){
-              fields[[f]] <- nested[[f]]
+      for(refname in names(refs)){
+        ref <- refs[[refname]]
+        print(refname)
+        if(!is.null(ref)){
+          for(r in ref){
+            reference <- strsplit(r,"#/")[[1]]
+            reffile <- reference[1]
+            if(reffile %in% names(dictionary$helper_yaml)){
+                nested <- dictionary$helper_yaml[[reffile]]
             }
             else{
-              fields[[f]] <- field
+                nested <- dictionary$node_list[[reffile]]
             }
+            
+            nested_fields <- names(nested[[reference[2]]])
+            for (f in nested_fields){
+              field <- nested[[reference[2]]][[f]]
+              if('$ref' %in% names(field)){
+                fields[[f]] <- nested[[f]]
+              }
+              else{
+                fields[[f]] <- field
+              }
+            }
+            fieldnames <- c(fieldnames, nested_fields)
           }
-          fieldnames <- c(fieldnames, nested_fields)
         }
       }
-
+        
       #don't include $ref and other internal variables #PROVISIONALLY HARD CODED
-      excluded_fields <- c("$ref", "type", "error_type", "state", "id",
+      excluded_fields <- c(names(refs), "type", "error_type", "state", "id",
                            "file_state", "created_datetime", "updated_datetime",
                            "state", "state_comment", "project_id", "submitter_id",
                            "workflow_start_datetime", "workflow_end_datetime", 
@@ -266,7 +269,7 @@ buildCompendiums <- function(dictionary) {
         } else {
           REQUIRED <- FALSE
         }
-        
+
         var_list <- tryCatch(
           {
             var_list <- data.frame(
@@ -358,9 +361,9 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
   #   simdata and json files in output directory
   
   print("Loading Simulation Tools...")
-  source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimtoJson.R')
-  source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
-  
+  source('SimtoJson.R')
+  source('SimData.R')
+    
   print("Getting JSON form dictionary...") 
   #dictionary <- readDictionary(dictionary, branch)
   dictionary <- readDictionary(dictionary)
