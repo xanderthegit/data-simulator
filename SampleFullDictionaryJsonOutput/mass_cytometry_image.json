@@ -1,13 +1,15 @@
 [
   {
+    "assay_target": "re5WkSOrtFIJ",
     "data_category": "Mass Cytometry",
     "data_type": "Single Channel IMC Image",
-    "data_format": "TIF",
-    "assay_target": "xgKq3KYhWTX5",
+    "data_format": "PNG",
+    "file_size": 5,
+    "file_name": "KjHJapwTzuW9",
+    "md5sum": "NcjFAOVOpGQc",
     "type": "mass_cytometry_image",
     "submitter_id": "mass_cytometry_image_001",
-    "7": {},
-    "8": {
+    "mass_cytometry_assays": {
       "submitter_id": "mass_cytometry_assay_001"
     }
   }

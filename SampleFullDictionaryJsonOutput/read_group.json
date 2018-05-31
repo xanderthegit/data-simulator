@@ -1,32 +1,33 @@
 [
   {
-    "adapter_sequence": "8XaIto5w8YFG",
-    "barcoding_applied": false,
-    "flow_cell_barcode": "ecpjlaWT04cw",
-    "instrument_model": "Complete Genomics",
-    "is_paired_end": false,
-    "library_name": "tWitPWLViRvo",
-    "library_preparation_kit_name": {
-      "submitter_id": "analyte_001"
-    },
-    "library_preparation_kit_vendor": "5QzMZfZ4hnMk",
-    "library_preparation_kit_catalog_number": "UmtJf2WDYGQ2",
-    "library_preparation_kit_version": "4BNSEMKXpsBY",
-    "library_selection": "RNA Depletion",
+    "library_name": "HeeWDwZy64k6",
+    "is_paired_end": true,
+    "read_length_lower": 3,
+    "adapter_sequence": "9iUWmbaxU7bU",
     "library_strand": "First Stranded",
-    "library_strategy": "Other",
+    "target_capture_kit_version": "h6Se21yJfzGe",
+    "library_preparation_kit_name": "BqxmIY68bIkc",
+    "target_capture_kit_name": "m76OCMXOrtSe",
+    "read_length_upper": 3,
+    "library_preparation_kit_version": "pOqZG67US9b2",
+    "read_group_name": "dlBDWSh36Elt",
+    "barcoding_applied": false,
+    "library_preparation_kit_vendor": "QawxE9IXxQp4",
+    "sequencing_center": "PCgK90pSzdPf",
+    "target_capture_kit_vendor": "PL6TPff7OdzQ",
+    "target_capture_kit_catalog_number": "Ezo82wa3Ov4Z",
+    "instrument_model": "Illumina HiSeq X Ten",
+    "RIN": 9.3536,
     "platform": "LS454",
-    "read_group_name": "ewiKvXxmokZh",
-    "read_length_lower": 5,
-    "read_length_upper": 6,
-    "RIN": 6.4747,
-    "sequencing_center": "z4lG5hRcRg8N",
-    "target_capture_kit_name": "HCEAtQo3U51g",
-    "target_capture_kit_vendor": "USrutZsgSTSI",
-    "target_capture_kit_catalog_number": "AolQReqWo3IP",
-    "target_capture_kit_version": "aO2FsssKeQOJ",
-    "target_capture_kit_target_region": "geR1d58bQDAv",
+    "flow_cell_barcode": "x9Qz8r6XgGMm",
+    "library_selection": "Poly-T Enrichment",
+    "library_strategy": "RNA-Seq",
+    "library_preparation_kit_catalog_number": "JwemIHcGdHQM",
+    "target_capture_kit_target_region": "ghd1KMZjyKFF",
     "type": "read_group",
-    "submitter_id": "read_group_001"
+    "submitter_id": "read_group_001",
+    "analytes": {
+      "submitter_id": "analyte_001"
+    }
   }
 ]

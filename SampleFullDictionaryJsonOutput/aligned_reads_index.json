@@ -1,11 +1,15 @@
 [
   {
     "data_category": "Sequencing Reads",
-    "data_type": {
-      "submitter_id": "submitted_aligned_reads_001"
-    },
     "data_format": "BAI",
+    "data_type": "Aligned Reads Index",
+    "file_size": 4,
+    "file_name": "PfdzPNpPD1rQ",
+    "md5sum": "RUiwBc0lhUlv",
     "type": "aligned_reads_index",
-    "submitter_id": "aligned_reads_index_001"
+    "submitter_id": "aligned_reads_index_001",
+    "submitted_aligned_reads_files": {
+      "submitter_id": "submitted_aligned_reads_001"
+    }
   }
 ]

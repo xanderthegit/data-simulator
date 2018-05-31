@@ -1,14 +1,15 @@
 [
   {
-    "associated_study": {
-      "submitter_id": "project_001"
-    },
-    "data_description": "LuMcFb9RBnOH",
-    "study_description": "cq2pWTmOyrxg",
+    "data_description": "LvQM2lurVPAi",
     "study_design": "Clinical Utility",
+    "associated_study": "NfPx47plPvX1",
+    "study_description": "rYQLzSK7aNDN",
+    "study_setup": "Genetic Analysis",
     "study_objective": "Limit of Detection",
-    "study_setup": "Detection/Enumeration/Isolation",
     "type": "study",
-    "submitter_id": "study_001"
+    "submitter_id": "study_001",
+    "projects": {
+      "submitter_id": "project_001"
+    }
   }
 ]

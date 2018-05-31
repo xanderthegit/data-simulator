@@ -1,15 +1,18 @@
 [
   {
-    "type": "submitted_methylation",
-    "data_category": "Methylation Data",
-    "data_type": "Methylation Intensity Values",
-    "data_format": "IDAT",
     "assay_method": "Methylation Array",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
+    "data_format": "IDAT",
+    "data_category": "Methylation Data",
     "assay_instrument": "Illumina",
-    "assay_instrument_model": {
+    "file_size": 2,
+    "file_name": "fB0S0nG83tbe",
+    "md5sum": "idXBRZopSQqp",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_001",
+    "analytes": {
       "submitter_id": "analyte_001"
-    },
-    "type.1": "submitted_methylation",
-    "submitter_id": "submitted_methylation_001"
+    }
   }
 ]

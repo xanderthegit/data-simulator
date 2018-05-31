@@ -1,23 +1,24 @@
 [
   {
-    "assay_method": "Copy Number Analysis",
-    "assay_target": "ada8iTNBBdCV",
-    "assay_target_secondary": "18LRkweL30QX",
-    "copies_unit": "aoRb3k4hBh3i",
-    "mutant_fraction_percent": 12.8641,
-    "mutant_copies": 3,
-    "mutation_result": "Frameshift",
-    "read_depth": 2,
-    "target_chromosome": {
-      "submitter_id": "read_group_001"
-    },
-    "target_chromosome_secondary": "19",
-    "target_position": 2,
-    "target_position_secondary": 3,
-    "target_ref": "2aYHW9AL1aPZ",
-    "target_alt": "RUUNjh3PzL12",
-    "WT_copies": 4,
+    "target_position": 8,
+    "assay_method": "Targeted Sequencing",
+    "read_depth": 3,
+    "target_alt": "MHcrtaGU2ccI",
+    "target_ref": "rXDTIzilQW8b",
+    "WT_copies": 6,
+    "target_chromosome": "4",
+    "mutation_result": "Copy Number Deletion",
+    "mutant_fraction_percent": 9.884,
+    "assay_target_secondary": "4BAlijK5McFf",
+    "target_position_secondary": 6,
+    "assay_target": "IgXPL3sRnXXi",
+    "mutant_copies": 6,
+    "target_chromosome_secondary": "8",
+    "copies_unit": "Kj66j7Nfmnfm",
     "type": "sequencing_assay",
-    "submitter_id": "sequencing_assay_001"
+    "submitter_id": "sequencing_assay_001",
+    "read_groups": {
+      "submitter_id": "read_group_001"
+    }
   }
 ]

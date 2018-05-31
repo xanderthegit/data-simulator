@@ -1,18 +1,19 @@
 [
   {
-    "analyte_isolation_method": "K6vk72v7wLWb",
-    "analyte_type": "DNA",
-    "cell_type": "Traditional CTC",
-    "cell_identifier": {
-      "submitter_id": "aliquot_001"
-    },
-    "days_to_assay": 1,
-    "frame_identifier": "SRWnYts9Tahb",
-    "llod": 5.9703,
-    "run_identifier": "n2U6IVa3rukO",
-    "specificity": 5.8951,
-    "sensitivity": 4.8389,
+    "run_identifier": "f704wldDH2I2",
+    "cell_type": "White Blood Cell",
+    "llod": 11.3634,
+    "frame_identifier": "furipNDuQipA",
+    "cell_identifier": "cPnHPexUl8IV",
+    "days_to_assay": 3,
+    "analyte_type": "Protein",
+    "analyte_isolation_method": "2JVtOXJf3Q8i",
+    "specificity": 11.2952,
+    "sensitivity": 11.2526,
     "type": "analyte",
-    "submitter_id": "analyte_001"
+    "submitter_id": "analyte_001",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
   }
 ]

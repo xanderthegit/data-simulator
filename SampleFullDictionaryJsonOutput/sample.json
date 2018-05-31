@@ -1,15 +1,14 @@
 [
   {
-    "blood_fractionation_method": "hnSXb3IOfefG",
-    "composition": "Peripheral Whole Blood",
-    "hours_to_fractionation_lower": 6.2952,
-    "hours_to_fractionation_upper": 11.3853,
-    "sample_quantity": 7.58,
-    "sample_volume": 11.5259,
+    "blood_fractionation_method": "09Qijg064Bz7",
+    "hours_to_fractionation_lower": 8.5047,
+    "hours_to_fractionation_upper": 12.6644,
+    "composition": "Circulating Tumor Cell (CTC)",
+    "sample_volume": 13.6105,
+    "sample_quantity": 13.1299,
     "type": "sample",
     "submitter_id": "sample_001",
-    "9": {},
-    "10": {
+    "biospecimens": {
       "submitter_id": "biospecimen_001"
     }
   }

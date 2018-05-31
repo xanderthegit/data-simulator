@@ -1,14 +1,15 @@
 [
   {
     "data_category": "Sequencing Reads",
-    "data_type": "Aligned Reads",
-    "data_format": "BAM",
-    "experimental_strategy": "WXS",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "miRNA-Seq",
+    "data_format": "BED",
+    "file_size": 5,
+    "file_name": "JZdBVlu8AxaW",
+    "md5sum": "LoW0HBoeyrWR",
     "type": "submitted_aligned_reads",
     "submitter_id": "submitted_aligned_reads_001",
-    "7": {},
-    "8": {},
-    "9": {
+    "read_groups": {
       "submitter_id": "read_group_001"
     }
   }

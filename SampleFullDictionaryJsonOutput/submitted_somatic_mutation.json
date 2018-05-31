@@ -1,14 +1,16 @@
 [
   {
-    "data_category": "H1pezQqOfjni",
-    "data_type": "hpl843atEGIN",
-    "data_format": "KRkjDyzrL4Zg",
-    "experimental_strategy": "5vNJAiOl2mB7",
-    "total_variants": 2,
+    "data_category": "3rLrYcOi9Q0F",
+    "data_type": "cmhFKQVi3VCT",
+    "total_variants": 4,
+    "experimental_strategy": "IdkF8zHRvHZz",
+    "data_format": "wMoGHO6E9oqB",
+    "file_size": 5,
+    "file_name": "x9h8Tu0b5SYG",
+    "md5sum": "pThjesmehdf9",
     "type": "submitted_somatic_mutation",
     "submitter_id": "submitted_somatic_mutation_001",
-    "8": {},
-    "9": {
+    "read_groups": {
       "submitter_id": "read_group_001"
     }
   }

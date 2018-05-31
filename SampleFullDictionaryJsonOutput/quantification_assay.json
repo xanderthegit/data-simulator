@@ -1,17 +1,18 @@
 [
   {
-    "assay_instrument": "Agilent TapeStation",
-    "assay_instrument_model": "Fluidigm Hyperion",
-    "assay_kit_name": "rOAfyXI4kJKl",
-    "assay_kit_vendor": "xTRanhgNSBl7",
-    "assay_kit_version": "OZvSxwOn8lMT",
+    "assay_kit_vendor": "c9yEOYhvSrou",
     "assay_method": "Immunohistochemistry",
-    "cell_count": {
-      "submitter_id": "analyte_001"
-    },
-    "cell_concentration": 10.1454,
-    "molecular_concentration": 16.264,
+    "cell_concentration": 6.7204,
+    "assay_instrument_model": "HDSCA Enumeration",
+    "assay_kit_version": "s8mRkxqpO40I",
+    "cell_count": 2,
+    "molecular_concentration": 13.5622,
+    "assay_instrument": "Epic Sciences CTC Platform",
+    "assay_kit_name": "T7vX1AfZCrrI",
     "type": "quantification_assay",
-    "submitter_id": "quantification_assay_001"
+    "submitter_id": "quantification_assay_001",
+    "analytes": {
+      "submitter_id": "analyte_001"
+    }
   }
 ]

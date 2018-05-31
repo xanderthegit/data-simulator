@@ -1,31 +1,32 @@
 [
   {
+    "classification_of_tumor": "Other",
+    "progression_free_survival": 5,
+    "method_of_diagnosis": "Autopsy",
+    "residual_disease": "R0",
+    "days_to_best_overall_response": 3,
+    "primary_diagnosis": "Tubular androblastoma with lipid storage",
+    "days_to_diagnosis": 1,
+    "tissue_or_organ_of_origin": "a28rBBo67LAB",
+    "ajcc_clinical_stage": "Stage IIA",
+    "morphology": "9531/0",
+    "prior_malignancy": "No",
+    "best_overall_response": "IPD-Immunoprogression",
+    "ajcc_pathologic_stage": "Stage 0",
+    "tumor_grade": "G3 Poorly differentiated (high grade)",
+    "ajcc_pathologic_m": "M0",
+    "ajcc_pathologic_t": "T1a2",
+    "prior_treatment": "No",
+    "ajcc_clinical_t": "T1a",
+    "ajcc_pathologic_n": "N1bI",
+    "ajcc_clinical_n": "N3",
     "ajcc_clinical_m": "M1",
-    "ajcc_clinical_n": "N0 (mol-)",
-    "ajcc_clinical_stage": "Stage IB",
-    "ajcc_clinical_t": "T2b",
-    "ajcc_pathologic_m": {
-      "submitter_id": "case_001"
-    },
-    "ajcc_pathologic_n": "N1bII",
-    "ajcc_pathologic_stage": "Stage IVB",
-    "ajcc_pathologic_t": "Tis",
-    "best_overall_response": "sCR-Stringent Complete Response",
-    "classification_of_tumor": "Primary",
-    "days_to_best_overall_response": 2,
-    "days_to_diagnosis": 3,
-    "method_of_diagnosis": "Excisional Biopsy",
-    "morphology": "8410/0",
-    "overall_survival": 2,
-    "primary_diagnosis": "Intraglandular papillary neoplasm with low grade intraepithelial neoplasia",
-    "prior_malignancy": "Yes",
-    "prior_treatment": "Not Reported",
-    "progression_free_survival": 3,
-    "progression_free_survival_event": "Unknown",
-    "residual_disease": "R1",
-    "tissue_or_organ_of_origin": "iAaie9E135HW",
-    "tumor_grade": "G2 Moderately differentiated (intermediate grade)",
+    "overall_survival": 5,
+    "progression_free_survival_event": "Death",
     "type": "diagnosis",
-    "submitter_id": "diagnosis_001"
+    "submitter_id": "diagnosis_001",
+    "cases": {
+      "submitter_id": "case_001"
+    }
   }
 ]

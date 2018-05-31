@@ -1,31 +1,32 @@
 [
   {
-    "biospecimen_anatomic_site": "Jaw",
-    "biospecimen_type": "Fluid",
-    "biospecimen_volume": 7.5647,
-    "biospecimen_weight": 11.2828,
-    "blood_draw_method": {
-      "submitter_id": "case_001"
-    },
+    "tumor_morphology": "dq4sczXaol6U",
+    "method_of_procurement": "Biopsy",
+    "biospecimen_anatomic_site": "Frontal Cortex",
+    "procurement_temperature": 12.7929,
     "blood_tube_type": "Acid Citrate Dextrose (ACD)",
-    "clinical_site": "wX3xeg9DRIb4",
-    "collaboration_id": "8a1VQ2cBJeos",
-    "days_to_collection": 4,
-    "days_to_procurement": 3,
-    "disease_type": "Ovarian Cancer",
-    "metastatic_bone": false,
-    "metastatic_lymph_node": true,
-    "metastatic_visceral": false,
-    "method_of_procurement": "Blood Draw",
-    "primary_site": "Male Genital Organs",
+    "collaboration_id": "n3DRU9xmrUKn",
+    "tissue_type": "Tumor",
+    "biospecimen_weight": 9.3841,
+    "biospecimen_volume": 11.456,
+    "metastatic_lymph_node": false,
+    "disease_type": "Pancreatic Cancer",
+    "blood_draw_method": "p2Hz4I87EcnY",
+    "biospecimen_type": "Fluid",
     "procured_or_purchased": "Purchased",
-    "procurement_temperature": 8.1029,
-    "shipping_temperature": 7.3781,
-    "tissue_type": "Peritumoral",
-    "tumor_code": "Granular Cell Tumors and Alveolar Soft Part Sarcomas",
-    "tumor_descriptor": "Primary",
-    "tumor_morphology": "Vsjte8N2G3c6",
+    "tumor_descriptor": "Recurrence",
+    "days_to_collection": 3,
+    "tumor_code": "Non Cancerous Tissue",
+    "primary_site": "Lymph Node",
+    "shipping_temperature": 11.3157,
+    "metastatic_bone": false,
+    "days_to_procurement": 2,
+    "metastatic_visceral": false,
+    "clinical_site": "eE2HZCMMAldI",
     "type": "biospecimen",
-    "submitter_id": "biospecimen_001"
+    "submitter_id": "biospecimen_001",
+    "cases": {
+      "submitter_id": "case_001"
+    }
   }
 ]

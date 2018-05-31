@@ -1,11 +1,12 @@
 [
   {
-    "collaboration_id": "5Y4mn8CnnDa5",
-    "index_date": "Study Enrollment",
-    "lost_to_followup": "Yes",
+    "lost_to_followup": "No",
+    "collaboration_id": "qvW747flgqbn",
+    "index_date": "First Patient Visit",
     "days_to_lost_to_followup": 4,
     "type": "case",
-    "submitter_id": {
+    "submitter_id": "case_001",
+    "studies": {
       "submitter_id": "study_001"
     }
   }

@@ -161,7 +161,6 @@ buildCompendiums <- function(dictionary) {
       # check nested props in ref
       for(refname in names(refs)){
         ref <- refs[[refname]]
-        print(refname)
         if(!is.null(ref)){
           for(r in ref){
             reference <- strsplit(r,"#/")[[1]]

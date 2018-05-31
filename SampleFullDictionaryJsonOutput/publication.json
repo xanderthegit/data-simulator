@@ -1,10 +1,11 @@
 [
   {
-    "pmid": {
-      "submitter_id": "project_001"
-    },
-    "doi": "rbygPOGF7q1y",
+    "pmid": "ADEc9xAdlWjQ",
+    "doi": "INzzHuWWAurU",
     "type": "publication",
-    "submitter_id": "publication_001"
+    "submitter_id": "publication_001",
+    "projects": {
+      "submitter_id": "project_001"
+    }
   }
 ]

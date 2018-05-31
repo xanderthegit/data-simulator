@@ -1,12 +1,10 @@
 [
   {
-    "type": {
+    "keyword_name": "Id3ISOMaubx4",
+    "type": "keyword",
+    "submitter_id": "keyword_001",
+    "projects": {
       "submitter_id": "project_001"
-    },
-    "submitter_id": "hJ6FVYFvl5yy",
-    "keyword_name": "oJhWXOCoM352",
-    "project_id": "lUxo2cg7XWuE",
-    "type.1": "keyword",
-    "submitter_id.1": "keyword_001"
+    }
   }
 ]

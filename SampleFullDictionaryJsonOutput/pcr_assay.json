@@ -1,22 +1,23 @@
 [
   {
-    "assay_instrument": "Qiagen Rotor-Gene Q",
-    "assay_instrument_model": "Bio-Rad QX100",
-    "assay_kit_name": "TZhid5MF7Usr",
-    "assay_kit_vendor": "ydf9iVhyzcJe",
-    "assay_kit_version": "qAEt7FGsvKJW",
-    "assay_method": "TaqMan",
-    "mutant_fraction_percent": {
-      "submitter_id": "analyte_001"
-    },
-    "mutation_result": "Unspecified",
-    "mutant_copies": 6,
-    "assay_target": "XB8V1Cha0y8J",
-    "target_chromosome": "TRUE",
     "target_position": 1,
-    "target_ref": "Qp8Ej70nvxaP",
-    "target_alt": "aJdC2ET56bo9",
+    "assay_method": "BEAMing Digital",
+    "assay_instrument_model": "Qiagen Rotor-Gene Q 5plex HRM",
+    "target_alt": "wrgzGkn3hB9d",
+    "assay_target": "2zjA6TvVuFUB",
+    "target_chromosome": "1",
+    "assay_kit_vendor": "LOhNtXaDxOH2",
+    "mutation_result": "Frameshift",
+    "assay_kit_version": "d7hFYhQAqHFD",
+    "mutant_fraction_percent": 8.2149,
+    "target_ref": "DkOhfhcYk7uj",
+    "mutant_copies": 2,
+    "assay_kit_name": "XfEjumps7VaH",
+    "assay_instrument": "Bio-Rad",
     "type": "pcr_assay",
-    "submitter_id": "pcr_assay_001"
+    "submitter_id": "pcr_assay_001",
+    "analytes": {
+      "submitter_id": "analyte_001"
+    }
   }
 ]
