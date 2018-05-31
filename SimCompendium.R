@@ -257,7 +257,7 @@ buildCompendiums <- function(dictionary) {
             if ('description' %in% names(fields[[f]])) {
                 DESCRIPTION = fields[[f]]$description
             } else {
-                DESCRIPTION = paste0("See : ", fields[[f]]$term$`$ref`)
+                DESCRIPTION = paste0("See : ", fields[[f]]["term"]$`$ref`)
             }
           
             if ('enum' %in% names(fields[[f]])) {
