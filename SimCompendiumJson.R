@@ -156,12 +156,11 @@ buildCompendiums <- function(dictionary) {
       fields <- node$properties
       linktoremove <- unlist(node$links)[grepl("name", names(unlist(node$links)))]
       fieldnames <- names(fields) 
-      refs <- fields[grepl("\\$ref_", names(fields))]
+      refs <- fields[grepl("\\$ref", names(fields))]
       
       # check nested props in ref
       for(refname in names(refs)){
         ref <- refs[[refname]]
-        print(refname)
         if(!is.null(ref)){
           for(r in ref){
             reference <- strsplit(r,"#/")[[1]]
