@@ -100,6 +100,9 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
                     if(grepl(':', row['CHOICES'])){
                         val <- replicate(n, paste(sample(10:23, 1),sample(10:59,1),sample(10:59,1),sep=":")) 
                     }
+                    else if(grepl('x', row['CHOICES'])){
+                        val <- replicate(n, paste(sample(0:9, 1),sample(0:9,1),sample(0:9,1),sep="x")) 
+                    }
                     else{
                         val <- replicate(n, paste(stri_rand_strings(1, 4, '[0-9]'), stri_rand_strings(1, 2, '[0-9]'), stri_rand_strings(1, 2, '[0-9]'),sep="-"))
                     }
