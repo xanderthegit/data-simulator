@@ -61,7 +61,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i])
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
- 
+
         #if (multiplicity == "many_to_one") {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
         #} else {
@@ -79,7 +79,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
             for(ln in 1:length(link_name)){
-                if(ln == "projects"){
+                if(link_name[ln] == "projects"){
                    x[[link_name[ln]]] <- list(code=project_name)
                 }
                 else{
