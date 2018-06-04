@@ -1,4 +1,8 @@
 #source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimCompendium.R')
+library(jsonlite)
+library(stringr)
+library(stringi)
+print("Finish import dependencies")
 setwd('./')
 source('SimCompendiumJson.R')
 options(echo=TRUE)
