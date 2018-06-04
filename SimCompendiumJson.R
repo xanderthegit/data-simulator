@@ -360,8 +360,10 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
   #   simdata and json files in output directory
   
   print("Loading Simulation Tools...")
-  source('SimtoJson.R')
-  source('SimData.R')
+  #source('SimtoJson.R')
+  #source('SimData.R')
+  source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimtoJson.R')
+  source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
     
   print("Getting JSON form dictionary...") 
   #dictionary <- readDictionary(dictionary, branch)
