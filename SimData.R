@@ -91,9 +91,22 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
             }
         } else if (row[['TYPE']] == "string"){
             if(row[['CHOICES']] != ''){
-                 pat <- str_extract(row[['CHOICES']], "\\[(.+?)\\]")
-                 size <- as.integer(str_match(row[['CHOICES']], "\\{(.+?)\\}")[,2])
-                 val <- stri_rand_strings(n, size, pattern = pat)
+                if(grepl('md5sum', row[['VARIABLE']])){
+                    pat <- str_extract(row[['CHOICES']], "\\[(.+?)\\]")
+                    size <- as.integer(str_match(row[['CHOICES']], "\\{(.+?)\\}")[,2])
+                    val <- stri_rand_strings(n, size, pattern = pat)
+                }
+                else{
+                    if(grepl(':', row['CHOICES'])){
+                        val <- replicate(n, paste(sample(10:23, 1),sample(10:59,1),sample(10:59,1),sep=":")) 
+                    }
+                    else if(grepl('x', row['CHOICES'])){
+                        val <- replicate(n, paste(sample(0:9, 1),sample(0:9,1),sample(0:9,1),sep="x")) 
+                    }
+                    else{
+                        val <- replicate(n, paste(stri_rand_strings(1, 4, '[0-9]'), stri_rand_strings(1, 2, '[0-9]'), stri_rand_strings(1, 2, '[0-9]'),sep="-"))
+                    }
+                }
             }
             else{
                  val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
