@@ -102,7 +102,6 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
                     }
                     else{
                         val <- replicate(n, paste(stri_rand_strings(1, 4, '[0-9]'), stri_rand_strings(1, 2, '[0-9]'), stri_rand_strings(1, 2, '[0-9]'),sep="-"))
-                        print(val)
                     }
                 }
             }
