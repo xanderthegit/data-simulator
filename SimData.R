@@ -1,6 +1,6 @@
 library(stringr)
 library(stringi)
-source('https://raw.githubusercontent.com/occ-data/data-simulator/master/ValidateFunction.R')
+source('ValidateFunction.R')
 
 ## Helper for handling numeric / integer distributions in compendium
 distPrep <- function(row, n=0, full.output=FALSE) {
@@ -66,9 +66,9 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
         if (row[['TYPE']] == "enum") {
             val <- unlist(sample(convertToList(row[['CHOICES']]), 
                                  n, T, as.numeric(convertToList(row[['PROBS']]))))
-            if (all(grepl('^-?[0-9.]+$', val))){
-                val <- as.numeric(val) 
-            }
+            #if (all(grepl('^-?[0-9.]+$', val))){
+            #    val <- as.numeric(val) 
+            #}
         } else if (row[['TYPE']] == "boolean"){
             val <- unlist(sample(c(TRUE, FALSE), 
                                  n, T, as.numeric(convertToList(row[['PROBS']]))))

@@ -1,4 +1,8 @@
 #source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimCompendium.R')
+library(jsonlite)
+library(stringr)
+library(stringi)
+print("Finish import dependencies")
 setwd('./')
 source('SimCompendiumJson.R')
 options(echo=TRUE)
@@ -14,3 +18,5 @@ finalSim <- simFromDictionary(repo, project, FALSE, n, TRUE, dir)
 #Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/genomel-dictionary/master/schema.json test 4 ~/sampleJsonOutput/
 #Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/bpadictionary/develop/schema.json test 4 ~/sampleJsonOutput
 #Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/kf-dictionary/1.0.0/schema.json test 4 ~/sampleJsonOutput/
+#Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/master/schema.json test 4 ~/sampleJsonOutput/
+
