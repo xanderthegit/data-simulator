@@ -99,6 +99,13 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     # Write importing order
     fileOrder <- paste(sorted_nodes, ".json", sep="")
     write(fileOrder, paste0(path, 'DataImportOrder.txt'))
+    
+    # Write file descriptions
+    for (i in seq_along(sorted_nodes)) {
+      nodelinks[nodelinks$NODE==sorted_nodes[i], 'ORDER'] <- i
+    }
+    fileDescr <- toJSON(nodelinks[!duplicated(nodelinks[,'NODE']),], pretty=T, auto_unbox=T)
+    write(fileDescr, paste0(path, 'NodeDescriptions.json'))
 }
 
 getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
