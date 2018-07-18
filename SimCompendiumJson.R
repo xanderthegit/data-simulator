@@ -192,7 +192,7 @@ buildCompendiums <- function(dictionary) {
                            "file_state", "created_datetime", "updated_datetime",
                            "state", "state_comment", "project_id", "submitter_id",
                            "workflow_start_datetime", "workflow_end_datetime", 
-                           "sequencing_date", "run_datetime")
+                           "sequencing_date", "run_datetime", "object_id")
       fieldnames <- fieldnames[!fieldnames %in% linktoremove]
       fieldnames <- fieldnames[!(fieldnames %in% excluded_fields)]
       required <- node$required            
