@@ -11,7 +11,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     #
     # Returns:
     #   creates and saves of json files representing data simulated for each node
-    
+
     nodes <- unique(compendium[['NODE']])
     
     # Sort nodes
@@ -101,10 +101,17 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     write(fileOrder, paste0(path, 'DataImportOrder.txt'))
     
     # Write file descriptions
+    node_descriptions <- list()
     for (i in seq_along(sorted_nodes)) {
-      nodelinks[nodelinks$NODE==sorted_nodes[i], 'ORDER'] <- i
+      node_name <- sorted_nodes[i]
+      this_node <- list()
+      this_node$NODE <- unbox(node_name)
+      this_node$ORDER <- unbox(i)
+      this_node$TARGET <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==node_name])
+      this_node$CATEGORY <- unbox(as.character(unique(nodelinks[nodelinks[['NODE']]==node_name, 'CATEGORY'])))
+      node_descriptions[[i]] <- this_node
     }
-    fileDescr <- toJSON(nodelinks[!duplicated(nodelinks[,'NODE']),], pretty=T, auto_unbox=T)
+    fileDescr <- toJSON(node_descriptions, pretty=T)
     write(fileDescr, paste0(path, 'NodeDescriptions.json'))
 }
 
@@ -115,9 +122,9 @@ getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
         target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
         sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
       }
-      if (!(node %in% sorted_nodes)){
-         sorted_nodes <- c(sorted_nodes, node)
-      }
+    }
+    if (!(node %in% sorted_nodes)){
+      sorted_nodes <- c(sorted_nodes, node)
     }
     return(sorted_nodes)
 }
