@@ -340,6 +340,7 @@ buildCompendiums <- function(dictionary) {
   # create final object with compendium and compendium node relationships
   compendium_objects <- list(compendium = compendium,
                              compendium_nodes = compendium_nodes)
+  browser()
   return(compendium_objects)  
     
 }
@@ -362,11 +363,8 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
   print("Loading Simulation Tools...")
   source('SimtoJson.R')
   source('SimData.R')
-  #source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimtoJson.R')
-  #source('https://raw.githubusercontent.com/occ-data/data-simulator/master/SimData.R')
     
   print("Getting JSON form dictionary...") 
-  #dictionary <- readDictionary(dictionary, branch)
   dictionary <- readDictionary(dictionary)
   
   print("Creating Compendium and Node Relationship Table...")
@@ -377,23 +375,55 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
     compendium <- compendium[compendium$REQUIRED==TRUE,]
   } 
   
+  gen_submitted_orders(compendium, compendiumObjects)
+  browser()
+  
   print("Simulating Data...")
   simdata <- simData(compendium, 
                      n, 
                      include.na = FALSE, 
                      reject= FALSE)
-  
+
   if (output_to_json) {
     print("Generating Json...")
     SimtoJson(simdata, 
               compendium, 
               compendiumObjects$compendium_nodes,
+              sorted_nodes,
               project_name,
               dir)
   }
   
   return(simdata)
   
+}
+
+gen_submitted_orders <- function(compendium, compendiumObjects) {
+  # Sort nodes
+  nodes <- unique(compendium[['NODE']]) 
+  sorted_nodes <- c("project")
+  for (i in nodes) {
+    target <- as.character(compendiumObjects$compendium_nodes[['TARGET']][compendiumObjects$compendium_nodes[['NODE']]==i])
+    sorted_nodes <- getOrder(target, i, nodes, sorted_nodes, compendiumObjects$compendium_nodes)
+  }   
+  sorted_nodes <- sorted_nodes[-1]
+  # Write importing order
+  fileOrder <- paste(sorted_nodes, ".json", sep="")
+  write(fileOrder, paste0('./', 'DataImportOrder_test.txt'))
+}
+
+getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
+  
+  for (link in links){
+    if (!(link %in% sorted_nodes)){
+      target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
+      sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
+    }
+  }
+  if (!(node %in% sorted_nodes)){
+    sorted_nodes <- c(sorted_nodes, node)
+  }
+  return(sorted_nodes)
 }
 
 ## Run Example: 

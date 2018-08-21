@@ -155,19 +155,23 @@ simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05)
     # 
     # Returns:
     #   df:   a simulated dataset
+    df2 <- c()
     for (i in 1:nrow(compendium)) {
         v <- compendium[i,][['VARIABLE']]
         if (i==1) {
             df <- simVar(compendium[i,], n, include.na, reject, threshold)
+            df2 <- append(df2, df$v)
         } else {
             tried <- try(simVar(compendium[i,], n, include.na, reject, threshold), silent=T)
             if(inherits(tried, "try-error")) {
                 print(paste0("Variable: ", v, " | Error: ", tried))
             } else {
                 var <- simVar(compendium[i,], n, include.na, reject, threshold)
-                df <- merge(df, var, by="id")
+                df2 <- append(df2, df$v)
+                df <- merge(df, var)
+                
             }
         }
     }
-    df
+    return(df)
 }

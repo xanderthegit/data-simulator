@@ -1,7 +1,7 @@
 source('SimData.R')
 library(jsonlite)
 
-SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
+SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name, path) {
     # takes simulated data and creates json
     # Args:
     #   simdata:   Simulated values
@@ -11,17 +11,6 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     #
     # Returns:
     #   creates and saves of json files representing data simulated for each node
-
-    nodes <- unique(compendium[['NODE']])
-    
-    # Sort nodes
-    sorted_nodes <- c("project")
-    for (i in nodes) {
-        target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==i])
-        sorted_nodes <- getOrder(target, i, nodes, sorted_nodes, nodelinks)
-    }   
-    sorted_nodes <- sorted_nodes[-1]
-    
     
     for (i in sorted_nodes) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
@@ -95,11 +84,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         filepath <- paste0(path, i, ".json")
         write(json, filepath)
     }
-    
-    # Write importing order
-    fileOrder <- paste(sorted_nodes, ".json", sep="")
-    write(fileOrder, paste0(path, 'DataImportOrder.txt'))
-    
+
     # Write file descriptions
     node_descriptions <- list()
     for (i in seq_along(sorted_nodes)) {
@@ -113,20 +98,6 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     }
     fileDescr <- toJSON(node_descriptions, pretty=T)
     write(fileDescr, paste0(path, 'NodeDescriptions.json'))
-}
-
-getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
-
-    for (link in links){
-      if (!(link %in% sorted_nodes)){
-        target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
-        sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
-      }
-    }
-    if (!(node %in% sorted_nodes)){
-      sorted_nodes <- c(sorted_nodes, node)
-    }
-    return(sorted_nodes)
 }
 
 ## Example to run
