@@ -340,7 +340,6 @@ buildCompendiums <- function(dictionary) {
   # create final object with compendium and compendium node relationships
   compendium_objects <- list(compendium = compendium,
                              compendium_nodes = compendium_nodes)
-  browser()
   return(compendium_objects)  
     
 }
@@ -375,12 +374,14 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
     compendium <- compendium[compendium$REQUIRED==TRUE,]
   } 
   
-  gen_submitted_orders(compendium, compendiumObjects)
+  sorted_nodes <- gen_submitted_orders(compendium, compendiumObjects, dir)
   browser()
-  
+  sample_numbers = predefine_sample_numbers(sorted_nodes)
+  names(sample_numbers) = sorted_nodes
   print("Simulating Data...")
   simdata <- simData(compendium, 
-                     n, 
+                     n,
+                     sample_numbers,
                      include.na = FALSE, 
                      reject= FALSE)
 
@@ -398,7 +399,12 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
   
 }
 
-gen_submitted_orders <- function(compendium, compendiumObjects) {
+predefine_sample_numbers <- function(sorted_nodes){
+  val <- sample(1:5, length(sorted_nodes), replace=T)
+  return(val)
+}
+
+gen_submitted_orders <- function(compendium, compendiumObjects, path) {
   # Sort nodes
   nodes <- unique(compendium[['NODE']]) 
   sorted_nodes <- c("project")
@@ -409,11 +415,11 @@ gen_submitted_orders <- function(compendium, compendiumObjects) {
   sorted_nodes <- sorted_nodes[-1]
   # Write importing order
   fileOrder <- paste(sorted_nodes, ".json", sep="")
-  write(fileOrder, paste0('./', 'DataImportOrder_test.txt'))
+  write(fileOrder, paste0(path, 'DataImportOrder2.txt'))
+  return(sorted_nodes)
 }
 
 getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
-  
   for (link in links){
     if (!(link %in% sorted_nodes)){
       target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])

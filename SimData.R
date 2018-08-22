@@ -49,7 +49,7 @@ convertToList <- function(l) {
 }
 
 ## Helper to choose correct simulation method for a var
-simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
+simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
     # reviews row, selects and implements a method for simulating variable
     #
     # Args: 
@@ -143,7 +143,7 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
     return(df)
 }
 
-simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05) {
+simData <- function(compendium, n, sample_numbers, include.na=TRUE, reject=FALSE, threshold=.05) {
     # helper that runs simulation for each row in variable compendium
     #
     # Args: 
