@@ -72,7 +72,6 @@ buildCompendiums <- function(dictionary) {
   
   # get objects from dictionary
   node_list <- dictionary$node_list
-  
   # loop through nodes to generate rows in compendium
   # and compendium nodes
   for (node in node_list) {
@@ -374,10 +373,10 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
     compendium <- compendium[compendium$REQUIRED==TRUE,]
   } 
   
+  node_levels <- gen_node_levels(compendium, compendiumObjects, dir)
   sorted_nodes <- gen_submitted_orders(compendium, compendiumObjects, dir)
-  browser()
-  sample_numbers = predefine_sample_numbers(sorted_nodes)
-  names(sample_numbers) = sorted_nodes
+  sample_numbers = predefine_sample_numbers(sorted_nodes, node_levels)
+  
   print("Simulating Data...")
   simdata <- simData(compendium, 
                      n,
@@ -385,6 +384,7 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
                      include.na = FALSE, 
                      reject= FALSE)
 
+  browser()
   if (output_to_json) {
     print("Generating Json...")
     SimtoJson(simdata, 
@@ -399,9 +399,60 @@ simFromDictionary <- function(dictionary, project_name, required_only=F, n, outp
   
 }
 
-predefine_sample_numbers <- function(sorted_nodes){
-  val <- sample(1:5, length(sorted_nodes), replace=T)
-  return(val)
+predefine_sample_numbers <- function(sorted_nodes, node_levels){
+  sample_numbers <- c()
+  max_level = max(node_levels)
+  for(node in sorted_nodes) {
+    factor = sample(2:4,1)
+    mean = max(40,min(factor**node_levels[[node]], 10000))
+    val = sample(as.integer(0.8*mean):as.integer(1.2*mean),1)
+    sample_numbers <- c(sample_numbers, val)
+  }
+  names(sample_numbers) <- sorted_nodes
+  return(sample_numbers)
+}
+
+get_neighbors <- function(nodes, compendiumObjects) {
+  neighbors <- rep(list(list()),length(nodes))
+  names(neighbors) <- nodes
+  
+  for(node in nodes) {
+    targets <- as.character(compendiumObjects$compendium_nodes[['TARGET']][compendiumObjects$compendium_nodes[['NODE']]==node])
+    for(target in targets) {
+      neighbors[[target]] <- c(node,neighbors[[target]])
+    }
+  }
+  return(neighbors)
+}
+
+gen_node_levels <- function(compendium, compendiumObjects, path) {
+  nodes <- unique(compendium[['NODE']])
+  nodes <- c("project", nodes)
+  neighbors <- get_neighbors(nodes, compendiumObjects)
+  
+  visited = rep(FALSE, length(nodes))
+  names(visited) <- nodes
+  
+  levels <- rep(0, length(nodes))
+  names(levels) <- nodes
+  last <- 1
+  visited[["project"]] <- TRUE
+  queue <- c("project")
+  
+  # Do BFS from root
+  while (last <= length(queue)) {
+    node <- queue[last]
+    for(target in neighbors[[node]]) {
+      if (visited[[target]] == FALSE) {
+        levels[[target]] <- levels[[node]] + 1
+        queue <- c(queue, target)
+        visited[[target]] <- TRUE
+      }
+    }
+    last = last + 1
+  }
+  levels <- levels[-1]
+  return(levels)
 }
 
 gen_submitted_orders <- function(compendium, compendiumObjects, path) {
@@ -415,7 +466,7 @@ gen_submitted_orders <- function(compendium, compendiumObjects, path) {
   sorted_nodes <- sorted_nodes[-1]
   # Write importing order
   fileOrder <- paste(sorted_nodes, ".json", sep="")
-  write(fileOrder, paste0(path, 'DataImportOrder2.txt'))
+  write(fileOrder, paste0(path, 'DataImportOrder.txt'))
   return(sorted_nodes)
 }
 

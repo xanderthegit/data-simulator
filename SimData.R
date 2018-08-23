@@ -130,9 +130,8 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
             }
         }
 
-    names <- c("id", row[["VARIABLE"]])
-    id <- c(1:n)
-    df <- data.frame(id, val)
+    names <- c(row[["VARIABLE"]])
+    df <- data.frame(val)
     names(df) <- names
     if (reject) {
         check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
@@ -158,20 +157,19 @@ simData <- function(compendium, n, sample_numbers, include.na=TRUE, reject=FALSE
     df2 <- c()
     for (i in 1:nrow(compendium)) {
         v <- compendium[i,][['VARIABLE']]
+        node <- compendium[i,][['NODE']]
         if (i==1) {
-            df <- simVar(compendium[i,], n, include.na, reject, threshold)
-            df2 <- append(df2, df$v)
+            df <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+            df2 <- append(df2, df)
         } else {
-            tried <- try(simVar(compendium[i,], n, include.na, reject, threshold), silent=T)
+            tried <- try(simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold), silent=T)
             if(inherits(tried, "try-error")) {
                 print(paste0("Variable: ", v, " | Error: ", tried))
             } else {
-                var <- simVar(compendium[i,], n, include.na, reject, threshold)
-                df2 <- append(df2, df$v)
-                df <- merge(df, var)
-                
+                var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+                df2 <- append(df2, var)
             }
         }
     }
-    return(df)
+    return(df2)
 }
