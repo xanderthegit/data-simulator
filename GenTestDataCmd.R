@@ -8,14 +8,10 @@ source('SimCompendiumJson.R')
 options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
-#repo <- args[1]
-#project <- args[2]
-#n <- as.integer(args[3])
-#dir <- args[4]
-repo = 'https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/master/schema.json'
-project = 'test'
-n=4
-dir = '~/sampleJsonOutput/'
+repo <- args[1]
+project <- args[2]
+n <- as.integer(args[3])
+dir <- args[4]
 rm(args)
 
 finalSim <- simFromDictionary(repo, project, FALSE, n, TRUE, dir)

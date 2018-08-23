@@ -50,10 +50,6 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i])
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
-        
-        if (length(link_name) >1) {
-          browser()
-        }
 
         #if (multiplicity == "many_to_one") {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
@@ -63,10 +59,13 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         
         # Add links
         l <- c()
-        target_vals = simdata[target]
-        for (v in 1:length(target_vals[[names(target_vals)[1]]])) {
-            num <- paste0(target, "_00", v)
-            l <- append(l, num)
+        for (v in 1:nrow(sub)) {
+            for(t in target) {
+                varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==t]
+                sub2 = data.frame(simdata[varlist2])
+                num <- paste0(t, "_00", sample(1:nrow(sub2),1))
+                l <- append(l, num)
+            }
         }
         finlist <- c()
         for (m in 1:nrow(sub)) {
