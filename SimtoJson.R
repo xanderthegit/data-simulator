@@ -14,7 +14,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
     
     for (i in sorted_nodes) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
-        sub <- simdata[, varlist, drop=FALSE]
+        sub <- data.frame(simdata[varlist])
         
         # Remove project_id
         if(length(grep("project_id", colnames(sub))) > 0){
@@ -27,15 +27,15 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
 
         # Add type
         if(!("type" %in% colnames(sub))){
-          sub <- cbind(sub, type=rep(i, nrow(simdata)))
+          sub <- cbind(sub, type=rep(i, nrow(sub)))
         }
         else{
-          sub$type <- rep(i, nrow(simdata))
+          sub$type <- rep(i, nrow(sub))
         }
 
         # Add submitter_id
         submitter_id <- c()
-        for (v in 1:nrow(simdata)){ 
+        for (v in 1:nrow(sub)){ 
             num <- paste0(i, "_00", v)
             submitter_id <- c(submitter_id, num)
         }
@@ -50,6 +50,10 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i])
         target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
         multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
+        
+        if (length(link_name) >1) {
+          browser()
+        }
 
         #if (multiplicity == "many_to_one") {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
@@ -59,11 +63,11 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         
         # Add links
         l <- c()
-        for (v in 1:nrow(simdata)) {
+        target_vals = simdata[target]
+        for (v in 1:length(target_vals[[names(target_vals)[1]]])) {
             num <- paste0(target, "_00", v)
             l <- append(l, num)
         }
-        
         finlist <- c()
         for (m in 1:nrow(sub)) {
             x <- as.list(sub[m,])
