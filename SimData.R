@@ -142,7 +142,7 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
     return(df)
 }
 
-simData <- function(compendium, n, sample_numbers, include.na=TRUE, reject=FALSE, threshold=.05) {
+simData <- function(compendium, sample_numbers, include.na=TRUE, reject=FALSE, threshold=.05) {
     # helper that runs simulation for each row in variable compendium
     #
     # Args: 
@@ -154,22 +154,22 @@ simData <- function(compendium, n, sample_numbers, include.na=TRUE, reject=FALSE
     # 
     # Returns:
     #   df:   a simulated dataset
-    df2 <- c()
+    df <- c()
     for (i in 1:nrow(compendium)) {
         v <- compendium[i,][['VARIABLE']]
         node <- compendium[i,][['NODE']]
         if (i==1) {
-            df <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
-            df2 <- append(df2, df)
+            var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+            df <- append(df, var)
         } else {
             tried <- try(simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold), silent=T)
             if(inherits(tried, "try-error")) {
                 print(paste0("Variable: ", v, " | Error: ", tried))
             } else {
                 var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
-                df2 <- append(df2, var)
+                df <- append(df, var)
             }
         }
     }
-    return(df2)
+    return(df)
 }
