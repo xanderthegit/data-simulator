@@ -57,20 +57,44 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
         #}
         
+        link_type <-  nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==node]
+        names(link_type) <- targets
         # Add links
         l <- c()
-        for (v in 1:nrow(sub)) {
+        adjusted_number = nrow(sub)
+        for(target in targets) {
+            varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==target]
+            sub2 = data.frame(simdata[varlist2])
+            if (link_type[[target]] %in% c("one_to_one","one_to_many")) {
+              adjusted_number = min(adjusted_number, nrow(sub2))
+            }
+        }
+        
+        if (adjusted_number < nrow(sub)) {
+            for (var in varlist) {
+              simdata[var][[var]] = simdata[var][[var]][1:adjusted_number]
+            }
+        }
+        
+        for (v in 1:adjusted_number) {
             for(target in targets) {
                 varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==target]
                 sub2 = data.frame(simdata[varlist2])
-                num <- paste0(target, "_00", sample(1:nrow(sub2),1))
-                l <- append(l, num)
+                if (link_type[[target]] %in% c("one_to_one","one_to_many") == FALSE) {
+                  l <- append(l,paste0(target, "_00", sample(1:nrow(sub2),1)))
+                }
+                else {
+                    if (v <= nrow(sub2)) {
+                      l <- append(l, paste0(target, "_00", v))
+                    }
+                }
+                
             }
         }
         finlist <- c()
-        link_type <-  nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==node]
+        
         submitter_ids <- c()
-        for (m in 1:nrow(sub)) {
+        for (m in 1:adjusted_number) {
             x <- as.list(sub[m,])
             for(ln in 1:length(link_name)){
                 if(link_name[ln] == "projects"){

@@ -414,7 +414,7 @@ generate_node_instance_numbers <- function(sorted_nodes, node_levels, n_max){
   max_level = max(node_levels)
   for(node in sorted_nodes) {
       factor = sample(2:3,1)
-      mean = max(40,min(factor**node_levels[[node]], n_max))
+      mean = max(20,min(factor**node_levels[[node]], n_max))
       val = sample(as.integer(0.8*mean):as.integer(1.2*mean),1)
       sample_numbers <- c(sample_numbers, val)
   }
