@@ -1,6 +1,23 @@
 source('SimData.R')
 library(jsonlite)
 
+convert2dataframe <- function(subdata) {
+  sub = data.frame()
+  for(i in 1:length(subdata[[names(subdata)[1]]])){
+    first = names(subdata)[1]
+    tmp1 = data.frame("")
+    names(tmp1) = names(subdata)[1]
+    for(name in names(subdata)) {
+      if (typeof(subdata[[name]]) == "list") {
+        tmp1[[name]] = subdata[[name]][i]
+      }else {
+        tmp1[[name]] = subdata[[name]][i]
+      }
+    }
+    sub = rbind(sub, tmp1)
+  }
+  return(sub)
+}
 SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name, path) {
     # takes simulated data and creates json
     # Args:
@@ -11,11 +28,13 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
     #
     # Returns:
     #   creates and saves of json files representing data simulated for each node
-    
+
     for (node in sorted_nodes) {
         varlist <- compendium[['VARIABLE']][compendium[['NODE']]==node]
-        sub <- data.frame(simdata[varlist])
+        subdata = simdata[varlist]
         
+        sub <- convert2dataframe(subdata)
+       
         # Remove project_id
         if(length(grep("project_id", colnames(sub))) > 0){
             sub <- sub[-grep("project_id", colnames(sub))]
@@ -64,7 +83,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         adjusted_number = nrow(sub)
         for(target in targets) {
             varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==target]
-            sub2 = data.frame(simdata[varlist2])
+            sub2 = convert2dataframe(simdata[varlist2])
             if (link_type[[target]] %in% c("one_to_one","one_to_many")) {
               adjusted_number = min(adjusted_number, nrow(sub2))
             }
@@ -79,7 +98,7 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
         for (v in 1:adjusted_number) {
             for(target in targets) {
                 varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==target]
-                sub2 = data.frame(simdata[varlist2])
+                sub2 = convert2dataframe(simdata[varlist2])
                 if (link_type[[target]] %in% c("one_to_one","one_to_many") == FALSE) {
                   l <- append(l,paste0(target, "_00", sample(1:nrow(sub2),1)))
                 }
@@ -92,10 +111,15 @@ SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name
             }
         }
         finlist <- c()
-        
         submitter_ids <- c()
         for (m in 1:adjusted_number) {
             x <- as.list(sub[m,])
+            for(name in names(x)) {
+                if (typeof(x[[name]]) == 'list')
+                {
+                  x[[name]] = unlist(x[[name]])
+                }
+            }
             for(ln in 1:length(link_name)){
                 if(link_name[ln] == "projects"){
                    x[[link_name[ln]]] <- list(code=project_name)

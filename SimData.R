@@ -111,8 +111,16 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
             else{
                  val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
             }
+        } else if (row[['TYPE']] == "array") {
+              val <- data.frame()
+              for (i in 1:n) {
+                  tmp1 = data.frame("")
+                  names(tmp1) = c('c1')
+                  tmp1[1]$c1 = list(stri_rand_strings(sample(1:3,1), 4, pattern = "[A-Za-z0-9]"))
+                  val <- rbind(val,tmp1)
+              }
         } else {
-            val <- rep("Something Went Wrong", n)
+              val <- rep("Something Went Wrong", n)
         }
       
         # add NAS
@@ -130,15 +138,16 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
             }
         }
 
-    names <- c(row[["VARIABLE"]])
-    df <- data.frame(val)
-    names(df) <- names
-    if (reject) {
-        check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
-    }
-    if (check > threshold) break
+        names <- c(row[["VARIABLE"]])
+        df <- data.frame(val)
+        names(df) <- names
+        if (reject) {
+            check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
+        }
+        if (check > threshold) break
     
     }
+    
     return(df)
 }
 
@@ -154,22 +163,27 @@ simData <- function(compendium, sample_numbers, include.na=TRUE, reject=FALSE, t
     # 
     # Returns:
     #   df:   a simulated dataset
-    df <- c()
+    df <- list()
+    names <- c()
     for (i in 1:nrow(compendium)) {
         v <- compendium[i,][['VARIABLE']]
         node <- compendium[i,][['NODE']]
         if (i==1) {
             var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
-            df <- append(df, var)
+            #df <- append(df, var)
+            names[length(names)+1] = names(var)
+            df[length(df)+1] <- var
         } else {
             tried <- try(simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold), silent=T)
             if(inherits(tried, "try-error")) {
                 print(paste0("Variable: ", v, " | Error: ", tried))
             } else {
                 var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
-                df <- append(df, var)
+                names[length(names)+1] = names(var)
+                df[length(df)+1] <- var
             }
         }
     }
+    names(df) = names
     return(df)
 }
