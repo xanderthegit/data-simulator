@@ -8,11 +8,7 @@ convert2dataframe <- function(subdata) {
     tmp1 = data.frame("")
     names(tmp1) = names(subdata)[1]
     for(name in names(subdata)) {
-      if (typeof(subdata[[name]]) == "list") {
         tmp1[[name]] = subdata[[name]][i]
-      }else {
-        tmp1[[name]] = subdata[[name]][i]
-      }
     }
     sub = rbind(sub, tmp1)
   }
