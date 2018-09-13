@@ -21,3 +21,4 @@ finalSim <- simFromDictionary(repo, project, FALSE, n_max, TRUE, dir)
 #Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/master/schema.json test 100 ~/sampleJsonOutput/
 #Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json test 100 ~/sampleJsonOutput/
 #Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/gtexdictionary/feat/consent/schema.json test 100 ~/sampleJsonOutput/
+#Rscript GenTestDataCmd.R https://s3.amazonaws.com/dictionary-artifacts/bhcdictionary/master/schema.json test 100 ~/sampleJsonOutput_brain/
