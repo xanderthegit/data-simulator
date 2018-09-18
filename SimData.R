@@ -49,7 +49,7 @@ convertToList <- function(l) {
 }
 
 ## Helper to choose correct simulation method for a var
-simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
+simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
     # reviews row, selects and implements a method for simulating variable
     #
     # Args: 
@@ -64,11 +64,12 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
     if (!reject) {threshold <- 0; check <- 1}
     repeat {
         if (row[['TYPE']] == "enum") {
+            
             val <- unlist(sample(convertToList(row[['CHOICES']]), 
                                  n, T, as.numeric(convertToList(row[['PROBS']]))))
-            #if (all(grepl('^-?[0-9.]+$', val))){
-            #    val <- as.numeric(val) 
-            #}
+            if (all(grepl('^-?[0-9.]+$', convertToList(row[['CHOICES']])))){
+                val <- as.numeric(val) 
+            }
         } else if (row[['TYPE']] == "boolean"){
             val <- unlist(sample(c(TRUE, FALSE), 
                                  n, T, as.numeric(convertToList(row[['PROBS']]))))
@@ -111,8 +112,16 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
             else{
                  val <- stri_rand_strings(n, 12, pattern = "[A-Za-z0-9]")
             }
+        } else if (row[['TYPE']] == "array") {
+              val <- data.frame()
+              for (i in 1:n) {
+                  tmp1 = data.frame("")
+                  names(tmp1) = c('c1')
+                  tmp1[1]$c1 = list(stri_rand_strings(sample(1:3,1), 4, pattern = "[A-Za-z0-9]"))
+                  val <- rbind(val,tmp1)
+              }
         } else {
-            val <- rep("Something Went Wrong", n)
+              val <- rep("Something Went Wrong", n)
         }
       
         # add NAS
@@ -130,20 +139,20 @@ simVar <- function(row, n, include.na=TRUE, reject=FALSE, threshold=.05) {
             }
         }
 
-    names <- c("id", row[["VARIABLE"]])
-    id <- c(1:n)
-    df <- data.frame(id, val)
-    names(df) <- names
-    if (reject) {
-        check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
-    }
-    if (check > threshold) break
+        names <- c(row[["VARIABLE"]])
+        df <- data.frame(val)
+        names(df) <- names
+        if (reject) {
+            check <- validateVar(row[['VARIABLE']], compendium, df, threshold)
+        }
+        if (check > threshold) break
     
     }
+    
     return(df)
 }
 
-simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05) {
+simData <- function(compendium, sample_numbers, include.na=TRUE, reject=FALSE, threshold=.05) {
     # helper that runs simulation for each row in variable compendium
     #
     # Args: 
@@ -155,19 +164,27 @@ simData <- function(compendium, n, include.na=TRUE, reject=FALSE, threshold=.05)
     # 
     # Returns:
     #   df:   a simulated dataset
+    df <- list()
+    names <- c()
     for (i in 1:nrow(compendium)) {
         v <- compendium[i,][['VARIABLE']]
+        node <- compendium[i,][['NODE']]
         if (i==1) {
-            df <- simVar(compendium[i,], n, include.na, reject, threshold)
+            var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+            #df <- append(df, var)
+            names[length(names)+1] = names(var)
+            df[length(df)+1] <- var
         } else {
-            tried <- try(simVar(compendium[i,], n, include.na, reject, threshold), silent=T)
+            tried <- try(simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold), silent=T)
             if(inherits(tried, "try-error")) {
                 print(paste0("Variable: ", v, " | Error: ", tried))
             } else {
-                var <- simVar(compendium[i,], n, include.na, reject, threshold)
-                df <- merge(df, var, by="id")
+                var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+                names[length(names)+1] = names(var)
+                df[length(df)+1] <- var
             }
         }
     }
-    df
+    names(df) = names
+    return(df)
 }

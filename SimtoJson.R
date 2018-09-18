@@ -1,7 +1,20 @@
 source('SimData.R')
 library(jsonlite)
 
-SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
+convert2dataframe <- function(subdata) {
+  sub = data.frame()
+  for(i in 1:length(subdata[[names(subdata)[1]]])){
+    first = names(subdata)[1]
+    tmp1 = data.frame("")
+    names(tmp1) = names(subdata)[1]
+    for(name in names(subdata)) {
+        tmp1[[name]] = subdata[[name]][i]
+    }
+    sub = rbind(sub, tmp1)
+  }
+  return(sub)
+}
+SimtoJson <- function(simdata, compendium, nodelinks, sorted_nodes, project_name, path) {
     # takes simulated data and creates json
     # Args:
     #   simdata:   Simulated values
@@ -12,21 +25,12 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     # Returns:
     #   creates and saves of json files representing data simulated for each node
 
-    nodes <- unique(compendium[['NODE']])
-    
-    # Sort nodes
-    sorted_nodes <- c("project")
-    for (i in nodes) {
-        target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==i])
-        sorted_nodes <- getOrder(target, i, nodes, sorted_nodes, nodelinks)
-    }   
-    sorted_nodes <- sorted_nodes[-1]
-    
-    
-    for (i in sorted_nodes) {
-        varlist <- compendium[['VARIABLE']][compendium[['NODE']]==i]
-        sub <- simdata[, varlist, drop=FALSE]
+    for (node in sorted_nodes) {
+        varlist <- compendium[['VARIABLE']][compendium[['NODE']]==node]
+        subdata = simdata[varlist]
         
+        sub <- convert2dataframe(subdata)
+       
         # Remove project_id
         if(length(grep("project_id", colnames(sub))) > 0){
             sub <- sub[-grep("project_id", colnames(sub))]
@@ -38,16 +42,16 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
 
         # Add type
         if(!("type" %in% colnames(sub))){
-          sub <- cbind(sub, type=rep(i, nrow(simdata)))
+          sub <- cbind(sub, type=rep(node, nrow(sub)))
         }
         else{
-          sub$type <- rep(i, nrow(simdata))
+          sub$type <- rep(node, nrow(sub))
         }
 
         # Add submitter_id
         submitter_id <- c()
-        for (v in 1:nrow(simdata)){ 
-            num <- paste0(i, "_00", v)
+        for (v in 1:nrow(sub)){ 
+            num <- paste0(node, "_00", v)
             submitter_id <- c(submitter_id, num)
         }
         
@@ -58,9 +62,9 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
             sub <- cbind(sub, submitter_id=submitter_id)
         }
 
-        link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==i])
-        target <- nodelinks[['TARGET']][nodelinks[['NODE']]==i]
-        multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==i]
+        link_name <- as.character(nodelinks[['LINK_NAME']][nodelinks[['NODE']]==node])
+        targets <- nodelinks[['TARGET']][nodelinks[['NODE']]==node]
+        multiplicity <- nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==node]
 
         #if (multiplicity == "many_to_one") {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
@@ -68,16 +72,50 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
         #    sub[[link_name]] <- toJSON(target_id, pretty=T, auto_unbox = T)
         #}
         
+        link_type <-  nodelinks[['MULTIPLICITY']][nodelinks[['NODE']]==node]
+        names(link_type) <- targets
         # Add links
         l <- c()
-        for (v in 1:nrow(simdata)) {
-            num <- paste0(target, "_00", v)
-            l <- append(l, num)
+        adjusted_number = nrow(sub)
+        for(target in targets) {
+            varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==target]
+            sub2 = convert2dataframe(simdata[varlist2])
+            if (link_type[[target]] %in% c("one_to_one","one_to_many")) {
+              adjusted_number = min(adjusted_number, nrow(sub2))
+            }
         }
         
+        if (adjusted_number < nrow(sub)) {
+            for (var in varlist) {
+              simdata[var][[var]] = simdata[var][[var]][1:adjusted_number]
+            }
+        }
+        
+        for (v in 1:adjusted_number) {
+            for(target in targets) {
+                varlist2 <- compendium[['VARIABLE']][compendium[['NODE']]==target]
+                sub2 = convert2dataframe(simdata[varlist2])
+                if (link_type[[target]] %in% c("one_to_one","one_to_many") == FALSE) {
+                  l <- append(l,paste0(target, "_00", sample(1:nrow(sub2),1)))
+                }
+                else {
+                    if (v <= nrow(sub2)) {
+                      l <- append(l, paste0(target, "_00", v))
+                    }
+                }
+                
+            }
+        }
         finlist <- c()
-        for (m in 1:nrow(sub)) {
+        submitter_ids <- c()
+        for (m in 1:adjusted_number) {
             x <- as.list(sub[m,])
+            for(name in names(x)) {
+                if (typeof(x[[name]]) == 'list')
+                {
+                  x[[name]] = unlist(x[[name]])
+                }
+            }
             for(ln in 1:length(link_name)){
                 if(link_name[ln] == "projects"){
                    x[[link_name[ln]]] <- list(code=project_name)
@@ -87,19 +125,23 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
                    x[[link_name[ln]]] <- list(submitter_id=l[pos])
                 }
             }
-            finlist <- append(finlist, list(x))
+            
+            if (link_type[1] %in% c("one_to_one","one_to_many") ) {
+                if (x[[link_name[ln]]] %in% submitter_ids == FALSE) {
+                   submitter_ids <- append(submitter_ids, x[[link_name[ln]]])
+                   finlist <- append(finlist, list(x))
+                }
+            }
+            else
+                finlist <- append(finlist, list(x))
         }
         
         json <- toJSON(finlist, pretty=T, auto_unbox=T)
               
-        filepath <- paste0(path, i, ".json")
+        filepath <- paste0(path, node, ".json")
         write(json, filepath)
     }
-    
-    # Write importing order
-    fileOrder <- paste(sorted_nodes, ".json", sep="")
-    write(fileOrder, paste0(path, 'DataImportOrder.txt'))
-    
+
     # Write file descriptions
     node_descriptions <- list()
     for (i in seq_along(sorted_nodes)) {
@@ -113,20 +155,6 @@ SimtoJson <- function(simdata, compendium, nodelinks, project_name, path) {
     }
     fileDescr <- toJSON(node_descriptions, pretty=T)
     write(fileDescr, paste0(path, 'NodeDescriptions.json'))
-}
-
-getOrder <- function(links, node, nodes, sorted_nodes, nodelinks) {
-
-    for (link in links){
-      if (!(link %in% sorted_nodes)){
-        target <- as.character(nodelinks[['TARGET']][nodelinks[['NODE']]==link])
-        sorted_nodes <- getOrder(target, link, nodes, sorted_nodes, nodelinks)
-      }
-    }
-    if (!(node %in% sorted_nodes)){
-      sorted_nodes <- c(sorted_nodes, node)
-    }
-    return(sorted_nodes)
 }
 
 ## Example to run
