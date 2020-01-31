@@ -1,3 +1,12 @@
+This is a fork of the occ-data/data-simulator project. The intent of this fork is to enable accurate, realistic simulations of Homeless Management Information System (HMIS) data. The occ-data repo represents amazing work and gives a great foundation for creating a complex database. To extend it to the realm of HMIS data, certain specific modifications or additions will have to be made. These include:
+ - enabling simulation of date and time data (especially for recording entry and exit dates)
+ - simulating family/household connections between individuals
+ - enabling generation of realistic names, social security numbers, and location IDs (Continuum of Care codes)
+ - other changes to emulate the stand HMIS logical model (2020 version here: http://www.hudhdx.info/Resources/Vendors/HMIS_2020_Model_v1_4.png), most likely to be achieved by making a standard compendium and nodes in the occ-data simulator existing structure
+ 
+The original Readme file from occ-data's repo is copied below.
+ 
+
 # data-simulator
 Used to generate datasets based on variable statistics
 
