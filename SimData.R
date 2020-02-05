@@ -120,6 +120,8 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
                   tmp1[1]$c1 = list(stri_rand_strings(sample(1:3,1), 4, pattern = "[A-Za-z0-9]"))
                   val <- rbind(val,tmp1)
               }
+        } else if (row[['TYPE']] == "date") {
+              val <- as.Date("2010-1-1")+sample(1:1000,n) #replicate(n, as.Date("2010-1-1") + sample(1:3685, 1))
         } else {
               val <- rep("Something Went Wrong", n)
         }
@@ -170,16 +172,16 @@ simData <- function(compendium, sample_numbers, include.na=TRUE, reject=FALSE, t
         v <- compendium[i,][['VARIABLE']]
         node <- compendium[i,][['NODE']]
         if (i==1) {
-            var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+            var <- simVar(compendium[i,], sample_numbers, include.na, reject, threshold)
             #df <- append(df, var)
             names[length(names)+1] = names(var)
             df[length(df)+1] <- var
         } else {
-            tried <- try(simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold), silent=T)
+            tried <- try(simVar(compendium[i,], sample_numbers, include.na, reject, threshold), silent=T)
             if(inherits(tried, "try-error")) {
                 print(paste0("Variable: ", v, " | Error: ", tried))
             } else {
-                var <- simVar(compendium[i,], sample_numbers[[node]], include.na, reject, threshold)
+                var <- simVar(compendium[i,], sample_numbers, include.na, reject, threshold)
                 names[length(names)+1] = names(var)
                 df[length(df)+1] <- var
             }
