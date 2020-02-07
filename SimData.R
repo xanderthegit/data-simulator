@@ -1,5 +1,6 @@
 library(stringr)
 library(stringi)
+library(charlatan)
 source('ValidateFunction.R')
 
 ## Helper for handling numeric / integer distributions in compendium
@@ -73,6 +74,11 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
         } else if (row[['TYPE']] == "boolean"){
             val <- unlist(sample(c(TRUE, FALSE), 
                                  n, T, as.numeric(convertToList(row[['PROBS']]))))
+        } else if (row[['TYPE']] == "ssn"){
+            area = stri_rand_strings(n, 3, pattern = "[0-9]")
+            specify = stri_rand_strings(n, 2, pattern = "[0-9]")
+            group = stri_rand_strings(n, 4, pattern = "[0-9]")
+            val <- paste(area, specify, group, sep = "-") #stri_rand_strings(n, 9, pattern = "[0-9]") #as.numeric(stri_rand_strings(n, 9, pattern = "[0-9]")) #replicate(sample(100000000:999999999,n,F))
         } else if (row[['TYPE']] == "number"){
             if (row[['DISTRIB']] == "poisson") {
                 val <- rep("Not a valid number distribution", n)
@@ -120,8 +126,19 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
                   tmp1[1]$c1 = list(stri_rand_strings(sample(1:3,1), 4, pattern = "[A-Za-z0-9]"))
                   val <- rbind(val,tmp1)
               }
+        } else if (row[['TYPE']] == "name") {
+              persons <- PersonProvider$new()
+              val <- replicate(n, persons$render()) #data.frame()
+              #for (i in 1:n) {
+              #    tmp1 = data.frame("")
+              #    names(tmp1) = c('c1')
+              #    tmp1[1]$c1 = list(stri_rand_strings(sample(1:3,1), 4, pattern = "[A-Za-z0-9]"))
+              #    val <- rbind(val,tmp1)
         } else if (row[['TYPE']] == "date") {
               val <- as.Date("2010-1-1")+sample(1:1000,n) #replicate(n, as.Date("2010-1-1") + sample(1:3685, 1))
+              #if row[['VARIABLE']] == "end"){
+               # val <- +sample(1:1000,n)
+              #}
         } else {
               val <- rep("Something Went Wrong", n)
         }
