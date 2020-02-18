@@ -128,7 +128,7 @@ simVar <- function(row, n,include.na=TRUE, reject=FALSE, threshold=.05) {
               }
         } else if (row[['TYPE']] == "name") {
               persons <- PersonProvider$new()
-              val <- replicate(n, persons$render()) #data.frame()
+              val <- replicate(n, persons$last_name()) #paste(persons$first_name(), persons$last_name())) #replicate(n, persons$render()) #data.frame()
               #for (i in 1:n) {
               #    tmp1 = data.frame("")
               #    names(tmp1) = c('c1')
